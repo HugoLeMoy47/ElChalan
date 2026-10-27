@@ -134,6 +134,13 @@ describe('construcción instalable', () => {
       expect(html).toContain('Content-Security-Policy')
       expect(html).toContain('manifest.webmanifest')
       expect(html).not.toMatch(/(src|href)="\/(?!\/)/) // rutas relativas (ADR-09)
+
+      // Cabeceras para Cloudflare: la página y sw.js nunca en caché (RNF-19), seguridad (RNF-14).
+      const cabeceras = readFileSync(join(salida, '_headers'), 'utf8')
+      expect(cabeceras).toMatch(/\/sw\.js\n {2}Cache-Control: no-cache/)
+      expect(cabeceras).toMatch(/\/index\.html\n {2}Cache-Control: no-cache/)
+      expect(cabeceras).toContain("frame-ancestors 'none'")
+      expect(archivos).not.toContain('./_headers')
     } finally {
       rmSync(salida, { recursive: true, force: true })
     }

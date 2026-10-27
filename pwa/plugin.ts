@@ -1,5 +1,6 @@
-// Plugin de Vite: al construir, genera `sw.js` con la lista de archivos de esta versión
-// y agrega una política de contenido restrictiva (RNF-14). En desarrollo no hace nada.
+// Plugin de Vite: al construir, genera `sw.js` con la lista de archivos de esta versión,
+// las cabeceras `_headers` para Cloudflare y la política de contenido restrictiva
+// (RNF-14) en la página. En desarrollo no hace nada.
 
 import { createHash } from 'node:crypto'
 import { readdirSync, readFileSync, statSync } from 'node:fs'
@@ -19,6 +20,28 @@ const POLITICA = [
   "base-uri 'self'",
   "form-action 'none'",
 ].join('; ')
+
+/**
+ * Cabeceras para Cloudflare (formato `_headers`). `sw.js`, la página y el manifiesto
+ * nunca se guardan en caché, para que los teléfonos vean las versiones nuevas (RNF-19);
+ * lo de `assets/` lleva huella en el nombre y se guarda para siempre.
+ */
+const CABECERAS = `/*
+  Content-Security-Policy: ${POLITICA}; frame-ancestors 'none'
+  X-Content-Type-Options: nosniff
+  Referrer-Policy: no-referrer
+  Permissions-Policy: camera=(), microphone=(), geolocation=(), payment=()
+/
+  Cache-Control: no-cache
+/index.html
+  Cache-Control: no-cache
+/sw.js
+  Cache-Control: no-cache
+/manifest.webmanifest
+  Cache-Control: no-cache
+/assets/*
+  Cache-Control: public, max-age=31536000, immutable
+`
 
 function listar(carpeta: string): string[] {
   return readdirSync(carpeta).flatMap((nombre) => {
@@ -55,6 +78,7 @@ export function sinConexion(): Plugin {
           .replace("VERSION = '__VERSION__'", `VERSION = '${huella.digest('hex').slice(0, 12)}'`)
           .replace('ARCHIVOS = __ARCHIVOS__', `ARCHIVOS = ${JSON.stringify(archivos.map((f) => (f === './' ? f : `./${f}`)))}`),
       })
+      this.emitFile({ type: 'asset', fileName: '_headers', source: CABECERAS })
     },
   }
 }

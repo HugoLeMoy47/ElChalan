@@ -20,6 +20,10 @@ node scripts/generar-iconos.mjs   # regenera los íconos de public/iconos/
 npm run dev         # la app en http://localhost:5173 (usa la vista de teléfono)
 ```
 
+## Publicación (D-61)
+
+Cloudflare (Workers con archivos estáticos) en `elchalan.hugolemoy.ninja`, conectado a este repositorio: cada push a `main` corre `npm run build` y `npx wrangler deploy` (`wrangler.jsonc`). Las cabeceras de caché y seguridad (`dist/_headers`) las genera `pwa/plugin.ts` al construir. En Cloudflare: variable `NODE_VERSION = 22` y **sin** analítica, Rocket Loader ni ofuscación de correos (romperían la política de contenido).
+
 ## Estructura (CH-15 §7)
 
 | Carpeta | Contenido | Estado |

@@ -1,0 +1,12 @@
+// Publicación en Cloudflare (ADR-09): solo archivos estáticos, sin servidor de datos.
+// La construye `npm run build` y la sube `npx wrangler deploy`.
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "elchalan",
+  "compatibility_date": "2026-10-20",
+  "send_metrics": false,
+  "assets": {
+    "directory": "./dist",
+    "not_found_handling": "single-page-application"
+  }
+}
