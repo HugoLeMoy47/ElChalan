@@ -24,14 +24,14 @@
 {:else if paso === 'nombre'}
   <button class="back" onclick={() => (paso = 'hola')}>‹ Volver</button>
   <h1>¿Cómo se llama tu negocio?</h1>
-  <input bind:value={nombre} placeholder="Por ejemplo: Novedades Lupita" maxlength="60" aria-label="Nombre del negocio" />
+  <input bind:value={nombre} placeholder="Por ejemplo: Novedades Lupita…" maxlength="60" aria-label="Nombre del negocio" />
   <div style="height:12px"></div>
   <button class="btn" disabled={!nombre.trim()} onclick={() => (paso = 'capital')}>Siguiente</button>
 {:else}
   <button class="back" onclick={() => (paso = 'nombre')}>‹ Volver</button>
   <h1>¿Con cuánto dinero empezaste?</h1>
   <p class="sub">Lo que tienes hoy en tu caja para el negocio. Puedes dejarlo para después.</p>
-  <input bind:value={capital} inputmode="decimal" placeholder="$0" aria-label="Con cuánto empecé" />
+  <input bind:value={capital} inputmode="decimal" placeholder="Por ejemplo: 2,000…" aria-label="Con cuánto empecé" />
   <div style="height:12px"></div>
   <button class="btn" disabled={ocupado || pesosACentavos(capital) === null} onclick={() => crear(true)}>Listo</button>
   <button class="btn sec" disabled={ocupado} onclick={() => crear(false)}>Omitir</button>

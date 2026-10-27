@@ -3,6 +3,7 @@
   import { diasEntre } from '../dominio/index.ts'
   import { app } from './app.svelte.ts'
   import { fechaCorta, haceDias } from './textos.ts'
+  import Hoja from './Hoja.svelte'
 
   type Revision = Awaited<ReturnType<typeof app.revisarRespaldo>>
 
@@ -34,7 +35,7 @@
   }
 </script>
 
-<button class="back" onclick={() => app.ir(app.bloqueado ? 'bloqueo' : app.estado ? 'inicio' : 'bienvenida')}>‹ Volver</button>
+<button class="back" onclick={() => app.atras()}>‹ Volver</button>
 <h1>Respaldo</h1>
 
 {#if app.estado && !app.bloqueado}
@@ -47,19 +48,16 @@
 <button class="btn sec" onclick={() => entrada?.click()}>Restaurar desde archivo</button>
 <input bind:this={entrada} type="file" accept="application/json,.json,text/plain,.txt" style="display:none" onchange={elegido} />
 
-{#if app.error}<div class="error">{app.error}</div>{/if}
+{#if app.error}<div class="error" role="alert">{app.error}</div>{/if}
 
 {#if revision && !revision.ok}
-  <div class="error">{revision.errores.join(' ')}</div>
+  <div class="error" role="alert">{revision.errores.join(' ')}</div>
 {:else if revision?.ok}
   {@const r = revision}
-  <div class="modal" role="dialog" aria-modal="true">
-    <div class="sheet">
-      <h3>¿Restaurar «{r.negocio}»?</h3>
-      <p>Respaldo del {fechaCorta(r.fecha.slice(0, 10))} con {r.movimientos} movimientos.
-        {#if app.estado}<b>Lo que hay ahora en este teléfono se reemplaza.</b>{/if}</p>
-      <button class="btn" onclick={() => r.restaurar()}>Sí, restaurar</button>
-      <button class="btn sec" onclick={() => (revision = null)}>No</button>
-    </div>
-  </div>
+  <Hoja titulo={`¿Restaurar «${r.negocio}»?`} alCerrar={() => (revision = null)}>
+    <p>Respaldo del {fechaCorta(r.fecha.slice(0, 10))} con {r.movimientos} movimientos.
+      {#if app.estado}<b>Lo que hay ahora en este teléfono se reemplaza.</b>{/if}</p>
+    <button class="btn" onclick={() => r.restaurar()}>Sí, restaurar</button>
+    <button class="btn sec" onclick={() => (revision = null)}>No</button>
+  </Hoja>
 {/if}

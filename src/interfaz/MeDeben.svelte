@@ -27,7 +27,7 @@
   const deAnotar = app.tipoCaptura === 'cobro'
 </script>
 
-<button class="back" onclick={() => app.ir(deAnotar ? 'anotar' : 'inicio')}>‹ Volver</button>
+<button class="back" onclick={() => app.atras()}>‹ Volver</button>
 <h1>{deAnotar ? '¿Quién te pagó?' : 'Lo que me deben'}</h1>
 <p class="sub" style="margin:-6px 0 12px">Los que ya se pasaron de la fecha aparecen primero. Toca a alguien para anotar su pago.</p>
 

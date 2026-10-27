@@ -3,6 +3,7 @@
   // PIN (solo en el teléfono), datos de ejemplo y «Acerca de».
   import { PENALIZACION_DEVOLUCION_PCT } from '../dominio/index.ts'
   import { app } from './app.svelte.ts'
+  import Hoja from './Hoja.svelte'
 
   const e = $derived(app.estado!)
   let nombre = $state(app.estado!.negocio.nombre)
@@ -45,7 +46,7 @@
   }
 </script>
 
-<button class="back" onclick={() => app.ir('inicio')}>‹ Volver</button>
+<button class="back" onclick={() => app.atras()}>‹ Volver</button>
 <h1>Ajustes</h1>
 
 <label class="f" for="nombre">Nombre de mi negocio</label>
@@ -79,30 +80,24 @@
 <p class="sub">El Chalán · versión {__VERSION_APP__}. Es una <b>prueba</b>: funciona sin internet y tus datos se quedan en este teléfono hasta que hagas un respaldo. No usa cuenta ni manda tus datos a ningún lado.</p>
 
 {#if pidiendoPin}
-  <div class="modal" role="dialog" aria-modal="true">
-    <div class="sheet">
-      <h3>{pidiendoPin === 'poner' ? 'Poner candado' : 'Quitar el candado'}</h3>
-      <label class="f" for="pin1">{pidiendoPin === 'poner' ? 'Tu PIN (4 a 6 números)' : 'Tu PIN actual'}</label>
-      <input id="pin1" type="password" inputmode="numeric" autocomplete="off" bind:value={pin} maxlength="6" />
-      {#if pidiendoPin === 'poner'}
-        <label class="f" for="pin2">Escríbelo otra vez</label>
-        <input id="pin2" type="password" inputmode="numeric" autocomplete="off" bind:value={pin2} maxlength="6" />
-      {/if}
-      {#if errorPin}<div class="error">{errorPin}</div>{/if}
-      <div style="height:12px"></div>
-      <button class="btn" onclick={confirmarPin}>Listo</button>
-      <button class="btn sec" onclick={() => { pidiendoPin = null; pin = pin2 = ''; errorPin = '' }}>Cancelar</button>
-    </div>
-  </div>
+  <Hoja titulo={pidiendoPin === 'poner' ? 'Poner candado' : 'Quitar el candado'} alCerrar={() => { pidiendoPin = null; pin = pin2 = ''; errorPin = '' }}>
+    <label class="f" for="pin1">{pidiendoPin === 'poner' ? 'Tu PIN (4 a 6 números)' : 'Tu PIN actual'}</label>
+    <input id="pin1" type="password" inputmode="numeric" autocomplete="off" bind:value={pin} maxlength="6" />
+    {#if pidiendoPin === 'poner'}
+      <label class="f" for="pin2">Escríbelo otra vez</label>
+      <input id="pin2" type="password" inputmode="numeric" autocomplete="off" bind:value={pin2} maxlength="6" />
+    {/if}
+    {#if errorPin}<div class="error" role="alert">{errorPin}</div>{/if}
+    <div style="height:12px"></div>
+    <button class="btn" onclick={confirmarPin}>Listo</button>
+    <button class="btn sec" onclick={() => { pidiendoPin = null; pin = pin2 = ''; errorPin = '' }}>Cancelar</button>
+  </Hoja>
 {/if}
 
 {#if confirmarBorrado}
-  <div class="modal" role="dialog" aria-modal="true">
-    <div class="sheet">
-      <h3>¿Borrar los datos de ejemplo?</h3>
-      <p>Se borra todo este negocio de ejemplo. Tu negocio, si ya lo creaste, no se toca.</p>
-      <button class="btn mal" onclick={() => app.borrarEjemplo()}>Sí, borrarlos</button>
-      <button class="btn sec" onclick={() => (confirmarBorrado = false)}>No</button>
-    </div>
-  </div>
+  <Hoja titulo={`¿Borrar los datos de ejemplo?`} alCerrar={() => (confirmarBorrado = false)}>
+    <p>Se borra todo este negocio de ejemplo. Tu negocio, si ya lo creaste, no se toca.</p>
+    <button class="btn mal" onclick={() => app.borrarEjemplo()}>Sí, borrarlos</button>
+    <button class="btn sec" onclick={() => (confirmarBorrado = false)}>No</button>
+  </Hoja>
 {/if}

@@ -12,7 +12,7 @@
   }
 </script>
 
-<button class="back" onclick={() => app.ir('inicio')}>‹ Volver</button>
+<button class="back" onclick={() => app.atras()}>‹ Volver</button>
 <h1>Cosas por revisar</h1>
 
 {#each app.alertas as a (`${a.codigo}|${a.objeto_id}`)}

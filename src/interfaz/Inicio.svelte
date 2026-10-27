@@ -3,6 +3,7 @@
   import { diasEntre } from '../dominio/index.ts'
   import { app } from './app.svelte.ts'
   import { haceDias, pesos, porcentaje } from './textos.ts'
+  import Hoja from './Hoja.svelte'
 
   let explica = $state(false)
   let confirmarBorrado = $state(false)
@@ -65,10 +66,13 @@
   <div class="stat"><div class="n">{pesos(v.gastos)}</div><div class="l">Gasté</div></div>
   <div class="stat"><div class="n">{pesos(v.utilidad_bruta)}</div><div class="l">Me deja</div></div>
   <div class="stat">
-    <div class="n" class:neg={v.utilidad_del_periodo < 0} class:pos={v.utilidad_del_periodo >= 0}>{pesos(v.utilidad_del_periodo)}</div>
+    <div class="n" class:neg={v.utilidad_del_periodo < 0} class:pos={v.utilidad_del_periodo > 0}>{pesos(v.utilidad_del_periodo)}</div>
     <div class="l">Gané <button class="link" style="min-height:0;padding:0" onclick={() => (explica = !explica)}>¿cómo?</button></div>
   </div>
-  <div class="stat"><div class="n">{porcentaje(v.margen_sobre_costo_pb)}</div><div class="l">Margen sobre costo</div></div>
+  <div class="stat">
+    {#if v.margen_sobre_costo_pb === null}<div class="n sub">Sin costos aún</div>{:else}<div class="n">{porcentaje(v.margen_sobre_costo_pb)}</div>{/if}
+    <div class="l">Margen sobre costo</div>
+  </div>
   <div class="stat"><div class="n">{pesos(v.compras)}</div><div class="l">Compré mercancía</div></div>
   <div class="stat ancho">
     <div class="n" class:neg={v.flujo_de_caja < 0}>{pesos(v.flujo_de_caja)}</div>
@@ -110,12 +114,9 @@
 <button class="fab" onclick={() => app.ir('anotar')}>＋ Anotar</button>
 
 {#if confirmarBorrado}
-  <div class="modal" role="dialog" aria-modal="true">
-    <div class="sheet">
-      <h3>¿Borrar los datos de ejemplo?</h3>
-      <p>Se borra todo este negocio de ejemplo. Tu negocio, si ya lo creaste, no se toca.</p>
-      <button class="btn mal" onclick={() => app.borrarEjemplo()}>Sí, borrarlos</button>
-      <button class="btn sec" onclick={() => (confirmarBorrado = false)}>No</button>
-    </div>
-  </div>
+  <Hoja titulo={`¿Borrar los datos de ejemplo?`} alCerrar={() => (confirmarBorrado = false)}>
+    <p>Se borra todo este negocio de ejemplo. Tu negocio, si ya lo creaste, no se toca.</p>
+    <button class="btn mal" onclick={() => app.borrarEjemplo()}>Sí, borrarlos</button>
+    <button class="btn sec" onclick={() => (confirmarBorrado = false)}>No</button>
+  </Hoja>
 {/if}

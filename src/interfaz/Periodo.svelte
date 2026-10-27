@@ -56,7 +56,7 @@
   }
 </script>
 
-<button class="back" onclick={() => app.ir('inicio')}>‹ Volver</button>
+<button class="back" onclick={() => app.atras()}>‹ Volver</button>
 <h1>Semana y mes</h1>
 
 <div class="seg">

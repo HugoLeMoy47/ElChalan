@@ -10,6 +10,7 @@
   import Avisos from './Avisos.svelte'
   import Teclado from './Teclado.svelte'
   import { CATEGORIA, MEDIO, TIPO, pesos } from './textos.ts'
+  import Hoja from './Hoja.svelte'
 
   /** En una compra, `compra` es lo que se tecleó como costo de compra («a cuánto»). */
   interface LineaProducto { producto_id: string; cantidad: string; precio?: number; costo?: number; compra?: string }
@@ -139,8 +140,8 @@
   })
 </script>
 
-<button class="back" onclick={() => app.ir(original ? 'detalle' : 'anotar')}>‹ Volver</button>
-<h1>{TIPO[tipo].icono} {original ? 'Corregir: ' : ''}{TIPO[tipo].texto}</h1>
+<button class="back" onclick={() => app.atras()}>‹ Volver</button>
+<h1><span aria-hidden="true">{TIPO[tipo].icono}</span> {original ? 'Corregir: ' : ''}{TIPO[tipo].texto}</h1>
 
 {#if lineas.length}
   <div class="amount">{pesos(montoProductos)}</div>
@@ -156,7 +157,7 @@
   </div>
   {#if credito}
     <label class="f" for="quien">¿Quién te debe? (obligatorio)</label>
-    <input id="quien" bind:value={quien} list="nombres" placeholder="Nombre o apodo" />
+    <input id="quien" bind:value={quien} list="nombres" placeholder="Nombre o apodo…" />
     <label class="f" for="promesa">¿Cuándo te paga? (opcional)</label>
     <input id="promesa" type="date" bind:value={promesa} min={fecha} />
     {#if !promesa}<p class="sub">Si lo dejas vacío, se cuenta a 30 días: {sumarDias(fecha, 30).split('-').reverse().join('/')}.</p>{/if}
@@ -182,11 +183,11 @@
       <div class="person" style="cursor:default">
         <span style="flex:2">{p?.nombre}<br /><span class="sub">{tipo === 'compra' ? 'cantidad y a cuánto cada uno' : `${pesos(precioDe(l))} c/u`}</span></span>
         <input style="flex:1;max-width:72px" bind:value={l.cantidad} inputmode="decimal" aria-label="Cantidad" />
-        {#if tipo === 'compra'}<input style="flex:1;max-width:96px" bind:value={l.compra} inputmode="decimal" placeholder="$" aria-label="Costo de compra" />{/if}
+        {#if tipo === 'compra'}<input style="flex:1;max-width:96px" bind:value={l.compra} inputmode="decimal" placeholder="$…" aria-label="Costo de compra" />{/if}
         <button class="back" style="flex:none" onclick={() => lineas.splice(i, 1)} aria-label="Quitar">✕</button>
       </div>
     {/each}
-    <input id="buscar" bind:value={buscar} placeholder="Busca por nombre o clave" />
+    <input id="buscar" bind:value={buscar} placeholder="Busca por nombre o clave…" />
     {#each encontrados as p (p.producto_id)}
       <button class="person" onclick={() => agregar(p.producto_id)}>
         <span>{p.nombre}<br /><span class="sub">{p.clave}</span></span><span>{pesos(p.precio_venta_centavos ?? 0)}</span>
@@ -206,7 +207,7 @@
 
   {#if conQuien && !(tipo === 'venta' && credito)}
     <label class="f" for="quien2">{tipo === 'compra' ? '¿A quién le compraste?' : '¿A quién le vendiste?'}</label>
-    <input id="quien2" bind:value={quien} list="nombres" placeholder="Nombre o apodo (opcional)" />
+    <input id="quien2" bind:value={quien} list="nombres" placeholder="Nombre o apodo (opcional)…" />
   {/if}
 
   <label class="f" for="fecha">¿Cuándo fue?</label>
@@ -220,11 +221,12 @@
 </datalist>
 
 {#if resultado && !resultado.ok}
-  <div class="error">{resultado.errores.map((x) => x.mensaje).join(' ')}</div>
+  <div class="error" role="alert">{resultado.errores.map((x) => x.mensaje).join(' ')}</div>
 {/if}
 
 <div style="height:8px"></div>
 <button class="btn" disabled={ocupado || centavos <= 0} onclick={listo}>Listo</button>
+{#if centavos <= 0}<p class="sub" style="text-align:center;margin-top:-2px">{lineas.length ? 'Escribe la cantidad de los productos.' : 'Escribe el monto para poder guardar.'}</p>{/if}
 
 {#if resultado?.ok && resultado.avisos.length && !preguntas.length}
   <Avisos avisos={resultado.avisos} onguardar={guardar} oncorregir={() => (resultado = null)} />
@@ -232,14 +234,11 @@
 
 {#if pregunta}
   {@const nombre = catalogo.get(pregunta.producto_id)?.nombre}
-  <div class="modal" role="dialog" aria-modal="true">
-    <div class="sheet">
-      <h3>¿Actualizo el costo de {nombre}?</h3>
-      <p>Esta vez te costó <b>{pesos(pregunta.costo_compra)}</b>; en tus productos dice <b>{pesos(pregunta.costo_catalogo)}</b>.</p>
-      <button class="btn" onclick={() => responder('si')}>Sí, ahora me cuesta {pesos(pregunta.costo_compra)}</button>
-      <button class="btn sec" onclick={() => responder('no')}>No, déjalo en {pesos(pregunta.costo_catalogo)}</button>
-      {#if promedio !== undefined}<button class="btn sec" onclick={() => responder('promedio')}>Usar el promedio: {pesos(promedio)}</button>{/if}
-      <p class="sub">El promedio toma en cuenta lo que ya tenías en bodega. Las ventas ya anotadas no cambian.</p>
-    </div>
-  </div>
+  <Hoja titulo={`¿Actualizo el costo de ${nombre}?`} alCerrar={() => { preguntas = []; respuestas = [] }}>
+    <p>Esta vez te costó <b>{pesos(pregunta.costo_compra)}</b>; en tus productos dice <b>{pesos(pregunta.costo_catalogo)}</b>.</p>
+    <button class="btn" onclick={() => responder('si')}>Sí, ahora me cuesta {pesos(pregunta.costo_compra)}</button>
+    <button class="btn sec" onclick={() => responder('no')}>No, déjalo en {pesos(pregunta.costo_catalogo)}</button>
+    {#if promedio !== undefined}<button class="btn sec" onclick={() => responder('promedio')}>Usar el promedio: {pesos(promedio)}</button>{/if}
+    <p class="sub">El promedio toma en cuenta lo que ya tenías en bodega. Las ventas ya anotadas no cambian.</p>
+  </Hoja>
 {/if}

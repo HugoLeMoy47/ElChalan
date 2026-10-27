@@ -16,7 +16,7 @@
 <p>Escribe tu PIN para entrar.</p>
 <input type="password" inputmode="numeric" autocomplete="off" maxlength="6" bind:value={pin} aria-label="PIN"
   onkeydown={(ev) => ev.key === 'Enter' && entrar()} />
-{#if error}<div class="error">Ese no es tu PIN.</div>{/if}
+{#if error}<div class="error" role="alert">Ese no es tu PIN.</div>{/if}
 <div style="height:12px"></div>
 <button class="btn" disabled={pin.length < 4} onclick={entrar}>Entrar</button>
 <button class="link" onclick={() => app.ir('respaldo')}>Olvidé mi PIN: restaurar desde un respaldo</button>

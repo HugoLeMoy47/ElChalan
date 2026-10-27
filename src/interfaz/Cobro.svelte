@@ -45,7 +45,7 @@
   }
 </script>
 
-<button class="back" onclick={() => app.ir('deben')}>‹ Volver</button>
+<button class="back" onclick={() => app.atras()}>‹ Volver</button>
 <h1>💰 Me pagó {nombre}</h1>
 
 {#each ventas as { venta, saldo } (venta.movimiento_id)}
@@ -65,7 +65,7 @@
   </div>
 {/if}
 
-{#if resultado && !resultado.ok}<div class="error">{resultado.errores.map((x) => x.mensaje).join(' ')}</div>{/if}
+{#if resultado && !resultado.ok}<div class="error" role="alert">{resultado.errores.map((x) => x.mensaje).join(' ')}</div>{/if}
 <button class="btn" disabled={!elegida || !(pesosACentavos(monto) ?? 0)} onclick={listo}>Listo</button>
 
 {#if resultado?.ok && resultado.avisos.length}

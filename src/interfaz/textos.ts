@@ -24,6 +24,12 @@ export const CATEGORIA: Record<CategoriaGasto, string> = {
   comisiones: 'Comisiones', sueldos: 'Sueldos', empaque: 'Empaque', otros: 'Otros',
 }
 
+/** Por qué se ajustó la bodega (F-9), en lenguaje de calle. */
+export const MOTIVO_AJUSTE: Record<string, string> = {
+  conteo: 'Conté', merma: 'Se echó a perder', regalo: 'Lo regalé', 'uso propio': 'Lo usé yo',
+  'inventario inicial': 'Inventario inicial',
+}
+
 /** `$1,234.50` */
 export const pesos = formatearPesos
 
@@ -42,7 +48,7 @@ export function haceDias(dias: number): string {
 export function cantidadCon(milesimas: number, unidad: string): string {
   const n = milesimas / 1000
   const plural = Math.abs(n) === 1 ? '' : /[aeiou]$/.test(unidad) ? 's' : 'es'
-  return `${n.toLocaleString('es-MX', { maximumFractionDigits: 3 })} ${unidad}${plural}`
+  return `${n.toLocaleString('es-MX', { maximumFractionDigits: 3 }).replace('-', '−')} ${unidad}${plural}`
 }
 
 /** Puntos base → «48.8 %». */

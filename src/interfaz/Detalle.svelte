@@ -3,6 +3,7 @@
   import { historiaDe, type Movimiento } from '../dominio/index.ts'
   import { app } from './app.svelte.ts'
   import { CATEGORIA, MEDIO, TIPO, fechaCorta, pesos } from './textos.ts'
+  import Hoja from './Hoja.svelte'
 
   const v = $derived(app.versiones!)
   const m = $derived(v.porId.get(app.seleccion!) as Movimiento)
@@ -19,7 +20,8 @@
   async function anular() {
     await app.anular(m.movimiento_id, motivo.trim() || undefined)
     app.avisar('Anulado')
-    app.ir('movimientos')
+    anulando = false
+    app.atras()
   }
 
   function corregir() {
@@ -31,8 +33,8 @@
   const quien = (x: Movimiento) => (x.tercero_id ? app.terceros.get(x.tercero_id)?.nombre : undefined)
 </script>
 
-<button class="back" onclick={() => app.ir('movimientos')}>‹ Volver</button>
-<h1>{TIPO[m.tipo].icono} {TIPO[m.tipo].texto}</h1>
+<button class="back" onclick={() => app.atras()}>‹ Volver</button>
+<h1><span aria-hidden="true">{TIPO[m.tipo].icono}</span> {TIPO[m.tipo].texto}</h1>
 {#if !vigente}<p class="tag">Anulado o sustituido; se conserva en la historia</p>{/if}
 
 <div class="kv"><span>Monto</span><b>{pesos(m.monto_centavos)}</b></div>
@@ -74,15 +76,12 @@
 {/if}
 
 {#if anulando}
-  <div class="modal" role="dialog" aria-modal="true">
-    <div class="sheet">
-      <h3>¿Anular este movimiento?</h3>
-      <p>Deja de contar en tus números, pero no se borra: queda en la historia.</p>
-      <label class="f" for="motivo">¿Por qué? (opcional)</label>
-      <input id="motivo" bind:value={motivo} maxlength="100" />
-      <div style="height:12px"></div>
-      <button class="btn mal" onclick={anular}>Sí, anular</button>
-      <button class="btn sec" onclick={() => (anulando = false)}>No</button>
-    </div>
-  </div>
+  <Hoja titulo={`¿Anular este movimiento?`} alCerrar={() => (anulando = false)}>
+    <p>Deja de contar en tus números, pero no se borra: queda en la historia.</p>
+    <label class="f" for="motivo">¿Por qué? (opcional)</label>
+    <input id="motivo" bind:value={motivo} maxlength="100" />
+    <div style="height:12px"></div>
+    <button class="btn mal" onclick={anular}>Sí, anular</button>
+    <button class="btn sec" onclick={() => (anulando = false)}>No</button>
+  </Hoja>
 {/if}

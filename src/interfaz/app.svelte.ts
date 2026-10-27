@@ -15,11 +15,15 @@ import {
 import { descargarEnNavegador, entregarArchivo } from '../exportacion/entregar.ts'
 import { crearRespaldo, estadoDesdeRespaldo, leerRespaldo, nombreArchivo } from '../exportacion/respaldo.ts'
 import { cargarEjemplo } from '../captura/ejemplo.ts'
+import { Navegacion } from './navegacion.ts'
 
 export type Pantalla =
   | 'cargando' | 'bienvenida' | 'inicio' | 'anotar' | 'captura' | 'deben' | 'cobro'
   | 'devolucion' | 'movimientos' | 'detalle' | 'respaldo' | 'revisar'
   | 'productos' | 'producto' | 'periodo' | 'ajustes' | 'bloqueo'
+
+/** Pantallas desde las que «atrás» sale de la app (UX-01). */
+const RAICES: Pantalla[] = ['cargando', 'bienvenida', 'inicio', 'bloqueo']
 
 /** Avisos que se muestran antes de guardar: el usuario puede guardar igual (CH-04 §12.1). */
 const AVISAR_ANTES = ['AN-03', 'AN-04', 'AN-09', 'AN-10', 'AN-14']
@@ -69,6 +73,11 @@ class App {
   bloqueado = $state(false)
 
   private almacen: AlmacenNegocio | null = null
+  private readonly nav = typeof history === 'undefined' ? null : new Navegacion<Pantalla>(history, 'cargando', RAICES, (p) => this.mostrar(p))
+
+  constructor() {
+    globalThis.addEventListener?.('popstate', () => this.nav?.alIrAtras())
+  }
   private temporizador: ReturnType<typeof setTimeout> | undefined
 
   // ── Lo que ve la pantalla ───────────────────────────────────────────────
@@ -102,9 +111,9 @@ class App {
     if (id && (await this.abrir(id))) {
       this.esEjemplo = id === ejemplo
       this.bloqueado = this.tienePin()
-      this.pantalla = this.bloqueado ? 'bloqueo' : 'inicio'
+      this.ir(this.bloqueado ? 'bloqueo' : 'inicio')
     } else {
-      this.pantalla = 'bienvenida'
+      this.ir('bienvenida')
     }
   }
 
@@ -128,7 +137,7 @@ class App {
     escribirClave(CLAVE_NEGOCIO, negocio.negocio_id)
     this.estado = await this.almacen.leer()
     this.esEjemplo = false
-    this.pantalla = 'inicio'
+    this.ir('inicio')
   }
 
   // ── Anotar ──────────────────────────────────────────────────────────────
@@ -249,7 +258,7 @@ class App {
     const ok = (await huellaPin(pin, sal)) === huella
     if (ok && this.bloqueado) {
       this.bloqueado = false
-      this.pantalla = 'inicio'
+      this.ir('inicio')
     }
     return ok
   }
@@ -303,7 +312,7 @@ class App {
         this.bloqueado = false
         this.estado = await this.almacen.leer()
         this.esEjemplo = false
-        this.pantalla = 'inicio'
+        this.ir('inicio')
         this.avisar('Negocio restaurado')
       },
     }
@@ -311,7 +320,7 @@ class App {
 
   // ── Datos de ejemplo (M0, RNF-20): viven en su propia base y se borran de golpe ─
   async probarEjemplo() {
-    this.pantalla = 'cargando'
+    this.ir('cargando')
     const estado = await cargarEjemplo(this.hoy)
     this.almacen?.cerrar()
     this.almacen = await AlmacenNegocio.abrir(estado.negocio.negocio_id)
@@ -319,7 +328,7 @@ class App {
     escribirClave(CLAVE_EJEMPLO, estado.negocio.negocio_id)
     this.estado = await this.almacen.leer()
     this.esEjemplo = true
-    this.pantalla = 'inicio'
+    this.ir('inicio')
   }
 
   async borrarEjemplo() {
@@ -331,14 +340,33 @@ class App {
     this.esEjemplo = false
     this.estado = null
     const propio = leerClave(CLAVE_NEGOCIO)
-    this.pantalla = propio && (await this.abrir(propio)) ? 'inicio' : 'bienvenida'
+    this.ir(propio && (await this.abrir(propio)) ? 'inicio' : 'bienvenida')
   }
 
   // ── Navegación y avisos ─────────────────────────────────────────────────
+  /** Cambia de pantalla y lo anota en el historial, para que «atrás» regrese. */
   ir(p: Pantalla) {
+    if (this.nav) this.nav.ir(p)
+    else this.mostrar(p)
+  }
+
+  /** «‹ Volver»: lo mismo que el botón atrás del teléfono. */
+  atras() {
+    this.nav?.atras()
+  }
+
+  /** Una hoja abierta se cierra con atrás (UX-13); devuelve su id. */
+  abrirHoja(cerrar: () => void): number {
+    return this.nav?.abrirHoja(cerrar) ?? -1
+  }
+
+  cerrarHoja(id: number) {
+    this.nav?.cerrarHoja(id)
+  }
+
+  private mostrar(p: Pantalla) {
     this.pantalla = p
     this.error = null
-    if (p !== 'inicio') this.aviso = null
     globalThis.scrollTo?.(0, 0)
   }
 

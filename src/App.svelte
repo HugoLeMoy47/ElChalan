@@ -27,7 +27,7 @@
 
 <main>
   {#if fallo}
-    <div class="error">{fallo} Lo que ya anotaste no se pierde; intenta cerrar y volver a abrir la app.</div>
+    <div class="error" role="alert">{fallo} Lo que ya anotaste no se pierde; intenta cerrar y volver a abrir la app.</div>
   {:else if app.pantalla === 'cargando'}
     <p class="vacio">Abriendo…</p>
   {:else if app.pantalla === 'bienvenida'}

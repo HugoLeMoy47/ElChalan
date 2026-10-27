@@ -66,7 +66,7 @@
   }
 </script>
 
-<button class="back" onclick={() => (venta ? (venta = null) : app.ir('anotar'))}>‹ Volver</button>
+<button class="back" onclick={() => (venta ? (venta = null) : app.atras())}>‹ Volver</button>
 <h1>↩️ Me devolvieron</h1>
 
 {#if !venta}
@@ -100,7 +100,7 @@
     oninput={(ev) => { pena = ev.currentTarget.value; penaEditada = true }} />
   <p class="sub">Se propone la mitad de lo devuelto; puedes cambiarla. Al cliente se le reconocen <b>{pesos(Math.max(reconocido, 0))}</b>{venta.condicion === 'credito' ? ': primero se le baja de lo que debe y, si sobra, se le regresa en dinero.' : '.'}</p>
 
-  {#if resultado && !resultado.ok}<div class="error">{resultado.errores.map((x) => x.mensaje).join(' ')}</div>{/if}
+  {#if resultado && !resultado.ok}<div class="error" role="alert">{resultado.errores.map((x) => x.mensaje).join(' ')}</div>{/if}
   <button class="btn" disabled={devuelto <= 0 || reconocido < 0} onclick={listo}>Listo</button>
 {/if}
 

@@ -3,7 +3,8 @@
   // bodega (conteo o merma) y archivar en lugar de borrar (CH-04 §7.4).
   import { costoDeCantidad, pesosACentavos, textoAMilesimas, type Producto } from '../dominio/index.ts'
   import { app } from './app.svelte.ts'
-  import { cantidadCon, pesos } from './textos.ts'
+  import { MOTIVO_AJUSTE, cantidadCon, pesos } from './textos.ts'
+  import Hoja from './Hoja.svelte'
 
   const p = $derived(app.estado!.productos.find((x) => x.producto_id === app.productoSeleccionado) as Producto)
   const cantidad = $derived(app.existenciaHoy[p.producto_id] ?? 0)
@@ -41,7 +42,7 @@
 
 </script>
 
-<button class="back" onclick={() => app.ir('productos')}>‹ Volver</button>
+<button class="back" onclick={() => app.atras()}>‹ Volver</button>
 <h1>{p.nombre}</h1>
 {#if !p.activo}<p class="tag">Archivado</p>{/if}
 
@@ -59,36 +60,30 @@
 <p class="sub">Archivar lo quita de la lista sin borrarlo, porque aparece en ventas ya anotadas.</p>
 
 {#if editando}
-  <div class="modal" role="dialog" aria-modal="true">
-    <div class="sheet">
-      <h3>Cambiar producto</h3>
-      <label class="f" for="en">Nombre</label>
-      <input id="en" bind:value={nombre} maxlength="60" />
-      <div class="row">
-        <div><label class="f" for="ep">Mi precio</label><input id="ep" bind:value={precio} inputmode="decimal" /></div>
-        <div><label class="f" for="ec">Me cuesta</label><input id="ec" bind:value={costo} inputmode="decimal" /></div>
-      </div>
-      <p class="sub">El cambio aplica a las ventas nuevas; las ya anotadas conservan su costo (D-50).</p>
-      <button class="btn" disabled={!nombre.trim() || (precio !== '' && pesosACentavos(precio) === null) || (costo !== '' && pesosACentavos(costo) === null)} onclick={guardar}>Guardar</button>
-      <button class="btn sec" onclick={() => (editando = false)}>Cancelar</button>
+  <Hoja titulo={`Cambiar producto`} alCerrar={() => (editando = false)}>
+    <label class="f" for="en">Nombre</label>
+    <input id="en" bind:value={nombre} maxlength="60" />
+    <div class="row">
+      <div><label class="f" for="ep">Mi precio</label><input id="ep" bind:value={precio} inputmode="decimal" /></div>
+      <div><label class="f" for="ec">Me cuesta</label><input id="ec" bind:value={costo} inputmode="decimal" /></div>
     </div>
-  </div>
+    <p class="sub">El cambio aplica a las ventas nuevas; las ya anotadas conservan su costo (D-50).</p>
+    <button class="btn" disabled={!nombre.trim() || (precio !== '' && pesosACentavos(precio) === null) || (costo !== '' && pesosACentavos(costo) === null)} onclick={guardar}>Guardar</button>
+    <button class="btn sec" onclick={() => (editando = false)}>Cancelar</button>
+  </Hoja>
 {/if}
 
 {#if contando}
-  <div class="modal" role="dialog" aria-modal="true">
-    <div class="sheet">
-      <h3>Ajustar mi bodega</h3>
-      <p>La app dice que tienes {cantidadCon(cantidad, p.unidad_medida)}. ¿Cuántos hay de verdad?</p>
-      <input bind:value={real} inputmode="decimal" aria-label="Cuántos hay" />
-      <p class="f">¿Por qué?</p>
-      <div class="chips">
-        {#each ['conteo', 'merma', 'regalo', 'uso propio'] as const as m (m)}
-          <button class="chip" class:on={motivo === m} onclick={() => (motivo = m)}>{m === 'conteo' ? 'Conté' : m === 'merma' ? 'Se echó a perder' : m === 'regalo' ? 'Lo regalé' : 'Lo usé yo'}</button>
-        {/each}
-      </div>
-      <button class="btn" disabled={textoAMilesimas(real) === null || textoAMilesimas(real) === cantidad} onclick={ajustar}>Guardar</button>
-      <button class="btn sec" onclick={() => (contando = false)}>Cancelar</button>
+  <Hoja titulo={`Ajustar mi bodega`} alCerrar={() => (contando = false)}>
+    <p>La app dice que tienes {cantidadCon(cantidad, p.unidad_medida)}. ¿Cuántos hay de verdad?</p>
+    <input bind:value={real} inputmode="decimal" aria-label="Cuántos hay" />
+    <p class="f">¿Por qué?</p>
+    <div class="chips">
+      {#each ['conteo', 'merma', 'regalo', 'uso propio'] as const as m (m)}
+        <button class="chip" class:on={motivo === m} onclick={() => (motivo = m)}>{MOTIVO_AJUSTE[m]}</button>
+      {/each}
     </div>
-  </div>
+    <button class="btn" disabled={textoAMilesimas(real) === null || textoAMilesimas(real) === cantidad} onclick={ajustar}>Guardar</button>
+    <button class="btn sec" onclick={() => (contando = false)}>Cancelar</button>
+  </Hoja>
 {/if}

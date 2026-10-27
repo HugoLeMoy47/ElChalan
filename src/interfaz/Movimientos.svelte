@@ -3,7 +3,7 @@
   // se ven tachados con un filtro aparte.
   import type { Movimiento, TipoMovimiento } from '../dominio/index.ts'
   import { app } from './app.svelte.ts'
-  import { TIPO, fechaCorta, pesos } from './textos.ts'
+  import { CATEGORIA, MOTIVO_AJUSTE, TIPO, cantidadCon, fechaCorta, pesos } from './textos.ts'
 
   let filtro = $state<TipoMovimiento | 'todos'>('todos')
   let verAnulados = $state(false)
@@ -38,7 +38,7 @@
   }
 </script>
 
-<button class="back" onclick={() => app.ir('inicio')}>‹ Volver</button>
+<button class="back" onclick={() => app.atras()}>‹ Volver</button>
 <h1>Movimientos</h1>
 
 <div class="chips">
@@ -55,11 +55,17 @@
   {#if i === 0 || visibles[i - 1].fecha !== m.fecha}<div class="dia">{fechaCorta(m.fecha)}</div>{/if}
   <button class="person" class:tachado={verAnulados} onclick={() => { app.seleccion = m.movimiento_id; app.ir('detalle') }}>
     <span>
-      {TIPO[m.tipo].icono} {TIPO[m.tipo].texto}{m.condicion === 'credito' ? ' a crédito' : ''}
-      <br /><span class="sub">{[quien(m), m.categoria_gasto, m.notas].filter(Boolean).join(' · ') || ' '}</span>
+      <span aria-hidden="true">{TIPO[m.tipo].icono}</span> {TIPO[m.tipo].texto}{m.condicion === 'credito' ? ' a crédito' : ''}
+      <br /><span class="sub">{[quien(m), m.categoria_gasto && CATEGORIA[m.categoria_gasto], m.tipo === 'ajuste_existencia' && m.concepto && (MOTIVO_AJUSTE[m.concepto] ?? m.concepto), m.notas].filter(Boolean).join(' · ') || ' '}</span>
     </span>
     <span style="text-align:right">
-      <b class:neg={!TIPO[m.tipo].entra}>{TIPO[m.tipo].entra ? '' : '−'}{pesos(m.monto_centavos)}</b>
+      {#if m.tipo === 'ajuste_existencia'}
+        <!-- Un ajuste de bodega no mueve dinero: se muestra la cantidad. -->
+        {@const cantidad = m.renglones.reduce((s, r) => s + r.cantidad_milesimas, 0)}
+        <b>{cantidad > 0 ? '+' : ''}{cantidadCon(cantidad, m.renglones[0]?.unidad_medida ?? 'pieza')}</b>
+      {:else}
+        <b class:neg={!TIPO[m.tipo].entra}>{TIPO[m.tipo].entra ? '' : '−'}{pesos(m.monto_centavos)}</b>
+      {/if}
       {#if m.estado_registro === 'por_completar'}<br /><span class="tag w">falta algo</span>{/if}
     </span>
   </button>
