@@ -5,7 +5,8 @@ import { Navegacion, type Historia } from '../src/interfaz/navegacion.ts'
 
 type P = 'inicio' | 'bienvenida' | 'anotar' | 'captura' | 'movimientos' | 'detalle'
 
-/** Un historial de navegador simulado: los saltos llegan como «atrás» después. */
+/** Un historial de navegador simulado: los saltos llegan como «atrás» después y, como en
+ *  Chrome, su destino se fija al pedirlos (no al llegar). */
 function navegador() {
   let entradas = 1
   let posicion = 0
@@ -13,15 +14,14 @@ function navegador() {
   const historia: Historia = {
     pushState: () => { entradas = posicion + 2; posicion++ },
     replaceState: () => {},
-    go: (n) => pendientes.push(n),
+    go: (n) => pendientes.push(posicion + n),
   }
   const pantallas: P[] = []
   const nav = new Navegacion<P>(historia, 'inicio', ['inicio', 'bienvenida'], (p) => pantallas.push(p))
   /** Procesa los saltos pendientes, como hace el navegador. */
   const procesar = () => {
     while (pendientes.length) {
-      const n = pendientes.shift()!
-      const destino = Math.max(0, Math.min(entradas - 1, posicion + n))
+      const destino = Math.max(0, Math.min(entradas - 1, pendientes.shift()!))
       if (destino !== posicion) {
         posicion = destino
         nav.alIrAtras()
@@ -135,6 +135,19 @@ describe('botón atrás', () => {
     n.procesar()
     expect(n.posicion()).toBe(0)
     expect(n.nav.actual).toBe('inicio')
+  })
+
+  it('ir al inicio y enseguida a otra pantalla no desordena el historial', () => {
+    const n = navegador()
+    n.nav.ir('anotar') // por ejemplo, el asistente encima del inicio
+    n.nav.pestana('inicio') // el salto atrás del historial todavía no llega…
+    n.nav.ir('captura') // …y ya se abre la primera venta
+    n.procesar()
+    expect(n.posicion()).toBe(1)
+    expect(n.nav.actual).toBe('captura')
+    expect(n.atras()).toBe(true)
+    expect(n.nav.actual).toBe('inicio')
+    expect(n.atras()).toBe(false)
   })
 
   it('«‹ Volver» en una raíz no hace nada', () => {

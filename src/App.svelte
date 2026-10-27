@@ -1,6 +1,7 @@
 <script lang="ts">
   import { onMount } from 'svelte'
   import { app } from './interfaz/app.svelte.ts'
+  import Asistente from './interfaz/Asistente.svelte'
   import Barra from './interfaz/Barra.svelte'
   import Bienvenida from './interfaz/Bienvenida.svelte'
   import Captura from './interfaz/Captura.svelte'
@@ -51,6 +52,7 @@
     {:else if app.pantalla === 'devolucion'}<Devolucion />
     {:else if app.pantalla === 'movimientos'}<Movimientos />
     {:else if app.pantalla === 'mas'}<Mas />
+    {:else if app.pantalla === 'asistente'}<Asistente />
     {:else if app.pantalla === 'detalle'}<Detalle />
     {:else if app.pantalla === 'revisar'}<Revisar />
     {:else if app.pantalla === 'productos'}<Productos />

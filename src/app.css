@@ -163,6 +163,19 @@ h1.con-ico { gap: 10px; } h1.con-ico .ico { width: 36px; height: 36px; font-size
 .barra .circulo svg { width: 26px; height: 26px; }
 .barra .punto { position: absolute; top: 9px; left: calc(50% + 6px); width: 10px; height: 10px; border-radius: 50%; background: var(--bad); border: 2px solid var(--panel); }
 
+/* ── Ronda E: asistente de bienvenida ── */
+.avance { display: flex; gap: 4px; margin: 4px 0 14px; }
+.avance span { flex: 1; height: 5px; border-radius: 999px; background: var(--line); }
+.avance span.on { background: var(--acc); }
+.beneficio { display: flex; align-items: center; gap: 12px; padding: 10px 0; }
+.beneficio .ico { width: 46px; height: 46px; font-size: 24px; }
+.giro { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin: 6px 0 14px; }
+.giro .chip { border-radius: 14px; min-height: 52px; }
+.alta-rapida { display: grid; grid-template-columns: 1fr 96px 48px; gap: 6px; margin: 6px 0 10px; }
+.alta-rapida .btn { margin: 0; padding: 0; min-height: 48px; }
+.person.retomar { padding: 4px 8px 4px 12px; background: var(--acc-soft); }
+.hecho { color: var(--ok); font-weight: 600; }
+
 @media (prefers-reduced-motion: reduce) {
   * { transition: none !important; animation: none !important; }
 }

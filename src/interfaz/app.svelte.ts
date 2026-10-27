@@ -18,7 +18,7 @@ import { cargarEjemplo } from '../captura/ejemplo.ts'
 import { Navegacion } from './navegacion.ts'
 
 export type Pantalla =
-  | 'cargando' | 'bienvenida' | 'inicio' | 'captura' | 'deben' | 'cobro' | 'mas'
+  | 'cargando' | 'bienvenida' | 'inicio' | 'captura' | 'deben' | 'cobro' | 'mas' | 'asistente'
   | 'devolucion' | 'movimientos' | 'detalle' | 'respaldo' | 'revisar'
   | 'productos' | 'producto' | 'periodo' | 'ajustes' | 'bloqueo'
 
@@ -30,6 +30,8 @@ const AVISAR_ANTES = ['AN-03', 'AN-04', 'AN-09', 'AN-10', 'AN-14']
 
 const CLAVE_NEGOCIO = 'elchalan:negocio'
 const CLAVE_EJEMPLO = 'elchalan:ejemplo'
+/** Paso del asistente de bienvenida en que se quedó cada negocio (CH-19 §6). */
+const CLAVE_ASISTENTE = (negocio: Uuid) => `elchalan:asistente:${negocio}`
 /** El candado vive solo en este teléfono: nunca entra al respaldo (CH-04 §4.1). */
 const CLAVE_PIN = (negocio: Uuid) => `elchalan:pin:${negocio}`
 
@@ -127,20 +129,43 @@ class App {
     return this.estado !== null
   }
 
-  async crearNegocio(nombre: string, capital?: number) {
+  async crearNegocio(nombre: string, capital?: number, giro?: string) {
     const ahora = new Date().toISOString()
     const negocio: Negocio = {
       negocio_id: uuidv7(), nombre: nombre.trim(), nivel: 1, moneda: 'MXN', zona_horaria: ZONA,
       inicio_operaciones: this.hoy, creado_en: ahora, dispositivo_id: uuidv7(),
     }
     if (capital) negocio.capital_inicial_centavos = capital
+    if (giro) negocio.giro = giro
     this.almacen?.cerrar()
     this.almacen = await AlmacenNegocio.abrir(negocio.negocio_id)
     await this.almacen.crearNegocio(negocio)
     escribirClave(CLAVE_NEGOCIO, negocio.negocio_id)
     this.estado = await this.almacen.leer()
     this.esEjemplo = false
+    // El asistente sigue con el negocio ya creado; «atrás» lleva al inicio.
+    this.guardarPasoAsistente(0)
     this.ir('inicio')
+    this.ir('asistente')
+  }
+
+  // ── Asistente de bienvenida (ronda E) ───────────────────────────────────
+  /** Paso pendiente del asistente, o null si ya terminó o nunca empezó. */
+  pasoAsistente(): number | null {
+    if (!this.estado || this.esEjemplo) return null
+    const valor = leerClave(CLAVE_ASISTENTE(this.estado.negocio.negocio_id))
+    return valor === null || valor === 'hecho' ? null : Number(valor)
+  }
+
+  /** null = terminado (no se vuelve a ofrecer en el inicio). */
+  guardarPasoAsistente(paso: number | null) {
+    if (this.estado) escribirClave(CLAVE_ASISTENTE(this.estado.negocio.negocio_id), paso === null ? 'hecho' : String(paso))
+  }
+
+  /** Volver a verlo desde Ajustes, desde el primer paso con el negocio creado. */
+  abrirAsistente() {
+    this.guardarPasoAsistente(0)
+    this.ir('asistente')
   }
 
   // ── Anotar ──────────────────────────────────────────────────────────────

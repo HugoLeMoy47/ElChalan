@@ -28,6 +28,8 @@
   const almacenamientoEnRiesgo = $derived(app.almacenamiento && !app.almacenamiento.persistente)
   const avisos = $derived(app.alertas)
   const fecha = $derived(fechaLarga(app.hoy, app.hoy))
+  /** El asistente se retoma donde se quedó (CH-19 §6); no obliga. */
+  let pasoAsistente = $state(app.pasoAsistente())
   const hora = new Date().getHours()
   const saludo = hora < 12 ? 'Buenos días' : hora < 19 ? 'Buenas tardes' : 'Buenas noches'
 </script>
@@ -61,6 +63,16 @@
       {#if almacenamientoEnRiesgo} Y el teléfono podría borrarlos si se queda sin espacio.{/if}
     </span><b>Respaldar</b>
   </button>
+{/if}
+
+{#if pasoAsistente !== null}
+  <div class="person retomar">
+    <button class="alerta-ver" onclick={() => app.ir('asistente')}>
+      <span class="ico t-venta" aria-hidden="true">🚀</span>
+      <span class="alerta-texto"><b>Termina de preparar tu negocio</b><span class="sub">Paso {pasoAsistente + 3} de 6 · toma un minuto</span></span>
+    </button>
+    <button class="chip" aria-label="Ya no mostrar" onclick={() => { app.guardarPasoAsistente(null); pasoAsistente = null }}>✕</button>
+  </div>
 {/if}
 
 <div class="tengo">
