@@ -15,7 +15,7 @@ npm install
 npm test            # dominio contra la verdad de terreno
 npm run generar     # regenera los datos sintéticos A1 y A2
 npm run check       # tipos
-npm run dev         # app (por ahora, una pantalla vacía)
+npm run dev         # la app en http://localhost:5173 (usa la vista de teléfono)
 ```
 
 ## Estructura (CH-15 §7)
@@ -26,14 +26,14 @@ npm run dev         # app (por ahora, una pantalla vacía)
 | `src/almacen/` | IndexedDB, una base por negocio, transacciones atómicas (ADR-03); almacenamiento persistente | Hecho (paso 4) |
 | `src/exportacion/` | Respaldo manual: archivo JSON con versión y huella, validación y restauración (M5a) | Hecho (paso 4) |
 | `src/respaldo/` | Interfaz del proveedor y adaptador de Drive | PoC-2 |
-| `src/captura/` | Captura manual y carga de datos de ejemplo (M0) | Pendiente |
-| `src/interfaz/` | Pantallas y textos de calle (CH-16) | Pendiente (paso 5) |
+| `src/captura/` | Datos de ejemplo (M0): A1 con las fechas recorridas a hoy, en su propia base | Hecho (paso 5) |
+| `src/interfaz/` | Pantallas y textos de calle (CH-16): F-0 a F-8, F-10 mínima y F-11 | Hecho (paso 5); F-9, F-12 y F-13 en el paso 7 |
 | `datos_sinteticos/` | Generador determinista de A1 y A2 y su verdad de terreno (CH-08) | Hecho (paso 1) |
 | `pruebas/` | Escenarios T-01 a T-11, T-14, T-17, T-16, T-21 y T-22, atomicidad, y comparación al centavo con A1 y A2 | Hecho |
 
 ## Plan (CH-18 §5)
 
-1. ~~Generador de datos sintéticos~~ · 2. ~~Dominio~~ · 3. ~~Detector de alertas~~ · 4. ~~Almacén local y respaldo manual~~ · 5. Interfaz mínima · 6. Instalable y sin conexión · 7. Productos, por revisar, semana y mes, ajustes · 8. Mediciones en un Android real.
+1. ~~Generador de datos sintéticos~~ · 2. ~~Dominio~~ · 3. ~~Detector de alertas~~ · 4. ~~Almacén local y respaldo manual~~ · 5. ~~Interfaz mínima~~ · 6. Instalable y sin conexión · 7. Productos, por revisar, semana y mes, ajustes · 8. Mediciones en un Android real.
 
 ## Reglas que no se negocian aquí
 

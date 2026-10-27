@@ -1,10 +1,56 @@
 <script lang="ts">
-  // Interfaz pendiente (paso 5 de CH-18 §5). Por ahora solo confirma que el dominio carga.
-  import { formatearPesos } from './dominio/index.ts'
+  import { onMount } from 'svelte'
+  import { app } from './interfaz/app.svelte.ts'
+  import Anotar from './interfaz/Anotar.svelte'
+  import Bienvenida from './interfaz/Bienvenida.svelte'
+  import Captura from './interfaz/Captura.svelte'
+  import Cobro from './interfaz/Cobro.svelte'
+  import Detalle from './interfaz/Detalle.svelte'
+  import Devolucion from './interfaz/Devolucion.svelte'
+  import Inicio from './interfaz/Inicio.svelte'
+  import MeDeben from './interfaz/MeDeben.svelte'
+  import Movimientos from './interfaz/Movimientos.svelte'
+  import Respaldo from './interfaz/Respaldo.svelte'
+  import Revisar from './interfaz/Revisar.svelte'
+
+  let fallo = $state<string | null>(null)
+
+  onMount(() => {
+    app.iniciar().catch(() => (fallo = 'No se pudo abrir tus datos en este navegador.'))
+  })
 </script>
 
 <main>
-  <h1>El Chalán</h1>
-  <p>Prueba de concepto en construcción. Funciona sin internet.</p>
-  <p class="sub">{formatearPesos(0)}</p>
+  {#if fallo}
+    <div class="error">{fallo} Lo que ya anotaste no se pierde; intenta cerrar y volver a abrir la app.</div>
+  {:else if app.pantalla === 'cargando'}
+    <p class="vacio">Abriendo…</p>
+  {:else if app.pantalla === 'bienvenida'}
+    <Bienvenida />
+    <div style="height:24px"></div>
+    <button class="link" onclick={() => app.ir('respaldo')}>Tengo un respaldo: restaurarlo</button>
+  {:else if app.pantalla === 'respaldo'}
+    <Respaldo />
+  {:else if app.estado}
+    {#if app.pantalla === 'inicio'}<Inicio />
+    {:else if app.pantalla === 'anotar'}<Anotar />
+    {:else if app.pantalla === 'captura'}{#key app.tipoCaptura + (app.corrigiendo ?? '')}<Captura />{/key}
+    {:else if app.pantalla === 'deben'}<MeDeben />
+    {:else if app.pantalla === 'cobro'}<Cobro />
+    {:else if app.pantalla === 'devolucion'}<Devolucion />
+    {:else if app.pantalla === 'movimientos'}<Movimientos />
+    {:else if app.pantalla === 'detalle'}<Detalle />
+    {:else if app.pantalla === 'revisar'}<Revisar />
+    {/if}
+  {/if}
+
+  {#if app.aviso}
+    <div class="toast" role="status">
+      <span>{app.aviso.texto}</span>
+      {#if app.aviso.deshacer}
+        {@const id = app.aviso.deshacer}
+        <button onclick={() => app.deshacer(id)}>Deshacer</button>
+      {/if}
+    </div>
+  {/if}
 </main>

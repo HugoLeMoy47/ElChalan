@@ -56,6 +56,8 @@ export interface Vistas {
   por_cobrar: Centavos
   por_cobrar_vencido: Centavos
   por_cobrar_por_tercero: Record<Uuid, Centavos>
+  /** Lo que debe cada venta a crédito, por id de su versión vigente (F-5, F-8). */
+  por_cobrar_por_venta: Record<Uuid, Centavos>
   // ¿Qué tengo en bodega?
   existencia: Record<Uuid, Milesimas>
   valor_inventario: Centavos
@@ -121,7 +123,7 @@ export function calcularVistas(
     ventas_netas_con_costo: 0, ventas_netas_sin_costo: 0, ventas_sin_costo_pb: null,
     costo_de_lo_vendido: 0, utilidad_bruta: 0, margen_sobre_costo_pb: null,
     margen_sobre_ventas_pb: null, utilidad_del_periodo: 0, flujo_de_caja: 0,
-    por_cobrar: 0, por_cobrar_vencido: 0, por_cobrar_por_tercero: {},
+    por_cobrar: 0, por_cobrar_vencido: 0, por_cobrar_por_tercero: {}, por_cobrar_por_venta: {},
     existencia: {}, valor_inventario: 0, dias_de_inventario: null,
     aportaciones: 0, retiros: 0,
     movimientos_por_completar: 0, movimientos_por_confirmar: 0, pendientes: {},
@@ -258,6 +260,7 @@ export function calcularVistas(
     if (saldo <= 0) continue
     const venta = versiones.vigenteDeRaiz.get(r)!
     v.por_cobrar += saldo
+    v.por_cobrar_por_venta[venta.movimiento_id] = saldo
     if (venta.tercero_id) sumar(v.por_cobrar_por_tercero, venta.tercero_id, saldo)
     if (fechaPromesaEfectiva(venta) < hasta) v.por_cobrar_vencido += saldo
   }
