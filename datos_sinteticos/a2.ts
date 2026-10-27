@@ -40,7 +40,7 @@ export function generarA2() {
     if (datos.pendientes?.includes('sin_categoria')) g.alerta('AN-05', m.movimiento_id)
     // AN-04: la misma venta dos veces seguidas (2 %); la mitad se anula enseguida.
     if (datos.tipo === 'venta' && az.probabilidad(0.02)) {
-      const dup = g.alta(datos)
+      const dup = g.alta(datos, { inmediato: true })
       g.alerta('AN-04', dup.movimiento_id)
       if (az.probabilidad(0.5)) g.anular(dup.movimiento_id, 'Se capturó dos veces')
     }

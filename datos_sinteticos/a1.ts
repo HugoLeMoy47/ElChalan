@@ -193,8 +193,12 @@ export function generarA1() {
     // AN-04 / T-18: la misma venta capturada dos veces seguidas (2 %); la mitad se anula al otro día.
     if (az.probabilidad(0.02)) {
       for (const [pid, c] of Object.entries(efectoExistencia)) existencia.set(pid, existencia.get(pid)! + c)
-      const dup = g.alta(datos)
+      const dup = g.alta(datos, { inmediato: true })
       g.alerta('AN-04', dup.movimiento_id)
+      // La copia trae las mismas fallas que la original (menos el reloj, que ya va bien).
+      for (const al of g.alertas.filter((x) => x.objeto_id === venta.movimiento_id && x.codigo !== 'AN-16')) {
+        g.alerta(al.codigo, dup.movimiento_id)
+      }
       if (az.probabilidad(0.5)) {
         programar(masDias(dia, 1), () => {
           g.anular(dup.movimiento_id, 'Se capturó dos veces')

@@ -50,6 +50,11 @@ function armar(cfg: { id: string; semilla: number; inicio: Fecha; fin: Fecha; ca
     ...p, vistas: verdad(g.libro, cfg.capital, g.productos, p.desde, p.hasta),
   })
   const { semanas, meses } = periodos(cfg.inicio, cfg.fin)
+  const total = calc({ clave: 'total', desde: cfg.inicio, hasta: cfg.fin })
+  // AN-12 resulta del estado final: un saldo por medio de pago debajo de cero.
+  for (const [medio, valor] of Object.entries(total.vistas.saldo_por_medio)) {
+    if (valor < 0) g.alerta('AN-12', `${g.negocio.negocio_id}:${medio}`)
+  }
   return {
     id: cfg.id,
     semilla: cfg.semilla,
@@ -59,7 +64,7 @@ function armar(cfg: { id: string; semilla: number; inicio: Fecha; fin: Fecha; ca
       semilla: cfg.semilla,
       semanas: semanas.map(calc),
       meses: meses.map(calc),
-      total: calc({ clave: 'total', desde: cfg.inicio, hasta: cfg.fin }),
+      total,
       alertas_esperadas: g.alertas,
       intentos_rechazados: g.rechazados,
     },

@@ -4,7 +4,14 @@
 import { readFileSync } from 'node:fs'
 import { describe, expect, it } from 'vitest'
 import { ARQUETIPOS, archivos } from '../datos_sinteticos/arquetipos.ts'
-import { calcularVistas, firmar, type Movimiento } from '../src/dominio/index.ts'
+import { calcularVistas, detectarAlertas, firmar, type Movimiento } from '../src/dominio/index.ts'
+
+/** CH-08 §9: las falsas alarmas no pasan del 5 % de las alertas mostradas. */
+const UMBRAL_FALSAS_ALARMAS = 0.05
+/** Sin tasa sintética: el generador no las inyecta (CH-04 §12.2). */
+const NO_INYECTADAS = ['AN-13', 'AN-17', 'AN-18']
+/** AN-20 se pregunta al comprar; se prueba con `cambiosDeCosto` en las pruebas del dominio. */
+const SOLO_AL_CAPTURAR = ['AN-20']
 
 for (const [id, construir] of Object.entries(ARQUETIPOS)) {
   describe(`arquetipo ${id}`, () => {
@@ -48,6 +55,23 @@ for (const [id, construir] of Object.entries(ARQUETIPOS)) {
           expect(r.movimiento.estado_registro).toBe(m.estado_registro)
         }
       }
+    })
+
+    it('T-21 · detecta todas las anomalías inyectadas, con pocas falsas alarmas', () => {
+      const detectadas = detectarAlertas(g.registro, g.negocio, g.productos, {
+        hoy: a.esperado.total.hasta, ultimo_respaldo: a.esperado.total.hasta,
+      }).filter((x) => !NO_INYECTADAS.includes(x.codigo))
+      const clave = (x: { codigo: string; objeto_id: string }) => `${x.codigo}|${x.objeto_id}`
+      const hallado = new Set(detectadas.map(clave))
+      const esperadas = a.esperado.alertas_esperadas.filter((x) => !SOLO_AL_CAPTURAR.includes(x.codigo))
+      const esperado = new Set(esperadas.map(clave))
+
+      const sinDetectar = esperadas.filter((x) => !hallado.has(clave(x)))
+      expect(sinDetectar, 'anomalías inyectadas sin detectar').toEqual([])
+      const falsas = detectadas.filter((x) => !esperado.has(clave(x)))
+      expect(falsas.length, `falsas alarmas: ${falsas.map(clave).join(', ')}`).toBeLessThanOrEqual(
+        Math.floor(detectadas.length * UMBRAL_FALSAS_ALARMAS),
+      )
     })
 
     it('los intentos con fecha futura se rechazan (AN-01)', () => {

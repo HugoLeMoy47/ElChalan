@@ -169,8 +169,9 @@ export class Generador {
     this.reloj = Math.max(this.reloj + 1000, t)
   }
 
-  private sello(): { ms: number; iso: FechaHora } {
-    this.reloj += this.azar.entero(20, 240) * 1000
+  /** Entre captura y captura pasan de 20 s a 4 min; un duplicado, de 2 a 10 s (doble toque). */
+  private sello(inmediato = false): { ms: number; iso: FechaHora } {
+    this.reloj += (inmediato ? this.azar.entero(2, 10) : this.azar.entero(20, 240)) * 1000
     return { ms: this.reloj, iso: new Date(this.reloj).toISOString() }
   }
 
@@ -194,8 +195,8 @@ export class Generador {
     return t
   }
 
-  private construir(d: DatosAlta, extra: Partial<Movimiento>, relojAtrasado = false): Movimiento {
-    const s = this.sello()
+  private construir(d: DatosAlta, extra: Partial<Movimiento>, relojAtrasado = false, inmediato = false): Movimiento {
+    const s = this.sello(inmediato)
     let creado = s.iso
     if (relojAtrasado) creado = new Date(s.ms - 2 * DIA - 3_600_000).toISOString()
     const id = uuidv7(s.ms, this.azar)
@@ -236,8 +237,8 @@ export class Generador {
   }
 
   /** Anota un alta. Devuelve el movimiento (su id es la raíz). */
-  alta(d: DatosAlta, opciones: { relojAtrasado?: boolean } = {}): Movimiento {
-    const m = this.construir(d, {}, opciones.relojAtrasado)
+  alta(d: DatosAlta, opciones: { relojAtrasado?: boolean; inmediato?: boolean } = {}): Movimiento {
+    const m = this.construir(d, {}, opciones.relojAtrasado, opciones.inmediato)
     this.registro.push(m)
     this.libro.set(m.movimiento_id, this.efecto(d))
     this.ultima.set(m.movimiento_id, m.movimiento_id)
@@ -263,6 +264,8 @@ export class Generador {
     }
     this.registro.push(m)
     this.libro.delete(raiz)
+    // Anular atiende las alertas de ese movimiento: dejan de esperarse.
+    for (let i = this.alertas.length - 1; i >= 0; i--) if (this.alertas[i].objeto_id === raiz) this.alertas.splice(i, 1)
     this.ultima.set(raiz, m.movimiento_id)
     return m
   }
