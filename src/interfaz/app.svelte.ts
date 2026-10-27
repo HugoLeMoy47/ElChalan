@@ -62,6 +62,9 @@ class App {
   esEjemplo = $state(false)
   /** Lo que abre cada pantalla: tipo a anotar, movimiento a ver o corregir, persona que pagó. */
   tipoCaptura = $state<DatosMovimiento['tipo']>('venta')
+  /** Cuántas se anotaron seguidas con «Listo y otra», y la vuelta del formulario. */
+  seguidas = $state(0)
+  vuelta = $state(0)
   corrigiendo = $state<Uuid | null>(null)
   seleccion = $state<Uuid | null>(null)
   terceroCobro = $state<Uuid | null>(null)
@@ -378,8 +381,16 @@ class App {
 
   anotar(tipo: DatosMovimiento['tipo']) {
     this.corrigiendo = null
+    this.seguidas = 0
     this.tipoCaptura = tipo
     this.ir(tipo === 'cobro' ? 'deben' : tipo === 'devolucion_venta' ? 'devolucion' : 'captura')
+  }
+
+  /** «Listo y otra» (UX-06): el formulario vuelve a empezar sin salir de la pantalla. */
+  otraCaptura() {
+    this.seguidas++
+    this.vuelta++
+    globalThis.scrollTo?.(0, 0)
   }
 
   avisar(texto: string, deshacer?: Uuid) {

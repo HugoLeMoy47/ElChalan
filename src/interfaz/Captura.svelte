@@ -1,14 +1,18 @@
 <script lang="ts">
   // F-2 a F-4 y F-6: anotar o corregir una venta, compra, gasto, retiro o aportación.
-  // Lo mínimo es el monto; lo demás va en «Agregar detalles» y nunca obliga (D-04),
-  // salvo el apodo de quien debe en una venta a crédito (D-55).
+  // Lo mínimo es el monto, con el teclado del teléfono (UX-28); cada tipo muestra de
+  // entrada lo que necesita y solo fecha y notas van plegadas (UX-14). Nada obliga
+  // (D-04), salvo el apodo de quien debe en una venta a crédito (D-55). En la compra
+  // (y en la venta, si ya hay productos) va primero el producto, con alta ahí mismo
+  // (D-64, UX-29). «Listo y otra» deja anotar varias seguidas (UX-06).
   import {
     CATEGORIAS_GASTO, calcularImporte, cambiosDeCosto, costoTrasCompra, pesosACentavos, sumarDias, textoAMilesimas,
     type CambioDeCosto, type CategoriaGasto, type DatosMovimiento, type DecisionCosto, type MedioPago, type Movimiento,
   } from '../dominio/index.ts'
   import { app, type Preparado } from './app.svelte.ts'
   import Avisos from './Avisos.svelte'
-  import Teclado from './Teclado.svelte'
+  import AltaProducto from './AltaProducto.svelte'
+  import Monto from './Monto.svelte'
   import { CATEGORIA, MEDIO, TIPO, pesos } from './textos.ts'
   import Hoja from './Hoja.svelte'
 
@@ -27,7 +31,7 @@
   let categoria = $state<CategoriaGasto | ''>(original?.categoria_gasto ?? '')
   let fecha = $state(original?.fecha ?? app.hoy)
   let notas = $state(original?.notas ?? '')
-  let detalles = $state(!!original && (original.medio_pago !== 'efectivo' || original.fecha !== app.hoy || !!original.notas))
+  let masDetalles = $state(!!original && (original.fecha !== app.hoy || !!original.notas))
   let lineas = $state<LineaProducto[]>(
     (original?.renglones ?? []).filter((r) => r.producto_id).map((r) => ({
       producto_id: r.producto_id!, cantidad: String(r.cantidad_milesimas / 1000),
@@ -38,15 +42,22 @@
   let buscar = $state('')
   let resultado = $state.raw<Preparado | null>(null)
   let ocupado = $state(false)
+  /** Guardar y dejar el formulario listo para la siguiente (UX-06). */
+  let otra = false
+  /** Nombre con el que se abre el alta de producto, o null si está cerrada. */
+  let alta = $state<string | null>(null)
   /** Preguntas «¿Actualizo el costo?» pendientes y lo que se va contestando (D-50). */
   let preguntas = $state.raw<CambioDeCosto[]>([])
   let respuestas = $state<DecisionCosto[]>([])
 
   const entra = TIPO[tipo].entra
-  const conProductos = (tipo === 'venta' || tipo === 'compra') && e.productos.some((p) => p.activo)
+  const conProductos = tipo === 'venta' || tipo === 'compra'
+  const productoPrimero = tipo === 'compra' || (tipo === 'venta' && e.productos.some((p) => p.activo))
   const rol = tipo === 'compra' ? 'proveedor' : 'cliente'
   const conQuien = tipo === 'venta' || tipo === 'compra'
-  const catalogo = new Map(e.productos.map((p) => [p.producto_id, p]))
+  // Del estado vivo: un producto dado de alta aquí mismo entra al catálogo.
+  const catalogo = $derived(new Map(app.estado!.productos.map((p) => [p.producto_id, p])))
+  const activos = $derived(app.estado!.productos.filter((p) => p.activo))
   const nombres = $derived(e.terceros.filter((t) => t.activo && t.rol === rol).map((t) => t.nombre))
 
   const precioDe = (l: LineaProducto) =>
@@ -57,21 +68,36 @@
   /** D-56: con productos, el total se suma solo. */
   const montoProductos = $derived(lineas.reduce((s, l) => s + calcularImporte(cantidadDe(l), precioDe(l)), 0))
   const centavos = $derived(lineas.length ? montoProductos : pesosACentavos(monto) ?? 0)
+  const texto = $derived(buscar.trim().toLowerCase())
   const encontrados = $derived(
-    buscar.trim().length < 2 ? [] : e.productos
-      .filter((p) => p.activo && `${p.nombre} ${p.clave ?? ''}`.toLowerCase().includes(buscar.trim().toLowerCase()))
-      .slice(0, 6),
+    texto.length < 2 ? [] : activos.filter((p) => `${p.nombre} ${p.clave ?? ''}`.toLowerCase().includes(texto)).slice(0, 6),
   )
+  /** Sin buscar, los primeros productos a un toque. */
+  const aLaMano = $derived(texto ? [] : activos.slice(0, 8))
+  const yaExiste = $derived(activos.some((p) => p.nombre.toLowerCase() === texto))
   const hayFraccion = $derived(lineas.some((l) => cantidadDe(l) % 1000 !== 0))
   const sinCosto = $derived(tipo === 'venta' && lineas.some((l) => (l.costo ?? catalogo.get(l.producto_id)?.costo_centavos) === undefined))
 
   function agregar(id: string) {
+    // Tocar otra vez el mismo producto suma uno.
+    const ya = lineas.find((l) => l.producto_id === id)
+    if (ya) {
+      ya.cantidad = String((textoAMilesimas(ya.cantidad) ?? 0) / 1000 + 1)
+      buscar = ''
+      return
+    }
     const costo = catalogo.get(id)?.costo_centavos
     lineas.push({ producto_id: id, cantidad: '1', compra: tipo === 'compra' && costo !== undefined ? String(costo / 100) : undefined })
     buscar = ''
   }
 
-  async function listo() {
+  function cambiarCantidad(l: LineaProducto, delta: number) {
+    l.cantidad = String(Math.max(0, (textoAMilesimas(l.cantidad) ?? 0) / 1000 + delta))
+  }
+
+  async function listo(yOtra = false) {
+    if (ocupado || centavos <= 0) return
+    otra = yOtra
     ocupado = true
     app.error = null
     try {
@@ -116,7 +142,8 @@
     if (!resultado?.ok) return
     const m = resultado.movimiento
     const antes = { ...app.existenciaHoy } // D-53 pondera con lo que había antes de comprar
-    await app.guardar(m, app.corrigiendo ? 'Corregido' : 'Anotado')
+    const seguir = otra && !original
+    await app.guardar(m, original ? 'Corregido' : seguir ? `Anotado · van ${app.seguidas + 1} seguidas` : 'Anotado')
     if (tipo === 'compra' && !original) {
       for (const r of m.renglones) {
         const p = r.producto_id ? catalogo.get(r.producto_id) : undefined
@@ -129,7 +156,8 @@
         if (nuevo !== p.costo_centavos) await app.guardarProducto({ ...p, costo_centavos: nuevo })
       }
     }
-    app.ir('inicio')
+    if (seguir) app.otraCaptura()
+    else app.ir('inicio')
   }
 
   const pregunta = $derived(preguntas[respuestas.length])
@@ -142,12 +170,67 @@
 
 <button class="back" onclick={() => app.atras()}>‹ Volver</button>
 <h1 class="con-ico t-{tipo}"><span class="ico" aria-hidden="true">{TIPO[tipo].icono}</span> {original ? 'Corregir: ' : ''}{TIPO[tipo].texto}</h1>
+{#if app.seguidas && !original}<p class="sub" style="margin:-6px 0 10px">Van {app.seguidas} seguida{app.seguidas === 1 ? '' : 's'}. La anterior ya quedó guardada.</p>{/if}
 
-{#if lineas.length}
-  <div class="amount">{pesos(montoProductos)}</div>
-  <p class="sub" style="text-align:center;margin-top:-4px">Se suma de los productos.</p>
+{#snippet bloqueMonto()}
+  {#if lineas.length}
+    <div class="total-prod"><span class="sub">Total</span><b>{pesos(montoProductos)}</b><span class="sub">se suma de los productos</span></div>
+  {:else}
+    {#if productoPrimero}<p class="f">{tipo === 'compra' ? '¿Sin producto? Escribe solo cuánto pagaste' : '¿Sin producto? Escribe solo el total'}</p>{/if}
+    <Monto bind:valor={monto} enfocar={!productoPrimero} alListo={() => listo()}
+      etiqueta={tipo === 'venta' ? '¿Cuánto vendiste?' : tipo === 'compra' ? '¿Cuánto pagaste?' : 'Monto'} />
+  {/if}
+{/snippet}
+
+{#snippet bloqueProductos()}
+  <p class="f">{tipo === 'compra' ? '¿Qué compraste?' : '¿Qué vendiste?'}{productoPrimero ? '' : ' (opcional)'}</p>
+  {#each lineas as l, i (l.producto_id)}
+    {@const p = catalogo.get(l.producto_id)}
+    <div class="linea">
+      <div class="linea-nombre">
+        <b>{p?.nombre}</b>
+        <span class="sub">{tipo === 'compra' ? `${pesos(calcularImporte(cantidadDe(l), precioDe(l)))}` : `${pesos(precioDe(l))} c/u · ${pesos(calcularImporte(cantidadDe(l), precioDe(l)))}`}</span>
+      </div>
+      <button class="paso" onclick={() => cambiarCantidad(l, -1)} aria-label="Uno menos">−</button>
+      <input class="cant" bind:value={l.cantidad} inputmode="decimal" aria-label={`Cantidad de ${p?.nombre}`} />
+      <button class="paso" onclick={() => cambiarCantidad(l, 1)} aria-label="Uno más">＋</button>
+      <button class="paso quitar" onclick={() => lineas.splice(i, 1)} aria-label={`Quitar ${p?.nombre}`}>✕</button>
+      {#if tipo === 'compra'}
+        <label class="linea-costo"><span class="sub">a</span><input bind:value={l.compra} inputmode="decimal" placeholder="$…" aria-label={`A cuánto compraste ${p?.nombre}`} /><span class="sub">c/u</span></label>
+      {/if}
+    </div>
+  {/each}
+  <input bind:value={buscar} placeholder={activos.length ? 'Busca o escribe uno nuevo…' : 'Escribe el nombre del producto…'} aria-label="Buscar o agregar producto"
+    onkeydown={(ev) => { if (ev.key === 'Enter' && texto.length >= 2) { if (encontrados.length) agregar(encontrados[0].producto_id); else alta = buscar.trim() } }} />
+  {#if aLaMano.length}
+    <div class="chips">
+      {#each aLaMano as p (p.producto_id)}<button class="chip" onclick={() => agregar(p.producto_id)}>{p.nombre}</button>{/each}
+    </div>
+  {/if}
+  {#each encontrados as p (p.producto_id)}
+    <button class="person" onclick={() => agregar(p.producto_id)}>
+      <span>{p.nombre}<br /><span class="sub">{p.clave ?? ''}</span></span>
+      <span>{pesos((tipo === 'compra' ? p.costo_centavos : p.precio_venta_centavos) ?? 0)}</span>
+    </button>
+  {/each}
+  {#if texto.length >= 2 && !yaExiste}
+    <button class="person nuevo" onclick={() => (alta = buscar.trim())}>
+      <span><b>＋ Agregar «{buscar.trim()}»</b><br /><span class="sub">Producto nuevo: se guarda en Mis productos</span></span>
+    </button>
+  {:else if !texto && !activos.length}
+    <button class="link" onclick={() => (alta = '')}>＋ Dar de alta un producto</button>
+  {/if}
+  {#if lineas.length && tipo === 'venta'}<p class="sub">El precio y el costo se copian de tus productos.</p>{/if}
+  {#if sinCosto}<p class="sub">⚠ Un producto no tiene costo: contará como si te hubiera costado $0.</p>{/if}
+  {#if hayFraccion}<p class="sub">Con cantidades con decimales, el importe se redondea a múltiplos de 5 centavos.</p>{/if}
+{/snippet}
+
+{#if productoPrimero}
+  {@render bloqueProductos()}
+  {@render bloqueMonto()}
 {:else}
-  <Teclado bind:valor={monto} />
+  {@render bloqueMonto()}
+  {#if conProductos}{@render bloqueProductos()}{/if}
 {/if}
 
 {#if tipo === 'venta'}
@@ -173,43 +256,22 @@
   </div>
 {/if}
 
-<button class="link" onclick={() => (detalles = !detalles)}>{detalles ? 'Ocultar detalles' : 'Agregar detalles'}</button>
-
-{#if detalles}
-  {#if conProductos}
-    <label class="f" for="buscar">{tipo === 'compra' ? '¿Qué compraste?' : '¿Qué vendiste?'}</label>
-    {#each lineas as l, i (i)}
-      {@const p = catalogo.get(l.producto_id)}
-      <div class="person" style="cursor:default">
-        <span style="flex:2">{p?.nombre}<br /><span class="sub">{tipo === 'compra' ? 'cantidad y a cuánto cada uno' : `${pesos(precioDe(l))} c/u`}</span></span>
-        <input style="flex:1;max-width:72px" bind:value={l.cantidad} inputmode="decimal" aria-label="Cantidad" />
-        {#if tipo === 'compra'}<input style="flex:1;max-width:96px" bind:value={l.compra} inputmode="decimal" placeholder="$…" aria-label="Costo de compra" />{/if}
-        <button class="back" style="flex:none" onclick={() => lineas.splice(i, 1)} aria-label="Quitar">✕</button>
-      </div>
-    {/each}
-    <input id="buscar" bind:value={buscar} placeholder="Busca por nombre o clave…" />
-    {#each encontrados as p (p.producto_id)}
-      <button class="person" onclick={() => agregar(p.producto_id)}>
-        <span>{p.nombre}<br /><span class="sub">{p.clave}</span></span><span>{pesos(p.precio_venta_centavos ?? 0)}</span>
-      </button>
-    {/each}
-    {#if lineas.length && tipo === 'venta'}<p class="sub">El precio y el costo se copian del catálogo; no se teclean.</p>{/if}
-    {#if sinCosto}<p class="sub">⚠ Un producto no tiene costo: contará como si te hubiera costado $0.</p>{/if}
-    {#if hayFraccion}<p class="sub">Con cantidades con decimales, el importe se redondea a múltiplos de 5 centavos.</p>{/if}
-  {/if}
-
+{#if !(tipo === 'venta' && credito)}
   <p class="f">¿Cómo {entra ? 'te pagaron' : 'pagaste'}?</p>
   <div class="chips">
     {#each ['efectivo', 'transferencia', 'tarjeta'] as const as m (m)}
       <button class="chip" class:on={medio === m} onclick={() => (medio = m)}>{MEDIO[m]}</button>
     {/each}
   </div>
+{/if}
 
-  {#if conQuien && !(tipo === 'venta' && credito)}
-    <label class="f" for="quien2">{tipo === 'compra' ? '¿A quién le compraste?' : '¿A quién le vendiste?'}</label>
-    <input id="quien2" bind:value={quien} list="nombres" placeholder="Nombre o apodo (opcional)…" />
-  {/if}
+{#if conQuien && !(tipo === 'venta' && credito)}
+  <label class="f" for="quien2">{tipo === 'compra' ? '¿A quién le compraste? (opcional)' : '¿A quién le vendiste? (opcional)'}</label>
+  <input id="quien2" bind:value={quien} list="nombres" placeholder="Nombre o apodo…" />
+{/if}
 
+<button class="link" aria-expanded={masDetalles} onclick={() => (masDetalles = !masDetalles)}>{masDetalles ? 'Ocultar fecha y notas' : 'Otra fecha o notas'}</button>
+{#if masDetalles}
   <label class="f" for="fecha">¿Cuándo fue?</label>
   <input id="fecha" type="date" bind:value={fecha} max={sumarDias(app.hoy, 1)} />
   <label class="f" for="notas">Notas</label>
@@ -225,8 +287,20 @@
 {/if}
 
 <div style="height:8px"></div>
-<button class="btn" disabled={ocupado || centavos <= 0} onclick={listo}>Listo</button>
-{#if centavos <= 0}<p class="sub" style="text-align:center;margin-top:-2px">{lineas.length ? 'Escribe la cantidad de los productos.' : 'Escribe el monto para poder guardar.'}</p>{/if}
+{#if original}
+  <button class="btn" disabled={ocupado || centavos <= 0} onclick={() => listo()}>Listo</button>
+{:else}
+  <div class="row">
+    <button class="btn" disabled={ocupado || centavos <= 0} onclick={() => listo()}>Listo</button>
+    <button class="btn sec" disabled={ocupado || centavos <= 0} onclick={() => listo(true)}>Listo y otra</button>
+  </div>
+{/if}
+{#if centavos <= 0}<p class="sub" style="text-align:center;margin-top:-2px">{lineas.length ? 'Escribe la cantidad de los productos.' : productoPrimero ? 'Elige un producto o escribe el total.' : 'Escribe el monto para poder guardar.'}</p>{/if}
+
+{#if alta !== null}
+  <AltaProducto nombreInicial={alta} desde={tipo === 'compra' ? 'compra' : 'venta'} alCerrar={() => (alta = null)}
+    alGuardar={(p) => { alta = null; agregar(p.producto_id) }} />
+{/if}
 
 {#if resultado?.ok && resultado.avisos.length && !preguntas.length}
   <Avisos avisos={resultado.avisos} onguardar={guardar} oncorregir={() => (resultado = null)} />

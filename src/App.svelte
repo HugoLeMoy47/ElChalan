@@ -45,7 +45,7 @@
     <Bloqueo />
   {:else if app.estado}
     {#if app.pantalla === 'inicio'}<Inicio />
-    {:else if app.pantalla === 'captura'}{#key app.tipoCaptura + (app.corrigiendo ?? '')}<Captura />{/key}
+    {:else if app.pantalla === 'captura'}{#key `${app.tipoCaptura}${app.corrigiendo ?? ''}${app.vuelta}`}<Captura />{/key}
     {:else if app.pantalla === 'deben'}<MeDeben />
     {:else if app.pantalla === 'cobro'}<Cobro />
     {:else if app.pantalla === 'devolucion'}<Devolucion />

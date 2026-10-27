@@ -7,7 +7,7 @@
   } from '../dominio/index.ts'
   import { app, type Preparado } from './app.svelte.ts'
   import Avisos from './Avisos.svelte'
-  import Teclado from './Teclado.svelte'
+  import Monto from './Monto.svelte'
   import { fechaCorta, pesos } from './textos.ts'
 
   const e = app.estado!
@@ -92,7 +92,7 @@
     {/each}
     <div class="amount">{pesos(devuelto)}</div>
   {:else}
-    <Teclado bind:valor={monto} />
+    <Monto bind:valor={monto} />
   {/if}
 
   <label class="f" for="pena">¿Cuánto te quedas de penalización?</label>

@@ -1,19 +1,13 @@
 <script lang="ts">
-  // F-9 · Mis productos: cuántos tengo y cuánto vale. Alta con cuatro campos.
-  import { existencias, pesosACentavos } from '../dominio/index.ts'
+  // F-9 · Mis productos: cuántos tengo y cuánto vale. Alta con cuatro campos, seguidas (D-64).
+  import { existencias } from '../dominio/index.ts'
   import { app } from './app.svelte.ts'
   import { cantidadCon, pesos } from './textos.ts'
-  import Hoja from './Hoja.svelte'
+  import AltaProducto from './AltaProducto.svelte'
 
   let buscar = $state('')
   let verArchivados = $state(false)
   let alta = $state(false)
-  let nombre = $state('')
-  let unidad = $state('pieza')
-  let precio = $state('')
-  let costo = $state('')
-
-  const UNIDADES = ['pieza', 'kilo', 'litro', 'caja', 'paquete', 'metro']
 
   const lista = $derived(
     existencias(app.estado!.productos, app.existenciaHoy)
@@ -21,20 +15,6 @@
       .filter((e) => `${e.producto.nombre} ${e.producto.clave ?? ''}`.toLowerCase().includes(buscar.trim().toLowerCase())),
   )
   const valorTotal = $derived(lista.reduce((s, e) => s + (e.valor ?? 0), 0))
-  const valido = $derived(!!nombre.trim() && (precio === '' || pesosACentavos(precio) !== null) && (costo === '' || pesosACentavos(costo) !== null))
-
-  async function guardar() {
-    const p = app.nuevoProducto({
-      nombre, unidad_medida: unidad,
-      precio: precio === '' ? undefined : pesosACentavos(precio)!,
-      costo: costo === '' ? undefined : pesosACentavos(costo)!,
-    })
-    await app.guardarProducto(p)
-    app.avisar(`Producto agregado: ${p.nombre}`)
-    alta = false
-    nombre = precio = costo = ''
-  }
-
 </script>
 
 <button class="back" onclick={() => app.atras()}>‹ Volver</button>
@@ -64,19 +44,5 @@
 {/each}
 
 {#if alta}
-  <Hoja titulo={`Nuevo producto`} alCerrar={() => (alta = false)}>
-    <label class="f" for="pn">¿Cómo se llama?</label>
-    <input id="pn" bind:value={nombre} maxlength="60" />
-    <p class="f">Se vende por</p>
-    <div class="chips">
-      {#each UNIDADES as u (u)}<button class="chip" class:on={unidad === u} onclick={() => (unidad = u)}>{u}</button>{/each}
-    </div>
-    <div class="row">
-      <div><label class="f" for="pp">Mi precio</label><input id="pp" bind:value={precio} inputmode="decimal" placeholder="$…" /></div>
-      <div><label class="f" for="pc">Me cuesta</label><input id="pc" bind:value={costo} inputmode="decimal" placeholder="$…" /></div>
-    </div>
-    <p class="sub">Con el costo, la app sabe cuánto te deja cada venta. Puedes ponerlo después.</p>
-    <button class="btn" disabled={!valido} onclick={guardar}>Guardar</button>
-    <button class="btn sec" onclick={() => (alta = false)}>Cancelar</button>
-  </Hoja>
+  <AltaProducto alCerrar={() => (alta = false)} alGuardar={(p, otro) => { if (!otro) { app.avisar(`Producto agregado: ${p.nombre}`); alta = false } }} />
 {/if}

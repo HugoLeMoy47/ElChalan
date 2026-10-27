@@ -19,7 +19,7 @@
 body { margin: 0; background: var(--panel); color: var(--ink); font: 16px/1.4 system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif; font-variant-numeric: tabular-nums; -webkit-tap-highlight-color: transparent; }
 button, a, input, select, textarea, label { touch-action: manipulation; }
 :focus-visible { outline: 3px solid var(--acc); outline-offset: 2px; }
-.btn:active, .act:active, .person:active, .chip:active, .keys button:active, .banner:active, .barra button:active { filter: brightness(.93); }
+.btn:active, .act:active, .person:active, .chip:active, .paso:active, .banner:active, .barra button:active { filter: brightness(.93); }
 main { max-width: 480px; margin: 0 auto; padding: calc(12px + env(safe-area-inset-top)) 16px calc(112px + env(safe-area-inset-bottom)); min-height: 100vh; }
 h1 { font-size: 20px; margin: 4px 0 12px; }
 button { font: inherit; color: inherit; cursor: pointer; }
@@ -54,8 +54,22 @@ button { font: inherit; color: inherit; cursor: pointer; }
 .act.main .ico { background: var(--panel); }
 .back { background: none; border: 0; color: var(--muted); padding: 8px 0; min-height: 44px; }
 .amount { font-size: 44px; font-weight: 700; text-align: center; margin: 6px 0 4px; letter-spacing: -.02em; }
-.keys { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin: 8px 0 12px; }
-.keys button { min-height: 54px; border: 0; border-radius: 14px; background: var(--bg); font-weight: 600; font-size: 22px; }
+/* Ronda C: monto con el teclado del teléfono (UX-28) y renglones de producto. */
+.monto { display: flex; align-items: center; gap: 6px; background: var(--bg); border: 2px solid transparent; border-radius: 16px; padding: 4px 16px; margin: 6px 0 10px; cursor: text; }
+.monto:focus-within { border-color: var(--acc); background: var(--panel); }
+.monto span { font-size: 30px; font-weight: 700; color: var(--muted); }
+.monto input { border: 0; background: transparent; min-height: 64px; padding: 0; font-size: 40px; font-weight: 700; letter-spacing: -.02em; }
+.monto input:focus-visible { outline: none; }
+.total-prod { display: flex; flex-direction: column; align-items: center; background: var(--bg); border-radius: 16px; padding: 10px; margin: 8px 0 10px; }
+.total-prod b { font-size: 36px; letter-spacing: -.02em; }
+.linea { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; background: var(--bg); border-radius: 14px; padding: 8px 10px; margin-bottom: 8px; }
+.linea-nombre { flex: 1 1 100px; min-width: 0; display: flex; flex-direction: column; }
+.linea .cant { width: 56px; min-height: 44px; text-align: center; padding: 0 4px; }
+.paso { flex: none; width: 40px; height: 44px; border: 0; border-radius: 10px; background: var(--panel); font-size: 18px; font-weight: 700; }
+.paso.quitar { background: transparent; color: var(--muted); }
+.linea-costo { flex-basis: 100%; display: flex; align-items: center; gap: 8px; }
+.linea-costo input { flex: 1; min-height: 44px; }
+.person.nuevo { background: var(--acc-soft); color: var(--ok); }
 .chips { display: flex; flex-wrap: wrap; gap: 8px; margin: 6px 0 10px; }
 .chip { border: 1px solid var(--line); background: transparent; border-radius: 999px; padding: 0 14px; min-height: 44px; }
 .chip.on { background: var(--acc); color: var(--acc-ink); border-color: var(--acc); }

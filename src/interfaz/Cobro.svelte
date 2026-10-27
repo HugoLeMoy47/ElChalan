@@ -3,7 +3,7 @@
   import { diasEntre, fechaPromesaEfectiva, pesosACentavos, type MedioPago, type Movimiento } from '../dominio/index.ts'
   import { app, type Preparado } from './app.svelte.ts'
   import Avisos from './Avisos.svelte'
-  import Teclado from './Teclado.svelte'
+  import Monto from './Monto.svelte'
   import { MEDIO, fechaCorta, pesos } from './textos.ts'
 
   const tercero = app.terceroCobro
@@ -57,7 +57,7 @@
 {/each}
 
 {#if elegida}
-  <Teclado bind:valor={monto} />
+  <Monto bind:valor={monto} />
   <div class="chips" style="justify-content:center">
     {#each ['efectivo', 'transferencia', 'tarjeta'] as const as m (m)}
       <button class="chip" class:on={medio === m} onclick={() => (medio = m)}>{MEDIO[m]}</button>
