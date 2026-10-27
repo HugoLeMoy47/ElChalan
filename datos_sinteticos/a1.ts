@@ -210,7 +210,7 @@ export function generarA1() {
       if (++creditos === 6 && !noCuadra) {
         const l = lineas[0]
         const pieza = importeLinea(1000, l.precio_unitario_centavos!)
-        const reconocido = pieza - Math.round(pieza / 10 / 100) * 100
+        const reconocido = pieza - Math.round(pieza / 2)
         programar(masDias(dia, 2), () => { devolver(raiz, l, 1000, medio, cliente.tercero_id, true) })
         programarCobro(raiz, { ...datos, monto: monto - reconocido }, cliente.tercero_id)
         return
@@ -236,7 +236,7 @@ export function generarA1() {
       const mayor = caso === 'devolucion_mayor'
       const l = lineas[0]
       const cantidad = mayor ? l.cantidad_milesimas + 1000 : 1000
-      // La primera devolución va sin penalización; las demás, con 10 % (D-59).
+      // La primera devolución va sin penalización; las demás, con la de costumbre (50 %, D-60).
       const penaliza = !mayor && contadoLimpias > 12
       programar(masDias(dia, az.entero(1, 5)), () => {
         const dev = devolver(raiz, l, cantidad, medio, cliente.tercero_id, penaliza)
@@ -245,10 +245,10 @@ export function generarA1() {
     }
   }
 
-  /** Devolución de una pieza o más de un renglón; con penalización, el negocio se queda el 10 %. */
+  /** Devolución de una pieza o más de un renglón; con penalización, el negocio se queda el 50 % (D-60). */
   function devolver(raiz: Uuid, l: Linea, cantidad: number, medio: MedioPago, tercero: Uuid, penaliza: boolean) {
     const importe = importeLinea(cantidad, l.precio_unitario_centavos!)
-    const penalizacion = penaliza ? Math.round(importe / 10 / 100) * 100 : 0
+    const penalizacion = penaliza ? Math.round(importe / 2) : 0
     const dl: Linea = { ...l, cantidad_milesimas: cantidad, importe_centavos: importe }
     const costoDev = l.costo_unitario_centavos !== undefined ? costoLinea(cantidad, l.costo_unitario_centavos) : null
     const dev = g.alta({

@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest'
 import {
   calcularImporte, claveSemana, costoPromedioPonderado, formatearPesos, pesosACentavos,
-  redondearCantidad, textoAMilesimas,
+  penalizacionSugerida, redondearCantidad, textoAMilesimas,
 } from '../../src/dominio/index.ts'
 
 describe('dinero en centavos (D-52)', () => {
@@ -48,5 +48,13 @@ describe('semanas ISO', () => {
     expect(claveSemana('2026-07-06')).toBe('2026-S28')
     expect(claveSemana('2026-07-12')).toBe('2026-S28')
     expect(claveSemana('2027-01-01')).toBe('2026-S53')
+  })
+})
+
+describe('penalización sugerida en devoluciones (D-60)', () => {
+  it('propone el 50 % de lo devuelto y admite otro porcentaje', () => {
+    expect(penalizacionSugerida(15_000)).toBe(7_500)
+    expect(penalizacionSugerida(12_345)).toBe(6_173) // 61.725 → 61.73
+    expect(penalizacionSugerida(15_000, 20)).toBe(3_000)
   })
 })

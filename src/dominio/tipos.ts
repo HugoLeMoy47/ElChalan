@@ -112,6 +112,8 @@ export interface Negocio {
   inicio_operaciones?: Fecha
   capital_inicial_centavos?: Centavos
   segmento_por_omision?: 'menudeo' | 'mayoreo'
+  /** Penalización que se propone en las devoluciones, en %; 50 si no se configura (D-60). */
+  penalizacion_devolucion_pct?: number
   creado_en: FechaHora
   dispositivo_id: Uuid
 }

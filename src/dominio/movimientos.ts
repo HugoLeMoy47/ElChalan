@@ -1,7 +1,7 @@
 // Firmar, corregir y anular movimientos (CH-04 §7.1, §7.2 y prevención de §12).
 // Puro: recibe el contexto (hoy, ids, catálogo) y devuelve el movimiento o los errores.
 
-import { calcularImporte } from './dinero.ts'
+import { calcularImporte, dividirRedondeando } from './dinero.ts'
 import { sumarDias } from './fechas.ts'
 import type { Versiones } from './versiones.ts'
 import type {
@@ -65,6 +65,17 @@ export type Resultado =
 
 /** Días que se proponen para una fecha de promesa vacía (AN-07). */
 export const DIAS_PROMESA_POR_OMISION = 30
+
+/** Penalización de costumbre en las devoluciones (D-60). */
+export const PENALIZACION_DEVOLUCION_PCT = 50
+
+/**
+ * Penalización que la app propone al registrar una devolución: un porcentaje de lo
+ * devuelto (50 % salvo que el negocio diga otra cosa). El usuario puede teclear otro monto.
+ */
+export function penalizacionSugerida(monto: Centavos, pct = PENALIZACION_DEVOLUCION_PCT): Centavos {
+  return dividirRedondeando(monto * pct, 100)
+}
 
 const TIPOS_CON_ORIGEN: TipoMovimiento[] = ['cobro', 'devolucion_venta']
 
