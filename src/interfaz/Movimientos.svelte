@@ -38,7 +38,6 @@
   }
 </script>
 
-<button class="back" onclick={() => app.atras()}>‹ Volver</button>
 <h1>Movimientos</h1>
 
 <div class="chips">
@@ -54,10 +53,10 @@
 {#each visibles as m, i (m.movimiento_id)}
   {#if i === 0 || visibles[i - 1].fecha !== m.fecha}<div class="dia">{fechaCorta(m.fecha)}</div>{/if}
   <button class="person" class:tachado={verAnulados} onclick={() => { app.seleccion = m.movimiento_id; app.ir('detalle') }}>
-    <span>
-      <span aria-hidden="true">{TIPO[m.tipo].icono}</span> {TIPO[m.tipo].texto}{m.condicion === 'credito' ? ' a crédito' : ''}
+    <span class="con-ico"><span class="ico t-{m.tipo}" aria-hidden="true">{TIPO[m.tipo].icono}</span><span>
+      {TIPO[m.tipo].texto}{m.condicion === 'credito' ? ' a crédito' : ''}
       <br /><span class="sub">{[quien(m), m.categoria_gasto && CATEGORIA[m.categoria_gasto], m.tipo === 'ajuste_existencia' && m.concepto && (MOTIVO_AJUSTE[m.concepto] ?? m.concepto), m.notas].filter(Boolean).join(' · ') || ' '}</span>
-    </span>
+    </span></span>
     <span style="text-align:right">
       {#if m.tipo === 'ajuste_existencia'}
         <!-- Un ajuste de bodega no mueve dinero: se muestra la cantidad. -->

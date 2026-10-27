@@ -18,7 +18,7 @@ import { cargarEjemplo } from '../captura/ejemplo.ts'
 import { Navegacion } from './navegacion.ts'
 
 export type Pantalla =
-  | 'cargando' | 'bienvenida' | 'inicio' | 'anotar' | 'captura' | 'deben' | 'cobro'
+  | 'cargando' | 'bienvenida' | 'inicio' | 'captura' | 'deben' | 'cobro' | 'mas'
   | 'devolucion' | 'movimientos' | 'detalle' | 'respaldo' | 'revisar'
   | 'productos' | 'producto' | 'periodo' | 'ajustes' | 'bloqueo'
 
@@ -351,6 +351,12 @@ class App {
   }
 
   /** «‹ Volver»: lo mismo que el botón atrás del teléfono. */
+  /** Pestaña de la barra inferior (D-62): atrás desde ella vuelve al inicio. */
+  pestana(p: Pantalla) {
+    if (this.nav) this.nav.pestana(p)
+    else this.mostrar(p)
+  }
+
   atras() {
     this.nav?.atras()
   }

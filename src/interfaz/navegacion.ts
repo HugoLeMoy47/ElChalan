@@ -45,6 +45,15 @@ export class Navegacion<P extends string> {
     this.sincronizar()
   }
 
+  /** Pestaña de la barra inferior (D-62): queda encima de la raíz, sin apilar pestañas,
+   *  para que «atrás» desde cualquiera de ellas vuelva al inicio. */
+  pestana(p: P): void {
+    this.hojas = []
+    this.pila = this.raices.includes(p) ? [p] : [this.pila[0], p]
+    this.alCambiar(p)
+    this.sincronizar()
+  }
+
   /** Lo mismo que el botón atrás del teléfono (para «‹ Volver»). */
   atras(): void {
     if (this.hojas.length || this.pila.length > 1) this.historia.go(-1)

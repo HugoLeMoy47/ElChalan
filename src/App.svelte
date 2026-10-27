@@ -1,13 +1,14 @@
 <script lang="ts">
   import { onMount } from 'svelte'
   import { app } from './interfaz/app.svelte.ts'
-  import Anotar from './interfaz/Anotar.svelte'
+  import Barra from './interfaz/Barra.svelte'
   import Bienvenida from './interfaz/Bienvenida.svelte'
   import Captura from './interfaz/Captura.svelte'
   import Cobro from './interfaz/Cobro.svelte'
   import Detalle from './interfaz/Detalle.svelte'
   import Devolucion from './interfaz/Devolucion.svelte'
   import Inicio from './interfaz/Inicio.svelte'
+  import Mas from './interfaz/Mas.svelte'
   import MeDeben from './interfaz/MeDeben.svelte'
   import Movimientos from './interfaz/Movimientos.svelte'
   import Respaldo from './interfaz/Respaldo.svelte'
@@ -19,6 +20,10 @@
   import Productos from './interfaz/Productos.svelte'
 
   let fallo = $state<string | null>(null)
+
+  /** Pantallas con barra inferior; los formularios y el detalle van sin ella. */
+  const CON_BARRA = ['inicio', 'movimientos', 'deben', 'mas', 'productos', 'periodo', 'revisar', 'ajustes', 'respaldo']
+  const conBarra = $derived(!!app.estado && !app.bloqueado && CON_BARRA.includes(app.pantalla))
 
   onMount(() => {
     app.iniciar().catch(() => (fallo = 'No se pudo abrir tus datos en este navegador.'))
@@ -40,12 +45,12 @@
     <Bloqueo />
   {:else if app.estado}
     {#if app.pantalla === 'inicio'}<Inicio />
-    {:else if app.pantalla === 'anotar'}<Anotar />
     {:else if app.pantalla === 'captura'}{#key app.tipoCaptura + (app.corrigiendo ?? '')}<Captura />{/key}
     {:else if app.pantalla === 'deben'}<MeDeben />
     {:else if app.pantalla === 'cobro'}<Cobro />
     {:else if app.pantalla === 'devolucion'}<Devolucion />
     {:else if app.pantalla === 'movimientos'}<Movimientos />
+    {:else if app.pantalla === 'mas'}<Mas />
     {:else if app.pantalla === 'detalle'}<Detalle />
     {:else if app.pantalla === 'revisar'}<Revisar />
     {:else if app.pantalla === 'productos'}<Productos />
@@ -54,6 +59,8 @@
     {:else if app.pantalla === 'ajustes'}<Ajustes />
     {/if}
   {/if}
+
+  {#if conBarra}<Barra />{/if}
 
   {#if app.aviso}
     <div class="toast" role="status">

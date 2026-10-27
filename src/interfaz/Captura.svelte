@@ -141,7 +141,7 @@
 </script>
 
 <button class="back" onclick={() => app.atras()}>‹ Volver</button>
-<h1><span aria-hidden="true">{TIPO[tipo].icono}</span> {original ? 'Corregir: ' : ''}{TIPO[tipo].texto}</h1>
+<h1 class="con-ico t-{tipo}"><span class="ico" aria-hidden="true">{TIPO[tipo].icono}</span> {original ? 'Corregir: ' : ''}{TIPO[tipo].texto}</h1>
 
 {#if lineas.length}
   <div class="amount">{pesos(montoProductos)}</div>

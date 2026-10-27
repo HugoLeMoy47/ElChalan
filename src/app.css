@@ -1,8 +1,9 @@
 /* Estilo de la maqueta v2 (D-47), a pantalla completa. Botones de 48 px o más (RNF-15).
-   Ronda A de CH-19: contraste AA, sin zoom por doble toque, áreas seguras, foco visible. */
+   Ronda A de CH-19: contraste AA, sin zoom por doble toque, áreas seguras, foco visible.
+   Ronda B: barra inferior, tarjeta «Tengo» con identidad y un color por tipo de movimiento. */
 :root {
   --bg: #f4f1ea; --panel: #ffffff; --ink: #1f2a24; --muted: #5f6962; --line: #e2ddd0;
-  --acc: #1f6f4a; --acc-ink: #ffffff; --acc-soft: #e3f1e9;
+  --acc: #1f6f4a; --acc-2: #2b8a5d; --acc-ink: #ffffff; --acc-soft: #e3f1e9;
   --warn: #9a5b00; --warn-soft: #fdf0d5; --bad: #b3261e; --bad-soft: #fbe4e1; --ok: #1f6f4a;
   --shadow: 0 6px 18px rgba(31, 111, 74, .35);
   color-scheme: light dark;
@@ -10,7 +11,7 @@
 @media (prefers-color-scheme: dark) {
   :root {
     --bg: #171a18; --panel: #222724; --ink: #eef2ee; --muted: #a3ada6; --line: #38403b;
-    --acc: #4cc38a; --acc-ink: #0d1f16; --acc-soft: #1f3a2c; --warn: #f2b441; --warn-soft: #3b2f13;
+    --acc: #4cc38a; --acc-2: #36a673; --acc-ink: #0d1f16; --acc-soft: #1f3a2c; --warn: #f2b441; --warn-soft: #3b2f13;
     --bad: #ff8a80; --bad-soft: #3d1f1c; --ok: #4cc38a; --shadow: 0 6px 18px rgba(0, 0, 0, .5);
   }
 }
@@ -18,7 +19,7 @@
 body { margin: 0; background: var(--panel); color: var(--ink); font: 16px/1.4 system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif; font-variant-numeric: tabular-nums; -webkit-tap-highlight-color: transparent; }
 button, a, input, select, textarea, label { touch-action: manipulation; }
 :focus-visible { outline: 3px solid var(--acc); outline-offset: 2px; }
-.btn:active, .act:active, .person:active, .chip:active, .keys button:active, .banner:active, .fab:active { filter: brightness(.93); }
+.btn:active, .act:active, .person:active, .chip:active, .keys button:active, .banner:active, .barra button:active { filter: brightness(.93); }
 main { max-width: 480px; margin: 0 auto; padding: calc(12px + env(safe-area-inset-top)) 16px calc(112px + env(safe-area-inset-bottom)); min-height: 100vh; }
 h1 { font-size: 20px; margin: 4px 0 12px; }
 button { font: inherit; color: inherit; cursor: pointer; }
@@ -43,13 +44,14 @@ button { font: inherit; color: inherit; cursor: pointer; }
 .stat .n { font-size: 21px; font-weight: 700; } .stat .l { font-size: 14px; color: var(--muted); }
 .stat.ancho { grid-column: 1 / -1; }
 .link { background: none; border: 0; color: var(--acc); padding: 6px 0; text-decoration: underline; min-height: 36px; }
-.fab { position: fixed; left: 50%; transform: translateX(-50%); width: min(448px, calc(100% - 32px)); bottom: calc(18px + env(safe-area-inset-bottom)); min-height: 58px; border: 0; border-radius: 18px; background: var(--acc); color: var(--acc-ink); font-weight: 700; font-size: 19px; box-shadow: var(--shadow); z-index: 5; }
 .btn { min-height: 52px; border: 0; border-radius: 14px; font-weight: 600; font-size: 17px; padding: 0 16px; background: var(--acc); color: var(--acc-ink); width: 100%; margin-bottom: 8px; }
 .btn.sec { background: var(--bg); color: var(--ink); } .btn.mal { background: var(--bad-soft); color: var(--bad); }
 .btn[disabled] { opacity: .55; cursor: not-allowed; }
 .acts { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
-.act { min-height: 84px; border: 0; border-radius: 16px; background: var(--bg); font-weight: 600; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px; }
-.act span { font-size: 26px; } .act.main { background: var(--acc-soft); color: var(--ok); }
+.act { min-height: 88px; border: 0; border-radius: 16px; background: var(--bg); font-weight: 600; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px; }
+.act .ico { width: 46px; height: 46px; font-size: 24px; border-radius: 14px; }
+.act.main { background: var(--tc-soft); color: var(--tc); min-height: 100px; font-size: 17px; }
+.act.main .ico { background: var(--panel); }
 .back { background: none; border: 0; color: var(--muted); padding: 8px 0; min-height: 44px; }
 .amount { font-size: 44px; font-weight: 700; text-align: center; margin: 6px 0 4px; letter-spacing: -.02em; }
 .keys { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin: 8px 0 12px; }
@@ -69,7 +71,7 @@ textarea { padding: 10px 12px; min-height: 72px; }
 .person.tachado { opacity: .55; text-decoration: line-through; }
 .tag { display: inline-block; border-radius: 999px; padding: 2px 8px; font-size: 12px; background: var(--bad-soft); color: var(--bad); }
 .tag.g { background: var(--acc-soft); color: var(--ok); } .tag.w { background: var(--warn-soft); color: var(--warn); }
-.toast { position: fixed; left: 50%; transform: translateX(-50%); width: min(448px, calc(100% - 32px)); bottom: calc(90px + env(safe-area-inset-bottom)); background: #1f2a24; color: #fff; border-radius: 14px; padding: 12px 14px; display: flex; justify-content: space-between; align-items: center; gap: 8px; font-size: 14px; z-index: 6; }
+.toast { position: fixed; left: 50%; transform: translateX(-50%); width: min(448px, calc(100% - 32px)); bottom: calc(84px + env(safe-area-inset-bottom)); background: #1f2a24; color: #fff; border-radius: 14px; padding: 12px 14px; display: flex; justify-content: space-between; align-items: center; gap: 8px; font-size: 14px; z-index: 6; }
 .toast button { background: none; border: 0; color: #9be3bd; font-weight: 700; min-height: 36px; }
 .modal { position: fixed; inset: 0; background: rgba(0, 0, 0, .45); display: flex; align-items: flex-end; justify-content: center; z-index: 8; }
 .sheet { position: relative; background: var(--panel); width: 100%; max-width: 480px; border-radius: 24px 24px 0 0; padding: 18px 16px calc(22px + env(safe-area-inset-bottom)); max-height: 90vh; overflow-y: auto; overscroll-behavior: contain; }
@@ -81,6 +83,56 @@ textarea { padding: 10px 12px; min-height: 72px; }
 .kv { display: flex; justify-content: space-between; gap: 12px; font-size: 15px; padding: 6px 0; border-bottom: 1px solid var(--line); }
 .kv span:first-child { color: var(--muted); }
 .vacio { text-align: center; color: var(--muted); padding: 24px 8px; }
+
+/* ── Ronda B (UX-27): identidad ── */
+.hola { display: flex; justify-content: space-between; align-items: flex-end; margin: 8px 0 12px; }
+.hola h1 { font-size: 24px; margin: 2px 0 0; letter-spacing: -.01em; }
+.hola .sub::first-letter { text-transform: uppercase; }
+.tengo { position: relative; overflow: hidden; background: linear-gradient(135deg, var(--acc) 0%, var(--acc-2) 100%); color: var(--acc-ink); border-radius: 22px; padding: 16px 18px 14px; margin-bottom: 12px; box-shadow: var(--shadow); }
+.tengo::after { content: ''; position: absolute; right: -46px; top: -56px; width: 170px; height: 170px; border-radius: 50%; background: rgba(255, 255, 255, .09); pointer-events: none; }
+.tengo h2 { font-size: 13px; margin: 0 0 2px; font-weight: 600; text-transform: uppercase; letter-spacing: .06em; opacity: .85; }
+.tengo .big { font-size: 40px; }
+.tengo .medios { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 10px; }
+.tengo .medios span { background: rgba(255, 255, 255, .17); border-radius: 999px; padding: 4px 10px; font-size: 13px; }
+.stat[class*='t-'] { border-left: 4px solid var(--tc); }
+.stat[class*='t-'] .l { color: var(--tc); font-weight: 600; }
+.vermas { display: flex; justify-content: center; align-items: center; gap: 6px; width: 100%; border: 1px dashed var(--line); background: transparent; color: var(--muted); border-radius: 12px; min-height: 44px; margin: -2px 0 12px; font-size: 14px; }
+.con-ico { display: flex; align-items: center; gap: 12px; }
+.ico { display: inline-grid; place-items: center; flex: none; width: 40px; height: 40px; border-radius: 12px; font-size: 20px; line-height: 1; background: var(--tc-soft, var(--panel)); color: var(--tc, var(--ink)); }
+h1.con-ico { gap: 10px; } h1.con-ico .ico { width: 36px; height: 36px; font-size: 19px; }
+
+/* Un color por tipo de movimiento. */
+.t-venta { --tc: #1f6f4a; --tc-soft: #e3f1e9; }
+.t-cobro { --tc: #0f6b66; --tc-soft: #dcf2ef; }
+.t-compra { --tc: #8a5300; --tc-soft: #fbeed3; }
+.t-gasto { --tc: #b3261e; --tc-soft: #fbe4e1; }
+.t-retiro { --tc: #6a3d9a; --tc-soft: #eee5f8; }
+.t-aportacion, .t-otro_ingreso { --tc: #1c5ea6; --tc-soft: #e1ecf8; }
+.t-devolucion_venta { --tc: #a8430a; --tc-soft: #fde6d6; }
+.t-ajuste_existencia, .t-ajuste_efectivo { --tc: #5f6962; --tc-soft: #ecebe5; }
+@media (prefers-color-scheme: dark) {
+  .t-venta { --tc: #4cc38a; --tc-soft: #1f3a2c; }
+  .t-cobro { --tc: #4fd1c5; --tc-soft: #173634; }
+  .t-compra { --tc: #f2b441; --tc-soft: #3b2f13; }
+  .t-gasto { --tc: #ff8a80; --tc-soft: #3d1f1c; }
+  .t-retiro { --tc: #c4a3f0; --tc-soft: #2e2340; }
+  .t-aportacion, .t-otro_ingreso { --tc: #8ab8f5; --tc-soft: #1b2b40; }
+  .t-devolucion_venta { --tc: #f5a26b; --tc-soft: #3d2717; }
+  .t-ajuste_existencia, .t-ajuste_efectivo { --tc: #a3ada6; --tc-soft: #2c312e; }
+  .tengo .medios span { background: rgba(0, 0, 0, .14); }
+}
+
+/* ── Barra inferior (D-62) ── */
+.barra { position: fixed; left: 0; right: 0; bottom: 0; z-index: 5; background: var(--panel); border-top: 1px solid var(--line); padding-bottom: env(safe-area-inset-bottom); }
+.barra > div { max-width: 480px; margin: 0 auto; display: grid; grid-template-columns: repeat(5, 1fr); }
+.barra button { position: relative; border: 0; background: none; min-height: 62px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 3px; font-size: 12px; color: var(--muted); padding: 4px 0; }
+.barra button.on { color: var(--acc); font-weight: 700; }
+.barra svg { width: 24px; height: 24px; }
+.barra .anotar { color: var(--acc); font-weight: 700; }
+.barra .circulo { display: grid; place-items: center; width: 54px; height: 54px; margin-top: -26px; border-radius: 50%; background: var(--acc); color: var(--acc-ink); box-shadow: var(--shadow); border: 4px solid var(--panel); }
+.barra .circulo svg { width: 26px; height: 26px; }
+.barra .punto { position: absolute; top: 9px; left: calc(50% + 6px); width: 10px; height: 10px; border-radius: 50%; background: var(--bad); border: 2px solid var(--panel); }
+
 @media (prefers-reduced-motion: reduce) {
   * { transition: none !important; animation: none !important; }
 }

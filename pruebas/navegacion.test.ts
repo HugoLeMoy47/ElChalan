@@ -116,6 +116,27 @@ describe('botón atrás', () => {
     expect(n.nav.actual).toBe('detalle')
   })
 
+  it('las pestañas no se apilan: atrás desde cualquiera vuelve al inicio', () => {
+    const n = navegador()
+    n.nav.pestana('movimientos')
+    n.nav.ir('detalle')
+    n.nav.pestana('anotar')
+    n.procesar()
+    expect(n.posicion()).toBe(1)
+    expect(n.atras()).toBe(true)
+    expect(n.nav.actual).toBe('inicio')
+    expect(n.atras()).toBe(false)
+  })
+
+  it('la pestaña Inicio regresa a la raíz', () => {
+    const n = navegador()
+    n.nav.pestana('movimientos')
+    n.nav.pestana('inicio')
+    n.procesar()
+    expect(n.posicion()).toBe(0)
+    expect(n.nav.actual).toBe('inicio')
+  })
+
   it('«‹ Volver» en una raíz no hace nada', () => {
     const n = navegador()
     n.nav.atras()
