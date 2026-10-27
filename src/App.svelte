@@ -12,6 +12,11 @@
   import Movimientos from './interfaz/Movimientos.svelte'
   import Respaldo from './interfaz/Respaldo.svelte'
   import Revisar from './interfaz/Revisar.svelte'
+  import Ajustes from './interfaz/Ajustes.svelte'
+  import Bloqueo from './interfaz/Bloqueo.svelte'
+  import Periodo from './interfaz/Periodo.svelte'
+  import Producto from './interfaz/Producto.svelte'
+  import Productos from './interfaz/Productos.svelte'
 
   let fallo = $state<string | null>(null)
 
@@ -31,6 +36,8 @@
     <button class="link" onclick={() => app.ir('respaldo')}>Tengo un respaldo: restaurarlo</button>
   {:else if app.pantalla === 'respaldo'}
     <Respaldo />
+  {:else if app.bloqueado}
+    <Bloqueo />
   {:else if app.estado}
     {#if app.pantalla === 'inicio'}<Inicio />
     {:else if app.pantalla === 'anotar'}<Anotar />
@@ -41,6 +48,10 @@
     {:else if app.pantalla === 'movimientos'}<Movimientos />
     {:else if app.pantalla === 'detalle'}<Detalle />
     {:else if app.pantalla === 'revisar'}<Revisar />
+    {:else if app.pantalla === 'productos'}<Productos />
+    {:else if app.pantalla === 'producto'}<Producto />
+    {:else if app.pantalla === 'periodo'}<Periodo />
+    {:else if app.pantalla === 'ajustes'}<Ajustes />
     {/if}
   {/if}
 

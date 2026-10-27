@@ -29,7 +29,7 @@ npm run dev         # la app en http://localhost:5173 (usa la vista de teléfono
 | `src/exportacion/` | Respaldo manual: archivo JSON con versión y huella, validación y restauración (M5a) | Hecho (paso 4) |
 | `src/respaldo/` | Interfaz del proveedor y adaptador de Drive | PoC-2 |
 | `src/captura/` | Datos de ejemplo (M0): A1 con las fechas recorridas a hoy, en su propia base | Hecho (paso 5) |
-| `src/interfaz/` | Pantallas y textos de calle (CH-16): F-0 a F-8, F-10 mínima y F-11 | Hecho (paso 5); F-9, F-12 y F-13 en el paso 7 |
+| `src/interfaz/` | Pantallas y textos de calle (CH-16): F-0 a F-13 | Hecho (pasos 5 y 7) |
 | `pwa/` | Service worker escrito a mano y el plugin de Vite que le pasa la lista de archivos (ADR-11) | Hecho (paso 6) |
 | `public/` | Manifiesto e íconos de la app instalable | Hecho (paso 6) |
 | `datos_sinteticos/` | Generador determinista de A1 y A2 y su verdad de terreno (CH-08) | Hecho (paso 1) |
@@ -37,7 +37,7 @@ npm run dev         # la app en http://localhost:5173 (usa la vista de teléfono
 
 ## Plan (CH-18 §5)
 
-1. ~~Generador de datos sintéticos~~ · 2. ~~Dominio~~ · 3. ~~Detector de alertas~~ · 4. ~~Almacén local y respaldo manual~~ · 5. ~~Interfaz mínima~~ · 6. ~~Instalable y sin conexión~~ (falta probarlo en un Android real) · 7. Productos, por revisar, semana y mes, ajustes · 8. Mediciones en un Android real.
+1. ~~Generador de datos sintéticos~~ · 2. ~~Dominio~~ · 3. ~~Detector de alertas~~ · 4. ~~Almacén local y respaldo manual~~ · 5. ~~Interfaz mínima~~ · 6. ~~Instalable y sin conexión~~ (falta probarlo en un Android real) · 7. ~~Productos, por revisar, semana y mes, ajustes~~ · 8. Mediciones en un Android real.
 
 ## Reglas que no se negocian aquí
 

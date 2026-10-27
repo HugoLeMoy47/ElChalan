@@ -133,6 +133,13 @@ export class AlmacenNegocio {
     await terminar(tx)
   }
 
+  /** Los datos del negocio (nombre, penalización de costumbre) se pueden cambiar. */
+  async guardarNegocio(negocio: Negocio): Promise<void> {
+    const tx = this.db.transaction('negocio', 'readwrite')
+    tx.objectStore('negocio').put(negocio)
+    await terminar(tx)
+  }
+
   /** Productos y terceros sí se actualizan (costo del catálogo, archivar); no se borran. */
   async guardarProducto(p: Producto): Promise<void> {
     const tx = this.db.transaction('productos', 'readwrite')

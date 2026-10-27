@@ -9,8 +9,8 @@ import { AlmacenNegocio, VERSION_ESQUEMA, type EstadoNegocio } from '../almacen/
 import { pedirPersistencia, type EstadoAlmacenamiento } from '../almacen/persistencia.ts'
 import {
   alertasAbiertas, anular, calcularVistas, corregir, detectarAlertas, firmar, hoyEn, inicioDeSemana,
-  resolverVersiones, type Alerta, type Contexto, type DatosMovimiento, type DecisionAlerta,
-  type ErrorValidacion, type Movimiento, type Negocio, type Tercero, type Uuid,
+  resolverVersiones, type Alerta, type Centavos, type Contexto, type DatosMovimiento, type DecisionAlerta,
+  type ErrorValidacion, type Milesimas, type Movimiento, type Negocio, type Producto, type Tercero, type Uuid,
 } from '../dominio/index.ts'
 import { crearRespaldo, estadoDesdeRespaldo, leerRespaldo, nombreArchivo } from '../exportacion/respaldo.ts'
 import { cargarEjemplo } from '../captura/ejemplo.ts'
@@ -18,12 +18,20 @@ import { cargarEjemplo } from '../captura/ejemplo.ts'
 export type Pantalla =
   | 'cargando' | 'bienvenida' | 'inicio' | 'anotar' | 'captura' | 'deben' | 'cobro'
   | 'devolucion' | 'movimientos' | 'detalle' | 'respaldo' | 'revisar'
+  | 'productos' | 'producto' | 'periodo' | 'ajustes' | 'bloqueo'
 
 /** Avisos que se muestran antes de guardar: el usuario puede guardar igual (CH-04 §12.1). */
 const AVISAR_ANTES = ['AN-03', 'AN-04', 'AN-09', 'AN-10', 'AN-14']
 
 const CLAVE_NEGOCIO = 'elchalan:negocio'
 const CLAVE_EJEMPLO = 'elchalan:ejemplo'
+/** El candado vive solo en este teléfono: nunca entra al respaldo (CH-04 §4.1). */
+const CLAVE_PIN = (negocio: Uuid) => `elchalan:pin:${negocio}`
+
+async function huellaPin(pin: string, sal: string): Promise<string> {
+  const bytes = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(`${sal}:${pin}`))
+  return [...new Uint8Array(bytes)].map((b) => b.toString(16).padStart(2, '0')).join('')
+}
 
 const ZONA = 'America/Mexico_City'
 
@@ -52,9 +60,12 @@ class App {
   corrigiendo = $state<Uuid | null>(null)
   seleccion = $state<Uuid | null>(null)
   terceroCobro = $state<Uuid | null>(null)
+  productoSeleccionado = $state<Uuid | null>(null)
   error = $state<string | null>(null)
   /** Hay una versión nueva de la app lista; se activa al tocar «Actualizar» (RNF-19). */
   actualizar = $state<(() => void) | null>(null)
+  /** Con el candado puesto, solo se ve la pantalla del PIN y la de restaurar (F-13). */
+  bloqueado = $state(false)
 
   private almacen: AlmacenNegocio | null = null
   private temporizador: ReturnType<typeof setTimeout> | undefined
@@ -76,6 +87,9 @@ class App {
     // El respaldo y el almacenamiento tienen su propio aviso en el inicio.
     return alertasAbiertas(todas, e.decisiones, this.hoy).filter((a) => a.codigo !== 'AN-17' && a.codigo !== 'AN-18')
   })
+  existenciaHoy = $derived(
+    this.estado ? calcularVistas(this.estado.movimientos, this.estado.negocio, this.estado.productos, { desde: this.hoy, hasta: this.hoy }).existencia : {},
+  )
   terceros = $derived(new Map((this.estado?.terceros ?? []).map((t) => [t.tercero_id, t])))
 
   // ── Arranque ────────────────────────────────────────────────────────────
@@ -86,7 +100,8 @@ class App {
     const id = ejemplo ?? propio
     if (id && (await this.abrir(id))) {
       this.esEjemplo = id === ejemplo
-      this.pantalla = 'inicio'
+      this.bloqueado = this.tienePin()
+      this.pantalla = this.bloqueado ? 'bloqueo' : 'inicio'
     } else {
       this.pantalla = 'bienvenida'
     }
@@ -174,6 +189,70 @@ class App {
     return t.tercero_id
   }
 
+  // ── Productos (F-9) ───────────────────────────────────────────────────────
+  async guardarProducto(p: Producto) {
+    const limpio = $state.snapshot(p) as Producto
+    await this.almacen!.guardarProducto(limpio)
+    const otros = this.estado!.productos.filter((x) => x.producto_id !== limpio.producto_id)
+    this.estado = { ...this.estado!, productos: [...otros, limpio].sort((a, b) => a.nombre.localeCompare(b.nombre, 'es')) }
+  }
+
+  nuevoProducto(datos: Pick<Producto, 'nombre' | 'unidad_medida'> & { precio?: Centavos; costo?: Centavos }): Producto {
+    const p: Producto = {
+      producto_id: uuidv7(), negocio_id: this.estado!.negocio.negocio_id, nombre: datos.nombre.trim(),
+      unidad_medida: datos.unidad_medida, etiquetas: [], activo: true,
+      creado_en: new Date().toISOString(), dispositivo_id: this.estado!.negocio.dispositivo_id,
+    }
+    if (datos.precio !== undefined) p.precio_venta_centavos = datos.precio
+    if (datos.costo !== undefined) p.costo_centavos = datos.costo
+    return p
+  }
+
+  /** Conteo de bodega: anota la diferencia entre lo que hay y lo que dice la app. */
+  async ajustarExistencia(productoId: Uuid, cantidadReal: Milesimas, concepto: string) {
+    const diferencia = cantidadReal - (this.existenciaHoy[productoId] ?? 0)
+    if (diferencia === 0) return
+    const p = this.estado!.productos.find((x) => x.producto_id === productoId)!
+    const r = firmar({
+      tipo: 'ajuste_existencia', monto_centavos: 0, concepto,
+      renglones: [{ producto_id: productoId, cantidad_milesimas: diferencia, unidad_medida: p.unidad_medida, importe_centavos: 0 }],
+    }, this.contexto())
+    if (!r.ok) throw new Error(r.errores[0].mensaje)
+    await this.guardar(r.movimiento, 'Bodega ajustada')
+  }
+
+  // ── Ajustes (F-13) ────────────────────────────────────────────────────────
+  async actualizarNegocio(cambios: Partial<Pick<Negocio, 'nombre' | 'penalizacion_devolucion_pct'>>) {
+    const negocio = { ...this.estado!.negocio, ...cambios }
+    await this.almacen!.guardarNegocio(negocio)
+    this.estado = { ...this.estado!, negocio }
+  }
+
+  tienePin(): boolean {
+    return !!this.estado && leerClave(CLAVE_PIN(this.estado.negocio.negocio_id)) !== null
+  }
+
+  async ponerPin(pin: string) {
+    const sal = uuidv7()
+    escribirClave(CLAVE_PIN(this.estado!.negocio.negocio_id), JSON.stringify({ sal, huella: await huellaPin(pin, sal) }))
+  }
+
+  quitarPin() {
+    escribirClave(CLAVE_PIN(this.estado!.negocio.negocio_id), null)
+  }
+
+  async desbloquear(pin: string): Promise<boolean> {
+    const guardado = leerClave(CLAVE_PIN(this.estado!.negocio.negocio_id))
+    if (!guardado) return true
+    const { sal, huella } = JSON.parse(guardado) as { sal: string; huella: string }
+    const ok = (await huellaPin(pin, sal)) === huella
+    if (ok && this.bloqueado) {
+      this.bloqueado = false
+      this.pantalla = 'inicio'
+    }
+    return ok
+  }
+
   async decidir(alerta: Alerta, decision: DecisionAlerta['decision'], hasta?: string) {
     const d: DecisionAlerta = {
       decision_id: uuidv7(), negocio_id: this.estado!.negocio.negocio_id, codigo: alerta.codigo,
@@ -225,6 +304,9 @@ class App {
         await this.almacen.reemplazarTodo(estadoDesdeRespaldo(lectura.datos, lectura.generado_en, VERSION_ESQUEMA))
         escribirClave(CLAVE_NEGOCIO, id)
         escribirClave(CLAVE_EJEMPLO, null)
+        // Restaurar es como estrenar teléfono: el candado no viaja en el respaldo.
+        escribirClave(CLAVE_PIN(id), null)
+        this.bloqueado = false
         this.estado = await this.almacen.leer()
         this.esEjemplo = false
         this.pantalla = 'inicio'

@@ -38,6 +38,13 @@ export function haceDias(dias: number): string {
   return dias <= 0 ? 'hoy' : dias === 1 ? 'ayer' : `hace ${dias} días`
 }
 
+/** «13 piezas», «1.25 kilos», «1 caja». */
+export function cantidadCon(milesimas: number, unidad: string): string {
+  const n = milesimas / 1000
+  const plural = Math.abs(n) === 1 ? '' : /[aeiou]$/.test(unidad) ? 's' : 'es'
+  return `${n.toLocaleString('es-MX', { maximumFractionDigits: 3 })} ${unidad}${plural}`
+}
+
 /** Puntos base → «48.8 %». */
 export function porcentaje(pb: number | null): string {
   return pb === null ? '—' : `${(pb / 100).toLocaleString('es-MX', { maximumFractionDigits: 1 })} %`

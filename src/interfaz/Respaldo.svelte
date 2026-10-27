@@ -25,10 +25,10 @@
   }
 </script>
 
-<button class="back" onclick={() => app.ir(app.estado ? 'inicio' : 'bienvenida')}>‹ Volver</button>
+<button class="back" onclick={() => app.ir(app.bloqueado ? 'bloqueo' : app.estado ? 'inicio' : 'bienvenida')}>‹ Volver</button>
 <h1>Respaldo</h1>
 
-{#if app.estado}
+{#if app.estado && !app.bloqueado}
   <p>{ultimo ? `Último respaldo: ${haceDias(diasEntre(ultimo, app.hoy))} (${fechaCorta(ultimo)}).` : 'Todavía no has hecho un respaldo: tus datos solo están en este teléfono.'}</p>
   <button class="btn" disabled={ocupado} onclick={respaldar}>Respaldar ahora</button>
   <p class="sub">Se crea un archivo con todo tu negocio. Guárdalo fuera del teléfono: mándatelo por correo o súbelo a tu Drive. Es texto que cualquiera puede leer, así que cuídalo.</p>

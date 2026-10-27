@@ -17,7 +17,7 @@
 
 <div class="top">
   <h1>{e.negocio.nombre}</h1>
-  <span class="sub">funciona sin internet</span>
+  <button class="chip" onclick={() => app.ir('ajustes')} aria-label="Ajustes">⚙ Ajustes</button>
 </div>
 
 {#if app.actualizar}
@@ -104,6 +104,8 @@
   </span><span>›</span>
 </button>
 <button class="person" onclick={() => app.ir('movimientos')}><span><b>Movimientos</b><br /><span class="sub">Todo lo que has anotado</span></span><span>›</span></button>
+<button class="person" onclick={() => app.ir('periodo')}><span><b>Semana y mes</b><br /><span class="sub">Cómo te fue, comparado con antes</span></span><span>›</span></button>
+<button class="person" onclick={() => app.ir('productos')}><span><b>Mis productos</b><br /><span class="sub">Cuántos tengo y cuánto vale mi bodega</span></span><span>›</span></button>
 
 <button class="fab" onclick={() => app.ir('anotar')}>＋ Anotar</button>
 
