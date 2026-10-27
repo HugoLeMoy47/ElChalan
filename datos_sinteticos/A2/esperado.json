@@ -1,0 +1,732 @@
+{
+  "arquetipo": "A2",
+  "semilla": 20260803,
+  "semanas": [
+    {
+      "clave": "semana 01",
+      "desde": "2026-08-03",
+      "hasta": "2026-08-09",
+      "vistas": {
+        "saldo_por_medio": {
+          "efectivo": 563415,
+          "transferencia": 266175,
+          "tarjeta": 0,
+          "otro": 0
+        },
+        "saldo_total": 829590,
+        "ventas_brutas": 2091490,
+        "ventas_contado": 2091490,
+        "ventas_credito": 0,
+        "devoluciones": 0,
+        "ventas_netas": 2091490,
+        "cobros": 0,
+        "otros_ingresos": 0,
+        "compras": 1648900,
+        "gastos": 113000,
+        "gastos_por_categoria": {
+          "renta": 30000,
+          "empaque": 36000,
+          "otros": 8000,
+          "transporte": 39000
+        },
+        "ventas_netas_con_costo": 0,
+        "costo_de_lo_vendido": 0,
+        "utilidad_bruta": 2091490,
+        "margen_sobre_costo_pb": null,
+        "utilidad_del_periodo": 1978490,
+        "flujo_de_caja": 329590,
+        "por_cobrar": 0,
+        "por_cobrar_vencido": 0,
+        "por_cobrar_por_tercero": {},
+        "existencia": {},
+        "valor_inventario": 0,
+        "dias_de_inventario": null,
+        "aportaciones": 0,
+        "retiros": 0,
+        "movimientos_por_completar": 0,
+        "pendientes": {}
+      }
+    },
+    {
+      "clave": "semana 02",
+      "desde": "2026-08-10",
+      "hasta": "2026-08-16",
+      "vistas": {
+        "saldo_por_medio": {
+          "efectivo": 746970,
+          "transferencia": 439620,
+          "tarjeta": 0,
+          "otro": 0
+        },
+        "saldo_total": 1186590,
+        "ventas_brutas": 2381820,
+        "ventas_contado": 2381820,
+        "ventas_credito": 0,
+        "devoluciones": 0,
+        "ventas_netas": 2381820,
+        "cobros": 0,
+        "otros_ingresos": 0,
+        "compras": 1779820,
+        "gastos": 115000,
+        "gastos_por_categoria": {
+          "renta": 25000,
+          "empaque": 27000,
+          "otros": 19000,
+          "transporte": 39000,
+          "sin_categoria": 5000
+        },
+        "ventas_netas_con_costo": 0,
+        "costo_de_lo_vendido": 0,
+        "utilidad_bruta": 2381820,
+        "margen_sobre_costo_pb": null,
+        "utilidad_del_periodo": 2266820,
+        "flujo_de_caja": 487000,
+        "por_cobrar": 0,
+        "por_cobrar_vencido": 0,
+        "por_cobrar_por_tercero": {},
+        "existencia": {},
+        "valor_inventario": 0,
+        "dias_de_inventario": null,
+        "aportaciones": 0,
+        "retiros": 130000,
+        "movimientos_por_completar": 1,
+        "pendientes": {
+          "sin_categoria": 1
+        }
+      }
+    },
+    {
+      "clave": "semana 03",
+      "desde": "2026-08-17",
+      "hasta": "2026-08-23",
+      "vistas": {
+        "saldo_por_medio": {
+          "efectivo": 1768780,
+          "transferencia": 746650,
+          "tarjeta": 0,
+          "otro": 0
+        },
+        "saldo_total": 2515430,
+        "ventas_brutas": 2596800,
+        "ventas_contado": 2596800,
+        "ventas_credito": 0,
+        "devoluciones": 0,
+        "ventas_netas": 2596800,
+        "cobros": 0,
+        "otros_ingresos": 0,
+        "compras": 1134960,
+        "gastos": 133000,
+        "gastos_por_categoria": {
+          "renta": 30000,
+          "empaque": 36000,
+          "otros": 23000,
+          "transporte": 44000
+        },
+        "ventas_netas_con_costo": 0,
+        "costo_de_lo_vendido": 0,
+        "utilidad_bruta": 2596800,
+        "margen_sobre_costo_pb": null,
+        "utilidad_del_periodo": 2463800,
+        "flujo_de_caja": 1328840,
+        "por_cobrar": 0,
+        "por_cobrar_vencido": 0,
+        "por_cobrar_por_tercero": {},
+        "existencia": {},
+        "valor_inventario": 0,
+        "dias_de_inventario": null,
+        "aportaciones": 0,
+        "retiros": 0,
+        "movimientos_por_completar": 0,
+        "pendientes": {}
+      }
+    },
+    {
+      "clave": "semana 04",
+      "desde": "2026-08-24",
+      "hasta": "2026-08-30",
+      "vistas": {
+        "saldo_por_medio": {
+          "efectivo": 1729985,
+          "transferencia": 1009855,
+          "tarjeta": 0,
+          "otro": 0
+        },
+        "saldo_total": 2739840,
+        "ventas_brutas": 2196150,
+        "ventas_contado": 2196150,
+        "ventas_credito": 0,
+        "devoluciones": 0,
+        "ventas_netas": 2196150,
+        "cobros": 0,
+        "otros_ingresos": 0,
+        "compras": 1318740,
+        "gastos": 483000,
+        "gastos_por_categoria": {
+          "renta": 25000,
+          "empaque": 37000,
+          "otros": 26000,
+          "transporte": 390000,
+          "sin_categoria": 5000
+        },
+        "ventas_netas_con_costo": 0,
+        "costo_de_lo_vendido": 0,
+        "utilidad_bruta": 2196150,
+        "margen_sobre_costo_pb": null,
+        "utilidad_del_periodo": 1713150,
+        "flujo_de_caja": 394410,
+        "por_cobrar": 0,
+        "por_cobrar_vencido": 0,
+        "por_cobrar_por_tercero": {},
+        "existencia": {},
+        "valor_inventario": 0,
+        "dias_de_inventario": null,
+        "aportaciones": 0,
+        "retiros": 170000,
+        "movimientos_por_completar": 1,
+        "pendientes": {
+          "sin_categoria": 1
+        }
+      }
+    },
+    {
+      "clave": "semana 05",
+      "desde": "2026-08-31",
+      "hasta": "2026-09-06",
+      "vistas": {
+        "saldo_por_medio": {
+          "efectivo": 2303010,
+          "transferencia": 1247910,
+          "tarjeta": 0,
+          "otro": 0
+        },
+        "saldo_total": 3550920,
+        "ventas_brutas": 2276930,
+        "ventas_contado": 2276930,
+        "ventas_credito": 0,
+        "devoluciones": 0,
+        "ventas_netas": 2276930,
+        "cobros": 0,
+        "otros_ingresos": 0,
+        "compras": 1350850,
+        "gastos": 115000,
+        "gastos_por_categoria": {
+          "renta": 30000,
+          "empaque": 35000,
+          "otros": 20000,
+          "transporte": 30000
+        },
+        "ventas_netas_con_costo": 0,
+        "costo_de_lo_vendido": 0,
+        "utilidad_bruta": 2276930,
+        "margen_sobre_costo_pb": null,
+        "utilidad_del_periodo": 2161930,
+        "flujo_de_caja": 811080,
+        "por_cobrar": 0,
+        "por_cobrar_vencido": 0,
+        "por_cobrar_por_tercero": {},
+        "existencia": {},
+        "valor_inventario": 0,
+        "dias_de_inventario": null,
+        "aportaciones": 0,
+        "retiros": 0,
+        "movimientos_por_completar": 0,
+        "pendientes": {}
+      }
+    },
+    {
+      "clave": "semana 06",
+      "desde": "2026-09-07",
+      "hasta": "2026-09-13",
+      "vistas": {
+        "saldo_por_medio": {
+          "efectivo": 2935410,
+          "transferencia": 1490155,
+          "tarjeta": 0,
+          "otro": 0
+        },
+        "saldo_total": 4425565,
+        "ventas_brutas": 2390765,
+        "ventas_contado": 2390765,
+        "ventas_credito": 0,
+        "devoluciones": 0,
+        "ventas_netas": 2390765,
+        "cobros": 0,
+        "otros_ingresos": 0,
+        "compras": 1255120,
+        "gastos": 111000,
+        "gastos_por_categoria": {
+          "renta": 30000,
+          "empaque": 31000,
+          "transporte": 32000,
+          "otros": 18000
+        },
+        "ventas_netas_con_costo": 0,
+        "costo_de_lo_vendido": 0,
+        "utilidad_bruta": 2390765,
+        "margen_sobre_costo_pb": null,
+        "utilidad_del_periodo": 2279765,
+        "flujo_de_caja": 1024645,
+        "por_cobrar": 0,
+        "por_cobrar_vencido": 0,
+        "por_cobrar_por_tercero": {},
+        "existencia": {},
+        "valor_inventario": 0,
+        "dias_de_inventario": null,
+        "aportaciones": 0,
+        "retiros": 150000,
+        "movimientos_por_completar": 0,
+        "pendientes": {}
+      }
+    },
+    {
+      "clave": "semana 07",
+      "desde": "2026-09-14",
+      "hasta": "2026-09-20",
+      "vistas": {
+        "saldo_por_medio": {
+          "efectivo": 3540495,
+          "transferencia": 1726520,
+          "tarjeta": 0,
+          "otro": 0
+        },
+        "saldo_total": 5267015,
+        "ventas_brutas": 2290790,
+        "ventas_contado": 2290790,
+        "ventas_credito": 0,
+        "devoluciones": 0,
+        "ventas_netas": 2290790,
+        "cobros": 0,
+        "otros_ingresos": 0,
+        "compras": 1323340,
+        "gastos": 126000,
+        "gastos_por_categoria": {
+          "renta": 30000,
+          "empaque": 37000,
+          "otros": 10000,
+          "transporte": 41000,
+          "sin_categoria": 8000
+        },
+        "ventas_netas_con_costo": 0,
+        "costo_de_lo_vendido": 0,
+        "utilidad_bruta": 2290790,
+        "margen_sobre_costo_pb": null,
+        "utilidad_del_periodo": 2164790,
+        "flujo_de_caja": 841450,
+        "por_cobrar": 0,
+        "por_cobrar_vencido": 0,
+        "por_cobrar_por_tercero": {},
+        "existencia": {},
+        "valor_inventario": 0,
+        "dias_de_inventario": null,
+        "aportaciones": 0,
+        "retiros": 0,
+        "movimientos_por_completar": 1,
+        "pendientes": {
+          "sin_categoria": 1
+        }
+      }
+    },
+    {
+      "clave": "semana 08",
+      "desde": "2026-09-21",
+      "hasta": "2026-09-27",
+      "vistas": {
+        "saldo_por_medio": {
+          "efectivo": 4042495,
+          "transferencia": 1937440,
+          "tarjeta": 0,
+          "otro": 0
+        },
+        "saldo_total": 5979935,
+        "ventas_brutas": 2036780,
+        "ventas_contado": 2036780,
+        "ventas_credito": 0,
+        "devoluciones": 0,
+        "ventas_netas": 2036780,
+        "cobros": 0,
+        "otros_ingresos": 0,
+        "compras": 1077860,
+        "gastos": 116000,
+        "gastos_por_categoria": {
+          "renta": 30000,
+          "empaque": 35000,
+          "otros": 14000,
+          "transporte": 37000
+        },
+        "ventas_netas_con_costo": 0,
+        "costo_de_lo_vendido": 0,
+        "utilidad_bruta": 2036780,
+        "margen_sobre_costo_pb": null,
+        "utilidad_del_periodo": 1920780,
+        "flujo_de_caja": 842920,
+        "por_cobrar": 0,
+        "por_cobrar_vencido": 0,
+        "por_cobrar_por_tercero": {},
+        "existencia": {},
+        "valor_inventario": 0,
+        "dias_de_inventario": null,
+        "aportaciones": 0,
+        "retiros": 130000,
+        "movimientos_por_completar": 0,
+        "pendientes": {}
+      }
+    }
+  ],
+  "meses": [
+    {
+      "clave": "2026-08",
+      "desde": "2026-08-03",
+      "hasta": "2026-08-31",
+      "vistas": {
+        "saldo_por_medio": {
+          "efectivo": 1729985,
+          "transferencia": 1009855,
+          "tarjeta": 0,
+          "otro": 0
+        },
+        "saldo_total": 2739840,
+        "ventas_brutas": 9266260,
+        "ventas_contado": 9266260,
+        "ventas_credito": 0,
+        "devoluciones": 0,
+        "ventas_netas": 9266260,
+        "cobros": 0,
+        "otros_ingresos": 0,
+        "compras": 5882420,
+        "gastos": 844000,
+        "gastos_por_categoria": {
+          "renta": 110000,
+          "empaque": 136000,
+          "otros": 76000,
+          "transporte": 512000,
+          "sin_categoria": 10000
+        },
+        "ventas_netas_con_costo": 0,
+        "costo_de_lo_vendido": 0,
+        "utilidad_bruta": 9266260,
+        "margen_sobre_costo_pb": null,
+        "utilidad_del_periodo": 8422260,
+        "flujo_de_caja": 2539840,
+        "por_cobrar": 0,
+        "por_cobrar_vencido": 0,
+        "por_cobrar_por_tercero": {},
+        "existencia": {},
+        "valor_inventario": 0,
+        "dias_de_inventario": null,
+        "aportaciones": 0,
+        "retiros": 300000,
+        "movimientos_por_completar": 2,
+        "pendientes": {
+          "sin_categoria": 2
+        }
+      }
+    },
+    {
+      "clave": "2026-09",
+      "desde": "2026-09-01",
+      "hasta": "2026-09-27",
+      "vistas": {
+        "saldo_por_medio": {
+          "efectivo": 4042495,
+          "transferencia": 1937440,
+          "tarjeta": 0,
+          "otro": 0
+        },
+        "saldo_total": 5979935,
+        "ventas_brutas": 8995265,
+        "ventas_contado": 8995265,
+        "ventas_credito": 0,
+        "devoluciones": 0,
+        "ventas_netas": 8995265,
+        "cobros": 0,
+        "otros_ingresos": 0,
+        "compras": 5007170,
+        "gastos": 468000,
+        "gastos_por_categoria": {
+          "renta": 120000,
+          "empaque": 138000,
+          "otros": 62000,
+          "transporte": 140000,
+          "sin_categoria": 8000
+        },
+        "ventas_netas_con_costo": 0,
+        "costo_de_lo_vendido": 0,
+        "utilidad_bruta": 8995265,
+        "margen_sobre_costo_pb": null,
+        "utilidad_del_periodo": 8527265,
+        "flujo_de_caja": 3520095,
+        "por_cobrar": 0,
+        "por_cobrar_vencido": 0,
+        "por_cobrar_por_tercero": {},
+        "existencia": {},
+        "valor_inventario": 0,
+        "dias_de_inventario": null,
+        "aportaciones": 0,
+        "retiros": 280000,
+        "movimientos_por_completar": 1,
+        "pendientes": {
+          "sin_categoria": 1
+        }
+      }
+    }
+  ],
+  "total": {
+    "clave": "total",
+    "desde": "2026-08-03",
+    "hasta": "2026-09-27",
+    "vistas": {
+      "saldo_por_medio": {
+        "efectivo": 4042495,
+        "transferencia": 1937440,
+        "tarjeta": 0,
+        "otro": 0
+      },
+      "saldo_total": 5979935,
+      "ventas_brutas": 18261525,
+      "ventas_contado": 18261525,
+      "ventas_credito": 0,
+      "devoluciones": 0,
+      "ventas_netas": 18261525,
+      "cobros": 0,
+      "otros_ingresos": 0,
+      "compras": 10889590,
+      "gastos": 1312000,
+      "gastos_por_categoria": {
+        "renta": 230000,
+        "empaque": 274000,
+        "otros": 138000,
+        "transporte": 652000,
+        "sin_categoria": 18000
+      },
+      "ventas_netas_con_costo": 0,
+      "costo_de_lo_vendido": 0,
+      "utilidad_bruta": 18261525,
+      "margen_sobre_costo_pb": null,
+      "utilidad_del_periodo": 16949525,
+      "flujo_de_caja": 6059935,
+      "por_cobrar": 0,
+      "por_cobrar_vencido": 0,
+      "por_cobrar_por_tercero": {},
+      "existencia": {},
+      "valor_inventario": 0,
+      "dias_de_inventario": null,
+      "aportaciones": 0,
+      "retiros": 580000,
+      "movimientos_por_completar": 3,
+      "pendientes": {
+        "sin_categoria": 3
+      }
+    }
+  },
+  "alertas_esperadas": [
+    {
+      "codigo": "AN-16",
+      "objeto_id": "019fe1ec-9898-737a-add1-e9d60affe76b"
+    },
+    {
+      "codigo": "AN-04",
+      "objeto_id": "019fe21b-3e00-71bc-942f-e47eaa086793"
+    },
+    {
+      "codigo": "AN-04",
+      "objeto_id": "019ff174-8870-7697-8bf0-15f3d52c35a8"
+    },
+    {
+      "codigo": "AN-04",
+      "objeto_id": "019ff184-3bf8-7e9a-8691-d1a55d7fb849"
+    },
+    {
+      "codigo": "AN-16",
+      "objeto_id": "019ff1cc-ce18-75f1-881c-e79edcfb7cbc"
+    },
+    {
+      "codigo": "AN-05",
+      "objeto_id": "019ffba6-0b98-7d13-82c2-658b572fb632"
+    },
+    {
+      "codigo": "AN-16",
+      "objeto_id": "019ffbf7-5818-74f4-b082-c9bc7950d6ae"
+    },
+    {
+      "codigo": "AN-16",
+      "objeto_id": "01a00125-1e88-7433-93d5-b92cfbc431e4"
+    },
+    {
+      "codigo": "AN-16",
+      "objeto_id": "01a015a0-3cd0-7159-a302-4b7aed296f9d"
+    },
+    {
+      "codigo": "AN-04",
+      "objeto_id": "01a01a98-aee8-7629-a35e-1cc641dbee97"
+    },
+    {
+      "codigo": "AN-04",
+      "objeto_id": "01a01acc-3268-7258-a5d0-17449e96b20d"
+    },
+    {
+      "codigo": "AN-04",
+      "objeto_id": "01a01fd9-68e8-70a3-adf0-29f571634518"
+    },
+    {
+      "codigo": "AN-04",
+      "objeto_id": "01a024f9-7f70-753d-8ea1-f5f2eaf30929"
+    },
+    {
+      "codigo": "AN-16",
+      "objeto_id": "01a02a6c-5590-7493-a918-d944b4b18864"
+    },
+    {
+      "codigo": "AN-16",
+      "objeto_id": "01a0397b-0e28-708b-8ce0-453337ee76ac"
+    },
+    {
+      "codigo": "AN-16",
+      "objeto_id": "01a0397d-8ec8-73d3-ac4d-3b318bdba278"
+    },
+    {
+      "codigo": "AN-04",
+      "objeto_id": "01a039ac-66f8-799f-971d-893eebd13966"
+    },
+    {
+      "codigo": "AN-03",
+      "objeto_id": "01a03eea-6d90-70e1-b78b-c10a32a2fb3e"
+    },
+    {
+      "codigo": "AN-05",
+      "objeto_id": "01a043bd-3af0-73de-ba25-7d00ebfa6500"
+    },
+    {
+      "codigo": "AN-04",
+      "objeto_id": "01a043e1-e990-7ef7-a043-6a688bed0c6e"
+    },
+    {
+      "codigo": "AN-04",
+      "objeto_id": "01a043ec-b730-7c6c-81af-a2e985c87fed"
+    },
+    {
+      "codigo": "AN-04",
+      "objeto_id": "01a04414-ec28-7fe6-99e1-4e778703f3d8"
+    },
+    {
+      "codigo": "AN-16",
+      "objeto_id": "01a04933-e588-7836-b9b5-978fc1cec368"
+    },
+    {
+      "codigo": "AN-04",
+      "objeto_id": "01a067d3-e498-7f2f-ae9e-237af4b5725b"
+    },
+    {
+      "codigo": "AN-04",
+      "objeto_id": "01a067e9-1660-7900-a523-0af7ac115270"
+    },
+    {
+      "codigo": "AN-16",
+      "objeto_id": "01a06815-4eb0-71d4-ae10-2cf4670c956f"
+    },
+    {
+      "codigo": "AN-16",
+      "objeto_id": "01a07c91-5758-7d4e-885d-22cac65a298e"
+    },
+    {
+      "codigo": "AN-16",
+      "objeto_id": "01a07ca8-e698-701b-a832-0c1e9e401522"
+    },
+    {
+      "codigo": "AN-04",
+      "objeto_id": "01a07ce7-3f88-7d7c-82b8-eeace6ebe55c"
+    },
+    {
+      "codigo": "AN-04",
+      "objeto_id": "01a0819e-62e0-726e-8ecb-34bf584d1537"
+    },
+    {
+      "codigo": "AN-16",
+      "objeto_id": "01a086c4-edc0-73a3-be6c-3d7d2141cd92"
+    },
+    {
+      "codigo": "AN-04",
+      "objeto_id": "01a09128-7598-7c62-b504-de4285df2454"
+    },
+    {
+      "codigo": "AN-04",
+      "objeto_id": "01a09137-1f80-7d95-8fd5-ee4f0f725f28"
+    },
+    {
+      "codigo": "AN-04",
+      "objeto_id": "01a0915e-b450-7b32-bc42-2c8fce399cbb"
+    },
+    {
+      "codigo": "AN-04",
+      "objeto_id": "01a09658-7a40-7a01-8a93-2a0f2c73db0c"
+    },
+    {
+      "codigo": "AN-05",
+      "objeto_id": "01a0afe6-2e08-7659-8fbe-0c6f8b4070c1"
+    },
+    {
+      "codigo": "AN-04",
+      "objeto_id": "01a0afee-8aa8-7574-a649-d365fbb9e019"
+    },
+    {
+      "codigo": "AN-16",
+      "objeto_id": "01a0affc-a7f0-7016-af30-34529da47a1b"
+    },
+    {
+      "codigo": "AN-16",
+      "objeto_id": "01a0b54c-1790-7498-8446-85f3440a22ee"
+    },
+    {
+      "codigo": "AN-04",
+      "objeto_id": "01a0ba47-bdf8-7a48-a8fc-b135496273b6"
+    },
+    {
+      "codigo": "AN-16",
+      "objeto_id": "01a0ba49-f848-7509-b3a3-78a085124900"
+    },
+    {
+      "codigo": "AN-16",
+      "objeto_id": "01a0ba9c-36f8-7263-98d9-6056b0069301"
+    },
+    {
+      "codigo": "AN-16",
+      "objeto_id": "01a0ba9e-5208-77ab-9a3e-e9cceb959394"
+    },
+    {
+      "codigo": "AN-16",
+      "objeto_id": "01a0bf5d-ddb8-7670-8e34-cb48585a6560"
+    },
+    {
+      "codigo": "AN-04",
+      "objeto_id": "01a0bf77-8fd8-73a4-bf2a-1ca55f89997e"
+    },
+    {
+      "codigo": "AN-04",
+      "objeto_id": "01a0c9ba-6880-705b-b6a8-ab2c657d54c2"
+    },
+    {
+      "codigo": "AN-04",
+      "objeto_id": "01a0d40f-f250-75f5-b210-24645615c478"
+    },
+    {
+      "codigo": "AN-16",
+      "objeto_id": "01a0d93b-6ae8-75fa-8a6b-c78e3544e80f"
+    },
+    {
+      "codigo": "AN-16",
+      "objeto_id": "01a0d961-9470-7a24-b62d-08f6f4674a23"
+    },
+    {
+      "codigo": "AN-16",
+      "objeto_id": "01a0de3f-0090-7a4c-9a48-a40c0b21b46e"
+    },
+    {
+      "codigo": "AN-16",
+      "objeto_id": "01a0de90-8b90-7de3-b6bf-00fd947d8070"
+    },
+    {
+      "codigo": "AN-04",
+      "objeto_id": "01a0e3ac-aa78-7863-8aa8-0905f22a3b97"
+    }
+  ],
+  "intentos_rechazados": []
+}

@@ -1,0 +1,17 @@
+{
+  "negocio": {
+    "nombre": "Puesto Ejemplo (A2)",
+    "giro": "comida",
+    "nivel": 1,
+    "moneda": "MXN",
+    "zona_horaria": "America/Mexico_City",
+    "inicio_operaciones": "2026-08-03",
+    "capital_inicial_centavos": 500000,
+    "segmento_por_omision": "menudeo",
+    "negocio_id": "019fc7ec-9b00-7236-b0b4-10c05e9b8dc4",
+    "dispositivo_id": "019fc7ec-9b00-7592-9a8b-0e8e37d324a8",
+    "creado_en": "2026-08-03T14:00:00.000Z"
+  },
+  "terceros": [],
+  "productos": []
+}

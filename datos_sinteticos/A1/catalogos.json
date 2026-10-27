@@ -1,0 +1,2671 @@
+{
+  "negocio": {
+    "nombre": "Mayoreo Ejemplo (A1)",
+    "giro": "reventa",
+    "nivel": 1,
+    "moneda": "MXN",
+    "zona_horaria": "America/Mexico_City",
+    "inicio_operaciones": "2026-07-06",
+    "capital_inicial_centavos": 1500000,
+    "segmento_por_omision": "mayoreo",
+    "negocio_id": "019f37ba-8b00-7f4d-b82c-ad686dabc7ed",
+    "dispositivo_id": "019f37ba-8b00-7669-a71e-8c524fa11750",
+    "creado_en": "2026-07-06T14:00:00.000Z"
+  },
+  "terceros": [
+    {
+      "tercero_id": "019f38d0-bdc0-74fa-b454-32135fa2d691",
+      "negocio_id": "019f37ba-8b00-7f4d-b82c-ad686dabc7ed",
+      "nombre": "Distribuidora Norte",
+      "rol": "proveedor",
+      "activo": true,
+      "creado_en": "2026-07-06T19:03:52.000Z",
+      "dispositivo_id": "019f37ba-8b00-7669-a71e-8c524fa11750"
+    },
+    {
+      "tercero_id": "019f38d4-0980-7b27-b59f-ac75a847524d",
+      "negocio_id": "019f37ba-8b00-7f4d-b82c-ad686dabc7ed",
+      "nombre": "Mayorista Sur",
+      "rol": "proveedor",
+      "activo": true,
+      "creado_en": "2026-07-06T19:07:28.000Z",
+      "dispositivo_id": "019f37ba-8b00-7669-a71e-8c524fa11750"
+    },
+    {
+      "tercero_id": "019f38d5-fd80-7589-a1d1-46d643f1223b",
+      "negocio_id": "019f37ba-8b00-7f4d-b82c-ad686dabc7ed",
+      "nombre": "Importadora Lago",
+      "rol": "proveedor",
+      "activo": true,
+      "creado_en": "2026-07-06T19:09:36.000Z",
+      "dispositivo_id": "019f37ba-8b00-7669-a71e-8c524fa11750"
+    },
+    {
+      "tercero_id": "019f38d7-1aa8-79f0-a5a9-26848293a67b",
+      "negocio_id": "019f37ba-8b00-7f4d-b82c-ad686dabc7ed",
+      "nombre": "Abarrotes Doña Chela",
+      "rol": "cliente",
+      "activo": true,
+      "creado_en": "2026-07-06T19:10:49.000Z",
+      "dispositivo_id": "019f37ba-8b00-7669-a71e-8c524fa11750"
+    },
+    {
+      "tercero_id": "019f38d8-e3b0-778f-b606-e1c8c1252c15",
+      "negocio_id": "019f37ba-8b00-7f4d-b82c-ad686dabc7ed",
+      "nombre": "Tienda La Esquina",
+      "rol": "cliente",
+      "activo": true,
+      "creado_en": "2026-07-06T19:12:46.000Z",
+      "dispositivo_id": "019f37ba-8b00-7669-a71e-8c524fa11750"
+    },
+    {
+      "tercero_id": "019f38da-b488-7e60-8ca7-47cf42632b1e",
+      "negocio_id": "019f37ba-8b00-7f4d-b82c-ad686dabc7ed",
+      "nombre": "Novedades Rubí",
+      "rol": "cliente",
+      "activo": true,
+      "creado_en": "2026-07-06T19:14:45.000Z",
+      "dispositivo_id": "019f37ba-8b00-7669-a71e-8c524fa11750"
+    },
+    {
+      "tercero_id": "019f38dd-f878-796f-ae3f-c2f29e9d55e1",
+      "negocio_id": "019f37ba-8b00-7f4d-b82c-ad686dabc7ed",
+      "nombre": "Bazar del Centro",
+      "rol": "cliente",
+      "activo": true,
+      "creado_en": "2026-07-06T19:18:19.000Z",
+      "dispositivo_id": "019f37ba-8b00-7669-a71e-8c524fa11750"
+    },
+    {
+      "tercero_id": "019f38df-c950-7006-b471-2d45d64ca567",
+      "negocio_id": "019f37ba-8b00-7f4d-b82c-ad686dabc7ed",
+      "nombre": "Kiosco Memo",
+      "rol": "cliente",
+      "activo": true,
+      "creado_en": "2026-07-06T19:20:18.000Z",
+      "dispositivo_id": "019f37ba-8b00-7669-a71e-8c524fa11750"
+    },
+    {
+      "tercero_id": "019f38e0-2710-759c-b4f6-7b156c7ef605",
+      "negocio_id": "019f37ba-8b00-7f4d-b82c-ad686dabc7ed",
+      "nombre": "Mercería Tere",
+      "rol": "cliente",
+      "activo": true,
+      "creado_en": "2026-07-06T19:20:42.000Z",
+      "dispositivo_id": "019f37ba-8b00-7669-a71e-8c524fa11750"
+    },
+    {
+      "tercero_id": "019f38e2-6930-7474-a572-d7e6c692084f",
+      "negocio_id": "019f37ba-8b00-7f4d-b82c-ad686dabc7ed",
+      "nombre": "Regalos Lalo",
+      "rol": "cliente",
+      "activo": true,
+      "creado_en": "2026-07-06T19:23:10.000Z",
+      "dispositivo_id": "019f37ba-8b00-7669-a71e-8c524fa11750"
+    },
+    {
+      "tercero_id": "019f38e5-10e0-7392-a353-6a39065881e9",
+      "negocio_id": "019f37ba-8b00-7f4d-b82c-ad686dabc7ed",
+      "nombre": "Puesto de Ramiro",
+      "rol": "cliente",
+      "activo": true,
+      "creado_en": "2026-07-06T19:26:04.000Z",
+      "dispositivo_id": "019f37ba-8b00-7669-a71e-8c524fa11750"
+    },
+    {
+      "tercero_id": "019f38e5-c490-7902-99c0-d455eb46c384",
+      "negocio_id": "019f37ba-8b00-7f4d-b82c-ad686dabc7ed",
+      "nombre": "Tianguis Paco",
+      "rol": "cliente",
+      "activo": true,
+      "creado_en": "2026-07-06T19:26:50.000Z",
+      "dispositivo_id": "019f37ba-8b00-7669-a71e-8c524fa11750"
+    },
+    {
+      "tercero_id": "019f38e7-2fd8-789b-b827-7bd63f3ab757",
+      "negocio_id": "019f37ba-8b00-7f4d-b82c-ad686dabc7ed",
+      "nombre": "Accesorios Nena",
+      "rol": "cliente",
+      "activo": true,
+      "creado_en": "2026-07-06T19:28:23.000Z",
+      "dispositivo_id": "019f37ba-8b00-7669-a71e-8c524fa11750"
+    },
+    {
+      "tercero_id": "019f38ea-5870-74fb-b5a2-b9e223a61fc9",
+      "negocio_id": "019f37ba-8b00-7f4d-b82c-ad686dabc7ed",
+      "nombre": "Mini súper Toño",
+      "rol": "cliente",
+      "activo": true,
+      "creado_en": "2026-07-06T19:31:50.000Z",
+      "dispositivo_id": "019f37ba-8b00-7669-a71e-8c524fa11750"
+    },
+    {
+      "tercero_id": "019f38eb-5270-7e74-97d5-6367798a2efa",
+      "negocio_id": "019f37ba-8b00-7f4d-b82c-ad686dabc7ed",
+      "nombre": "Variedades Lupita",
+      "rol": "cliente",
+      "activo": true,
+      "creado_en": "2026-07-06T19:32:54.000Z",
+      "dispositivo_id": "019f37ba-8b00-7669-a71e-8c524fa11750"
+    }
+  ],
+  "productos": [
+    {
+      "producto_id": "019f37bb-f260-7859-ae7a-ec71b3193ff4",
+      "negocio_id": "019f37ba-8b00-7f4d-b82c-ad686dabc7ed",
+      "clave": "CAT-0001",
+      "nombre": "Bolsa Clásico 1",
+      "categoria": "Bolsas",
+      "variante": "negro",
+      "unidad_medida": "pieza",
+      "precio_venta_centavos": 11500,
+      "precio_referencia_centavos": 16500,
+      "etiquetas": [
+        "A"
+      ],
+      "activo": true,
+      "creado_en": "2026-07-06T14:01:32.000Z",
+      "dispositivo_id": "019f37ba-8b00-7669-a71e-8c524fa11750",
+      "costo_centavos": 8350
+    },
+    {
+      "producto_id": "019f37bd-80d0-7dbc-9588-2ccfca91f5e8",
+      "negocio_id": "019f37ba-8b00-7f4d-b82c-ad686dabc7ed",
+      "clave": "CAT-0002",
+      "nombre": "Gorra Mini 1",
+      "categoria": "Gorras",
+      "variante": "verde",
+      "unidad_medida": "pieza",
+      "precio_venta_centavos": 8500,
+      "precio_referencia_centavos": 10200,
+      "etiquetas": [
+        "A"
+      ],
+      "activo": true,
+      "creado_en": "2026-07-06T14:03:14.000Z",
+      "dispositivo_id": "019f37ba-8b00-7669-a71e-8c524fa11750",
+      "costo_centavos": 7020
+    },
+    {
+      "producto_id": "019f37be-a5c8-72e5-940e-147bc23e1559",
+      "negocio_id": "019f37ba-8b00-7f4d-b82c-ad686dabc7ed",
+      "clave": "CAT-0003",
+      "nombre": "Termo Grande 1",
+      "categoria": "Termos",
+      "variante": "rojo",
+      "unidad_medida": "pieza",
+      "precio_venta_centavos": 15000,
+      "precio_referencia_centavos": 16800,
+      "etiquetas": [
+        "A"
+      ],
+      "activo": true,
+      "creado_en": "2026-07-06T14:04:29.000Z",
+      "dispositivo_id": "019f37ba-8b00-7669-a71e-8c524fa11750",
+      "costo_centavos": 10200
+    },
+    {
+      "producto_id": "019f37c1-9f80-7103-8168-7a6b96e8008c",
+      "negocio_id": "019f37ba-8b00-7f4d-b82c-ad686dabc7ed",
+      "clave": "CAT-0004",
+      "nombre": "Llavero Pro 1",
+      "categoria": "Llaveros",
+      "variante": "azul",
+      "unidad_medida": "pieza",
+      "precio_venta_centavos": 12000,
+      "precio_referencia_centavos": 17300,
+      "etiquetas": [
+        "A"
+      ],
+      "activo": true,
+      "creado_en": "2026-07-06T14:07:44.000Z",
+      "dispositivo_id": "019f37ba-8b00-7669-a71e-8c524fa11750",
+      "costo_centavos": 9300
+    },
+    {
+      "producto_id": "019f37c3-39a8-7fa1-aa8f-d01be49da889",
+      "negocio_id": "019f37ba-8b00-7f4d-b82c-ad686dabc7ed",
+      "clave": "CAT-0005",
+      "nombre": "Encendedor Eco 1",
+      "categoria": "Encendedores",
+      "variante": "arena",
+      "unidad_medida": "pieza",
+      "precio_venta_centavos": 20000,
+      "precio_referencia_centavos": 29600,
+      "etiquetas": [
+        "A"
+      ],
+      "activo": true,
+      "creado_en": "2026-07-06T14:09:29.000Z",
+      "dispositivo_id": "019f37ba-8b00-7669-a71e-8c524fa11750",
+      "costo_centavos": 14850
+    },
+    {
+      "producto_id": "019f37c3-b2c0-7ff3-b2d6-142df48a8c25",
+      "negocio_id": "019f37ba-8b00-7f4d-b82c-ad686dabc7ed",
+      "clave": "CAT-0006",
+      "nombre": "Estuch Plus 1",
+      "categoria": "Estuches",
+      "variante": "blanco",
+      "unidad_medida": "pieza",
+      "precio_venta_centavos": 4000,
+      "precio_referencia_centavos": 5200,
+      "etiquetas": [
+        "A"
+      ],
+      "activo": true,
+      "creado_en": "2026-07-06T14:10:00.000Z",
+      "dispositivo_id": "019f37ba-8b00-7669-a71e-8c524fa11750",
+      "costo_centavos": 3150
+    },
+    {
+      "producto_id": "019f37c6-cfa0-7bd4-bbfa-2e21e169730f",
+      "negocio_id": "019f37ba-8b00-7f4d-b82c-ad686dabc7ed",
+      "clave": "CAT-0007",
+      "nombre": "Bolsa Viaje 1",
+      "categoria": "Bolsas",
+      "variante": "negro",
+      "unidad_medida": "pieza",
+      "precio_venta_centavos": 17500,
+      "precio_referencia_centavos": 25100,
+      "etiquetas": [
+        "A"
+      ],
+      "activo": true,
+      "creado_en": "2026-07-06T14:13:24.000Z",
+      "dispositivo_id": "019f37ba-8b00-7669-a71e-8c524fa11750",
+      "costo_centavos": 11500
+    },
+    {
+      "producto_id": "019f37c9-b1e8-7555-811e-e332b604f245",
+      "negocio_id": "019f37ba-8b00-7f4d-b82c-ad686dabc7ed",
+      "clave": "CAT-0008",
+      "nombre": "Gorra Doble 1",
+      "categoria": "Gorras",
+      "variante": "verde",
+      "unidad_medida": "pieza",
+      "precio_venta_centavos": 11000,
+      "precio_referencia_centavos": 16600,
+      "etiquetas": [
+        "A"
+      ],
+      "activo": true,
+      "creado_en": "2026-07-06T14:16:33.000Z",
+      "dispositivo_id": "019f37ba-8b00-7669-a71e-8c524fa11750",
+      "costo_centavos": 8900
+    },
+    {
+      "producto_id": "019f37cb-8a90-7ef2-a23e-cb28ee70bec8",
+      "negocio_id": "019f37ba-8b00-7f4d-b82c-ad686dabc7ed",
+      "clave": "CAT-0009",
+      "nombre": "Termo Clásico 1",
+      "categoria": "Termos",
+      "variante": "rojo",
+      "unidad_medida": "pieza",
+      "precio_venta_centavos": 12000,
+      "precio_referencia_centavos": 17300,
+      "etiquetas": [
+        "A"
+      ],
+      "activo": true,
+      "creado_en": "2026-07-06T14:18:34.000Z",
+      "dispositivo_id": "019f37ba-8b00-7669-a71e-8c524fa11750",
+      "costo_centavos": 8500
+    },
+    {
+      "producto_id": "019f37cd-6720-745a-b227-70a2bf621d51",
+      "negocio_id": "019f37ba-8b00-7f4d-b82c-ad686dabc7ed",
+      "clave": "CAT-0010",
+      "nombre": "Llavero Mini 1",
+      "categoria": "Llaveros",
+      "variante": "azul",
+      "unidad_medida": "pieza",
+      "precio_venta_centavos": 8000,
+      "precio_referencia_centavos": 12400,
+      "etiquetas": [
+        "A"
+      ],
+      "activo": true,
+      "creado_en": "2026-07-06T14:20:36.000Z",
+      "dispositivo_id": "019f37ba-8b00-7669-a71e-8c524fa11750",
+      "costo_centavos": 6350
+    },
+    {
+      "producto_id": "019f37d0-fd18-76e6-91fd-24fe60feadaf",
+      "negocio_id": "019f37ba-8b00-7f4d-b82c-ad686dabc7ed",
+      "clave": "CAT-0011",
+      "nombre": "Encendedor Grande 1",
+      "categoria": "Encendedores",
+      "variante": "arena",
+      "unidad_medida": "pieza",
+      "precio_venta_centavos": 14500,
+      "precio_referencia_centavos": 19700,
+      "etiquetas": [
+        "A"
+      ],
+      "activo": true,
+      "creado_en": "2026-07-06T14:24:31.000Z",
+      "dispositivo_id": "019f37ba-8b00-7669-a71e-8c524fa11750",
+      "costo_centavos": 9850
+    },
+    {
+      "producto_id": "019f37d2-1270-7efd-8e52-022bfd25150b",
+      "negocio_id": "019f37ba-8b00-7f4d-b82c-ad686dabc7ed",
+      "clave": "CAT-0012",
+      "nombre": "Estuch Pro 1",
+      "categoria": "Estuches",
+      "variante": "blanco",
+      "unidad_medida": "pieza",
+      "precio_venta_centavos": 22000,
+      "precio_referencia_centavos": 31600,
+      "etiquetas": [
+        "A"
+      ],
+      "activo": true,
+      "creado_en": "2026-07-06T14:25:42.000Z",
+      "dispositivo_id": "019f37ba-8b00-7669-a71e-8c524fa11750",
+      "costo_centavos": 14750
+    },
+    {
+      "producto_id": "019f37d3-6a30-75e7-ae6a-823d120b2087",
+      "negocio_id": "019f37ba-8b00-7f4d-b82c-ad686dabc7ed",
+      "clave": "CAT-0013",
+      "nombre": "Bolsa Eco 1",
+      "categoria": "Bolsas",
+      "variante": "negro",
+      "unidad_medida": "pieza",
+      "precio_venta_centavos": 15500,
+      "precio_referencia_centavos": 19400,
+      "etiquetas": [
+        "A"
+      ],
+      "activo": true,
+      "creado_en": "2026-07-06T14:27:10.000Z",
+      "dispositivo_id": "019f37ba-8b00-7669-a71e-8c524fa11750",
+      "costo_centavos": 10700
+    },
+    {
+      "producto_id": "019f37d4-25b0-7649-a2c8-496a163a9443",
+      "negocio_id": "019f37ba-8b00-7f4d-b82c-ad686dabc7ed",
+      "clave": "CAT-0014",
+      "nombre": "Gorra Plus 1",
+      "categoria": "Gorras",
+      "variante": "verde",
+      "unidad_medida": "pieza",
+      "precio_venta_centavos": 14500,
+      "precio_referencia_centavos": 18900,
+      "etiquetas": [
+        "A"
+      ],
+      "activo": true,
+      "creado_en": "2026-07-06T14:27:58.000Z",
+      "dispositivo_id": "019f37ba-8b00-7669-a71e-8c524fa11750",
+      "costo_centavos": 10450
+    },
+    {
+      "producto_id": "019f37d5-5a48-7356-bfd6-097771bd4c76",
+      "negocio_id": "019f37ba-8b00-7f4d-b82c-ad686dabc7ed",
+      "clave": "CAT-0015",
+      "nombre": "Termo Viaje 1",
+      "categoria": "Termos",
+      "variante": "rojo",
+      "unidad_medida": "pieza",
+      "precio_venta_centavos": 15000,
+      "precio_referencia_centavos": 23100,
+      "etiquetas": [
+        "A"
+      ],
+      "activo": true,
+      "creado_en": "2026-07-06T14:29:17.000Z",
+      "dispositivo_id": "019f37ba-8b00-7669-a71e-8c524fa11750",
+      "costo_centavos": 10550
+    },
+    {
+      "producto_id": "019f37d8-0db0-7e06-8a46-9cad45a1db4a",
+      "negocio_id": "019f37ba-8b00-7f4d-b82c-ad686dabc7ed",
+      "clave": "CAT-0016",
+      "nombre": "Llavero Doble 1",
+      "categoria": "Llaveros",
+      "variante": "azul",
+      "unidad_medida": "pieza",
+      "precio_venta_centavos": 13500,
+      "precio_referencia_centavos": 19400,
+      "etiquetas": [
+        "A"
+      ],
+      "activo": true,
+      "creado_en": "2026-07-06T14:32:14.000Z",
+      "dispositivo_id": "019f37ba-8b00-7669-a71e-8c524fa11750",
+      "costo_centavos": 9600
+    },
+    {
+      "producto_id": "019f37d9-a7d8-7333-bc64-7482a50e4a22",
+      "negocio_id": "019f37ba-8b00-7f4d-b82c-ad686dabc7ed",
+      "clave": "CAT-0017",
+      "nombre": "Encendedor Clásico 1",
+      "categoria": "Encendedores",
+      "variante": "arena",
+      "unidad_medida": "pieza",
+      "precio_venta_centavos": 18000,
+      "precio_referencia_centavos": 22400,
+      "etiquetas": [
+        "A"
+      ],
+      "activo": true,
+      "creado_en": "2026-07-06T14:33:59.000Z",
+      "dispositivo_id": "019f37ba-8b00-7669-a71e-8c524fa11750",
+      "costo_centavos": 12600
+    },
+    {
+      "producto_id": "019f37da-1d08-74fa-8525-f72a772e2ac4",
+      "negocio_id": "019f37ba-8b00-7f4d-b82c-ad686dabc7ed",
+      "clave": "CAT-0018",
+      "nombre": "Estuch Mini 1",
+      "categoria": "Estuches",
+      "variante": "blanco",
+      "unidad_medida": "pieza",
+      "precio_venta_centavos": 6500,
+      "precio_referencia_centavos": 9700,
+      "etiquetas": [
+        "A"
+      ],
+      "activo": true,
+      "creado_en": "2026-07-06T14:34:29.000Z",
+      "dispositivo_id": "019f37ba-8b00-7669-a71e-8c524fa11750",
+      "costo_centavos": 5000
+    },
+    {
+      "producto_id": "019f37dd-0338-7252-b97a-ae0dd434a447",
+      "negocio_id": "019f37ba-8b00-7f4d-b82c-ad686dabc7ed",
+      "clave": "CAT-0019",
+      "nombre": "Bolsa Grande 1",
+      "categoria": "Bolsas",
+      "variante": "negro",
+      "unidad_medida": "pieza",
+      "precio_venta_centavos": 13000,
+      "precio_referencia_centavos": 15800,
+      "etiquetas": [
+        "A"
+      ],
+      "activo": true,
+      "creado_en": "2026-07-06T14:37:39.000Z",
+      "dispositivo_id": "019f37ba-8b00-7669-a71e-8c524fa11750",
+      "costo_centavos": 9100
+    },
+    {
+      "producto_id": "019f37dd-ce58-71f1-a214-38432e6d6ce8",
+      "negocio_id": "019f37ba-8b00-7f4d-b82c-ad686dabc7ed",
+      "clave": "CAT-0020",
+      "nombre": "Gorra Pro 1",
+      "categoria": "Gorras",
+      "variante": "verde",
+      "unidad_medida": "pieza",
+      "precio_venta_centavos": 17000,
+      "precio_referencia_centavos": 22900,
+      "etiquetas": [
+        "A"
+      ],
+      "activo": true,
+      "creado_en": "2026-07-06T14:38:31.000Z",
+      "dispositivo_id": "019f37ba-8b00-7669-a71e-8c524fa11750",
+      "costo_centavos": 11800
+    },
+    {
+      "producto_id": "019f37e1-1248-763e-b73b-e9993684098c",
+      "negocio_id": "019f37ba-8b00-7f4d-b82c-ad686dabc7ed",
+      "clave": "CAT-0021",
+      "nombre": "Termo Eco 1",
+      "categoria": "Termos",
+      "variante": "rojo",
+      "unidad_medida": "pieza",
+      "precio_venta_centavos": 6500,
+      "precio_referencia_centavos": 9500,
+      "etiquetas": [
+        "A"
+      ],
+      "activo": true,
+      "creado_en": "2026-07-06T14:42:05.000Z",
+      "dispositivo_id": "019f37ba-8b00-7669-a71e-8c524fa11750",
+      "costo_centavos": 5000
+    },
+    {
+      "producto_id": "019f37e2-3740-7702-88df-f4c13a2e97f2",
+      "negocio_id": "019f37ba-8b00-7f4d-b82c-ad686dabc7ed",
+      "clave": "CAT-0022",
+      "nombre": "Llavero Plus 1",
+      "categoria": "Llaveros",
+      "variante": "azul",
+      "unidad_medida": "pieza",
+      "precio_venta_centavos": 20000,
+      "precio_referencia_centavos": 28900,
+      "etiquetas": [
+        "A"
+      ],
+      "activo": true,
+      "creado_en": "2026-07-06T14:43:20.000Z",
+      "dispositivo_id": "019f37ba-8b00-7669-a71e-8c524fa11750",
+      "costo_centavos": 13550
+    },
+    {
+      "producto_id": "019f37e5-4c50-70c0-842a-0644651b89e1",
+      "negocio_id": "019f37ba-8b00-7f4d-b82c-ad686dabc7ed",
+      "clave": "CAT-0023",
+      "nombre": "Encendedor Viaje 1",
+      "categoria": "Encendedores",
+      "variante": "arena",
+      "unidad_medida": "pieza",
+      "precio_venta_centavos": 19000,
+      "precio_referencia_centavos": 26900,
+      "etiquetas": [
+        "A"
+      ],
+      "activo": true,
+      "creado_en": "2026-07-06T14:46:42.000Z",
+      "dispositivo_id": "019f37ba-8b00-7669-a71e-8c524fa11750",
+      "costo_centavos": 13200
+    },
+    {
+      "producto_id": "019f37e8-f1e8-7787-b48f-b8a991bfed41",
+      "negocio_id": "019f37ba-8b00-7f4d-b82c-ad686dabc7ed",
+      "clave": "CAT-0024",
+      "nombre": "Estuch Doble 1",
+      "categoria": "Estuches",
+      "variante": "blanco",
+      "unidad_medida": "pieza",
+      "precio_venta_centavos": 14000,
+      "precio_referencia_centavos": 17800,
+      "etiquetas": [
+        "A"
+      ],
+      "activo": true,
+      "creado_en": "2026-07-06T14:50:41.000Z",
+      "dispositivo_id": "019f37ba-8b00-7669-a71e-8c524fa11750",
+      "costo_centavos": 10550
+    },
+    {
+      "producto_id": "019f37eb-1c98-7ab6-8870-4850ae85ea2c",
+      "negocio_id": "019f37ba-8b00-7f4d-b82c-ad686dabc7ed",
+      "clave": "CAT-0025",
+      "nombre": "Bolsa Clásico 1",
+      "categoria": "Bolsas",
+      "variante": "negro",
+      "unidad_medida": "pieza",
+      "precio_venta_centavos": 6000,
+      "precio_referencia_centavos": 9200,
+      "etiquetas": [
+        "A"
+      ],
+      "activo": true,
+      "creado_en": "2026-07-06T14:53:03.000Z",
+      "dispositivo_id": "019f37ba-8b00-7669-a71e-8c524fa11750",
+      "costo_centavos": 4350
+    },
+    {
+      "producto_id": "019f37ed-eb58-73d5-b024-67ea8700ba0f",
+      "negocio_id": "019f37ba-8b00-7f4d-b82c-ad686dabc7ed",
+      "clave": "CAT-0026",
+      "nombre": "Gorra Mini 1",
+      "categoria": "Gorras",
+      "variante": "verde",
+      "unidad_medida": "pieza",
+      "precio_venta_centavos": 17000,
+      "precio_referencia_centavos": 23300,
+      "etiquetas": [
+        "A"
+      ],
+      "activo": true,
+      "creado_en": "2026-07-06T14:56:07.000Z",
+      "dispositivo_id": "019f37ba-8b00-7669-a71e-8c524fa11750",
+      "costo_centavos": 11550
+    },
+    {
+      "producto_id": "019f37ee-e170-7689-a1fe-10c6e5d301f0",
+      "negocio_id": "019f37ba-8b00-7f4d-b82c-ad686dabc7ed",
+      "clave": "CAT-0027",
+      "nombre": "Termo Grande 1",
+      "categoria": "Termos",
+      "variante": "rojo",
+      "unidad_medida": "pieza",
+      "precio_venta_centavos": 4000,
+      "precio_referencia_centavos": 6500,
+      "etiquetas": [
+        "A"
+      ],
+      "activo": true,
+      "creado_en": "2026-07-06T14:57:10.000Z",
+      "dispositivo_id": "019f37ba-8b00-7669-a71e-8c524fa11750",
+      "costo_centavos": 3250
+    },
+    {
+      "producto_id": "019f37f0-3160-7cb9-9e5b-ac6ee3d7fa99",
+      "negocio_id": "019f37ba-8b00-7f4d-b82c-ad686dabc7ed",
+      "clave": "CAT-0028",
+      "nombre": "Llavero Pro 1",
+      "categoria": "Llaveros",
+      "variante": "azul",
+      "unidad_medida": "pieza",
+      "precio_venta_centavos": 9500,
+      "precio_referencia_centavos": 13900,
+      "etiquetas": [
+        "A"
+      ],
+      "activo": true,
+      "creado_en": "2026-07-06T14:58:36.000Z",
+      "dispositivo_id": "019f37ba-8b00-7669-a71e-8c524fa11750",
+      "costo_centavos": 6950
+    },
+    {
+      "producto_id": "019f37f3-a048-79fb-9a37-d0d3ab04277d",
+      "negocio_id": "019f37ba-8b00-7f4d-b82c-ad686dabc7ed",
+      "clave": "CAT-0029",
+      "nombre": "Encendedor Eco 1",
+      "categoria": "Encendedores",
+      "variante": "arena",
+      "unidad_medida": "pieza",
+      "precio_venta_centavos": 8500,
+      "precio_referencia_centavos": 11800,
+      "etiquetas": [
+        "A"
+      ],
+      "activo": true,
+      "creado_en": "2026-07-06T15:02:21.000Z",
+      "dispositivo_id": "019f37ba-8b00-7669-a71e-8c524fa11750",
+      "costo_centavos": 6100
+    },
+    {
+      "producto_id": "019f37f5-1748-7ad4-865c-403b3c92c9c6",
+      "negocio_id": "019f37ba-8b00-7f4d-b82c-ad686dabc7ed",
+      "clave": "CAT-0030",
+      "nombre": "Estuch Plus 1",
+      "categoria": "Estuches",
+      "variante": "blanco",
+      "unidad_medida": "pieza",
+      "precio_venta_centavos": 17500,
+      "precio_referencia_centavos": 21400,
+      "etiquetas": [
+        "A"
+      ],
+      "activo": true,
+      "creado_en": "2026-07-06T15:03:57.000Z",
+      "dispositivo_id": "019f37ba-8b00-7669-a71e-8c524fa11750",
+      "costo_centavos": 12050
+    },
+    {
+      "producto_id": "019f37f5-e268-72ff-bb51-1826a32359d9",
+      "negocio_id": "019f37ba-8b00-7f4d-b82c-ad686dabc7ed",
+      "clave": "CAT-0031",
+      "nombre": "Bolsa Viaje 1",
+      "categoria": "Bolsas",
+      "variante": "negro",
+      "unidad_medida": "pieza",
+      "precio_venta_centavos": 16000,
+      "precio_referencia_centavos": 23500,
+      "etiquetas": [
+        "A"
+      ],
+      "activo": true,
+      "creado_en": "2026-07-06T15:04:49.000Z",
+      "dispositivo_id": "019f37ba-8b00-7669-a71e-8c524fa11750",
+      "costo_centavos": 11100
+    },
+    {
+      "producto_id": "019f37f9-2270-7cc5-bd0c-ebc63493fd8e",
+      "negocio_id": "019f37ba-8b00-7f4d-b82c-ad686dabc7ed",
+      "clave": "CAT-0032",
+      "nombre": "Gorra Doble 1",
+      "categoria": "Gorras",
+      "variante": "verde",
+      "unidad_medida": "pieza",
+      "precio_venta_centavos": 5000,
+      "precio_referencia_centavos": 6500,
+      "etiquetas": [
+        "A"
+      ],
+      "activo": true,
+      "creado_en": "2026-07-06T15:08:22.000Z",
+      "dispositivo_id": "019f37ba-8b00-7669-a71e-8c524fa11750",
+      "costo_centavos": 3800
+    },
+    {
+      "producto_id": "019f37f9-ce50-7d85-99d1-53c3b6957fbb",
+      "negocio_id": "019f37ba-8b00-7f4d-b82c-ad686dabc7ed",
+      "clave": "CAT-0033",
+      "nombre": "Termo Clásico 1",
+      "categoria": "Termos",
+      "variante": "rojo",
+      "unidad_medida": "pieza",
+      "precio_venta_centavos": 3500,
+      "precio_referencia_centavos": 5100,
+      "etiquetas": [
+        "A"
+      ],
+      "activo": true,
+      "creado_en": "2026-07-06T15:09:06.000Z",
+      "dispositivo_id": "019f37ba-8b00-7669-a71e-8c524fa11750",
+      "costo_centavos": 2450
+    },
+    {
+      "producto_id": "019f37fa-b0e0-7448-aa86-d6368fca4bdd",
+      "negocio_id": "019f37ba-8b00-7f4d-b82c-ad686dabc7ed",
+      "clave": "CAT-0034",
+      "nombre": "Llavero Mini 1",
+      "categoria": "Llaveros",
+      "variante": "azul",
+      "unidad_medida": "pieza",
+      "precio_venta_centavos": 4500,
+      "precio_referencia_centavos": 6900,
+      "etiquetas": [
+        "A"
+      ],
+      "activo": true,
+      "creado_en": "2026-07-06T15:10:04.000Z",
+      "dispositivo_id": "019f37ba-8b00-7669-a71e-8c524fa11750",
+      "costo_centavos": 3400
+    },
+    {
+      "producto_id": "019f37fd-d978-7547-ab49-bc87cc02fb02",
+      "negocio_id": "019f37ba-8b00-7f4d-b82c-ad686dabc7ed",
+      "clave": "CAT-0035",
+      "nombre": "Encendedor Grande 1",
+      "categoria": "Encendedores",
+      "variante": "arena",
+      "unidad_medida": "pieza",
+      "precio_venta_centavos": 12500,
+      "precio_referencia_centavos": 17600,
+      "etiquetas": [
+        "A"
+      ],
+      "activo": true,
+      "creado_en": "2026-07-06T15:13:31.000Z",
+      "dispositivo_id": "019f37ba-8b00-7669-a71e-8c524fa11750",
+      "costo_centavos": 8900
+    },
+    {
+      "producto_id": "019f3800-7d40-75fb-9e8c-3d68ff1c2f3f",
+      "negocio_id": "019f37ba-8b00-7f4d-b82c-ad686dabc7ed",
+      "clave": "CAT-0036",
+      "nombre": "Estuch Pro 1",
+      "categoria": "Estuches",
+      "variante": "blanco",
+      "unidad_medida": "pieza",
+      "precio_venta_centavos": 10000,
+      "precio_referencia_centavos": 14900,
+      "etiquetas": [
+        "A"
+      ],
+      "activo": true,
+      "creado_en": "2026-07-06T15:16:24.000Z",
+      "dispositivo_id": "019f37ba-8b00-7669-a71e-8c524fa11750",
+      "costo_centavos": 8150
+    },
+    {
+      "producto_id": "019f3801-aa08-772e-8351-ab0d17e21760",
+      "negocio_id": "019f37ba-8b00-7f4d-b82c-ad686dabc7ed",
+      "clave": "CAT-0037",
+      "nombre": "Bolsa Eco 1",
+      "categoria": "Bolsas",
+      "variante": "negro",
+      "unidad_medida": "pieza",
+      "precio_venta_centavos": 18500,
+      "precio_referencia_centavos": 26800,
+      "etiquetas": [
+        "A"
+      ],
+      "activo": true,
+      "creado_en": "2026-07-06T15:17:41.000Z",
+      "dispositivo_id": "019f37ba-8b00-7669-a71e-8c524fa11750",
+      "costo_centavos": 13200
+    },
+    {
+      "producto_id": "019f3804-ea10-7aeb-b85d-23d3c269d9f2",
+      "negocio_id": "019f37ba-8b00-7f4d-b82c-ad686dabc7ed",
+      "clave": "CAT-0038",
+      "nombre": "Gorra Plus 1",
+      "categoria": "Gorras",
+      "variante": "verde",
+      "unidad_medida": "pieza",
+      "precio_venta_centavos": 9500,
+      "precio_referencia_centavos": 11400,
+      "etiquetas": [
+        "A"
+      ],
+      "activo": true,
+      "creado_en": "2026-07-06T15:21:14.000Z",
+      "dispositivo_id": "019f37ba-8b00-7669-a71e-8c524fa11750",
+      "costo_centavos": 6550
+    },
+    {
+      "producto_id": "019f3806-3230-7959-8bf3-3d6233fb12cd",
+      "negocio_id": "019f37ba-8b00-7f4d-b82c-ad686dabc7ed",
+      "clave": "CAT-0039",
+      "nombre": "Termo Viaje 1",
+      "categoria": "Termos",
+      "variante": "rojo",
+      "unidad_medida": "pieza",
+      "precio_venta_centavos": 4500,
+      "precio_referencia_centavos": 5200,
+      "etiquetas": [
+        "A"
+      ],
+      "activo": true,
+      "creado_en": "2026-07-06T15:22:38.000Z",
+      "dispositivo_id": "019f37ba-8b00-7669-a71e-8c524fa11750",
+      "costo_centavos": 2900
+    },
+    {
+      "producto_id": "019f3808-12a8-7c79-ba1c-7345855bc085",
+      "negocio_id": "019f37ba-8b00-7f4d-b82c-ad686dabc7ed",
+      "clave": "CAT-0040",
+      "nombre": "Llavero Doble 1",
+      "categoria": "Llaveros",
+      "variante": "azul",
+      "unidad_medida": "pieza",
+      "precio_venta_centavos": 4500,
+      "precio_referencia_centavos": 6600,
+      "etiquetas": [
+        "A"
+      ],
+      "activo": true,
+      "creado_en": "2026-07-06T15:24:41.000Z",
+      "dispositivo_id": "019f37ba-8b00-7669-a71e-8c524fa11750",
+      "costo_centavos": 3250
+    },
+    {
+      "producto_id": "019f380b-2f88-7cd9-b800-a2c411c0b6d1",
+      "negocio_id": "019f37ba-8b00-7f4d-b82c-ad686dabc7ed",
+      "clave": "CAT-0041",
+      "nombre": "Encendedor Clásico 1",
+      "categoria": "Encendedores",
+      "variante": "arena",
+      "unidad_medida": "pieza",
+      "precio_venta_centavos": 24000,
+      "precio_referencia_centavos": 28800,
+      "etiquetas": [
+        "B"
+      ],
+      "activo": true,
+      "creado_en": "2026-07-06T15:28:05.000Z",
+      "dispositivo_id": "019f37ba-8b00-7669-a71e-8c524fa11750",
+      "costo_centavos": 13600
+    },
+    {
+      "producto_id": "019f380e-5820-71f3-96f3-0fe6b05ab6fb",
+      "negocio_id": "019f37ba-8b00-7f4d-b82c-ad686dabc7ed",
+      "clave": "CAT-0042",
+      "nombre": "Estuch Mini 1",
+      "categoria": "Estuches",
+      "variante": "blanco",
+      "unidad_medida": "pieza",
+      "precio_venta_centavos": 18000,
+      "precio_referencia_centavos": 20000,
+      "etiquetas": [
+        "B"
+      ],
+      "activo": true,
+      "creado_en": "2026-07-06T15:31:32.000Z",
+      "dispositivo_id": "019f37ba-8b00-7669-a71e-8c524fa11750",
+      "costo_centavos": 11100
+    },
+    {
+      "producto_id": "019f3811-51d8-79ee-bcaf-9c2a0cf8b3b5",
+      "negocio_id": "019f37ba-8b00-7f4d-b82c-ad686dabc7ed",
+      "clave": "CAT-0043",
+      "nombre": "Bolsa Grande 1",
+      "categoria": "Bolsas",
+      "variante": "negro",
+      "unidad_medida": "pieza",
+      "precio_venta_centavos": 4500,
+      "precio_referencia_centavos": 5600,
+      "etiquetas": [
+        "B"
+      ],
+      "activo": true,
+      "creado_en": "2026-07-06T15:34:47.000Z",
+      "dispositivo_id": "019f37ba-8b00-7669-a71e-8c524fa11750",
+      "costo_centavos": 2800
+    },
+    {
+      "producto_id": "019f3814-f770-7e29-80b5-283628adf437",
+      "negocio_id": "019f37ba-8b00-7f4d-b82c-ad686dabc7ed",
+      "clave": "CAT-0044",
+      "nombre": "Gorra Pro 1",
+      "categoria": "Gorras",
+      "variante": "verde",
+      "unidad_medida": "pieza",
+      "precio_venta_centavos": 25500,
+      "precio_referencia_centavos": 30500,
+      "etiquetas": [
+        "B"
+      ],
+      "activo": true,
+      "creado_en": "2026-07-06T15:38:46.000Z",
+      "dispositivo_id": "019f37ba-8b00-7669-a71e-8c524fa11750",
+      "costo_centavos": 14600
+    },
+    {
+      "producto_id": "019f3817-3990-7a1c-a69d-a890654248d8",
+      "negocio_id": "019f37ba-8b00-7f4d-b82c-ad686dabc7ed",
+      "clave": "CAT-0045",
+      "nombre": "Termo Eco 1",
+      "categoria": "Termos",
+      "variante": "rojo",
+      "unidad_medida": "pieza",
+      "precio_venta_centavos": 16000,
+      "precio_referencia_centavos": 18900,
+      "etiquetas": [
+        "B"
+      ],
+      "activo": true,
+      "creado_en": "2026-07-06T15:41:14.000Z",
+      "dispositivo_id": "019f37ba-8b00-7669-a71e-8c524fa11750",
+      "costo_centavos": 9950
+    },
+    {
+      "producto_id": "019f3818-3b60-7f28-bc7c-a76efd0c7904",
+      "negocio_id": "019f37ba-8b00-7f4d-b82c-ad686dabc7ed",
+      "clave": "CAT-0046",
+      "nombre": "Llavero Plus 1",
+      "categoria": "Llaveros",
+      "variante": "azul",
+      "unidad_medida": "pieza",
+      "precio_venta_centavos": 9500,
+      "precio_referencia_centavos": 9900,
+      "etiquetas": [
+        "B"
+      ],
+      "activo": true,
+      "creado_en": "2026-07-06T15:42:20.000Z",
+      "dispositivo_id": "019f37ba-8b00-7669-a71e-8c524fa11750",
+      "costo_centavos": 5100
+    },
+    {
+      "producto_id": "019f381b-40d0-70bd-9ddc-5973d104f85b",
+      "negocio_id": "019f37ba-8b00-7f4d-b82c-ad686dabc7ed",
+      "clave": "CAT-0047",
+      "nombre": "Encendedor Viaje 1",
+      "categoria": "Encendedores",
+      "variante": "arena",
+      "unidad_medida": "pieza",
+      "precio_venta_centavos": 4000,
+      "precio_referencia_centavos": 4100,
+      "etiquetas": [
+        "B"
+      ],
+      "activo": true,
+      "creado_en": "2026-07-06T15:45:38.000Z",
+      "dispositivo_id": "019f37ba-8b00-7669-a71e-8c524fa11750",
+      "costo_centavos": 2450
+    },
+    {
+      "producto_id": "019f381d-82f0-7191-ae35-0faae42a06af",
+      "negocio_id": "019f37ba-8b00-7f4d-b82c-ad686dabc7ed",
+      "clave": "CAT-0048",
+      "nombre": "Estuch Doble 1",
+      "categoria": "Estuches",
+      "variante": "blanco",
+      "unidad_medida": "pieza",
+      "precio_venta_centavos": 19500,
+      "precio_referencia_centavos": 25200,
+      "etiquetas": [
+        "B"
+      ],
+      "activo": true,
+      "creado_en": "2026-07-06T15:48:06.000Z",
+      "dispositivo_id": "019f37ba-8b00-7669-a71e-8c524fa11750",
+      "costo_centavos": 12900
+    },
+    {
+      "producto_id": "019f381d-dcc8-7a6e-8d96-d4f6570cf7f2",
+      "negocio_id": "019f37ba-8b00-7f4d-b82c-ad686dabc7ed",
+      "clave": "CAT-0049",
+      "nombre": "Bolsa Clásico 2",
+      "categoria": "Bolsas",
+      "variante": "negro",
+      "unidad_medida": "pieza",
+      "precio_venta_centavos": 20000,
+      "precio_referencia_centavos": 24000,
+      "etiquetas": [
+        "B"
+      ],
+      "activo": true,
+      "creado_en": "2026-07-06T15:48:29.000Z",
+      "dispositivo_id": "019f37ba-8b00-7669-a71e-8c524fa11750",
+      "costo_centavos": 11200
+    },
+    {
+      "producto_id": "019f3821-8260-702c-a8b3-53517c6e8d74",
+      "negocio_id": "019f37ba-8b00-7f4d-b82c-ad686dabc7ed",
+      "clave": "CAT-0050",
+      "nombre": "Gorra Mini 2",
+      "categoria": "Gorras",
+      "variante": "verde",
+      "unidad_medida": "pieza",
+      "precio_venta_centavos": 11000,
+      "precio_referencia_centavos": 13800,
+      "etiquetas": [
+        "B"
+      ],
+      "activo": true,
+      "creado_en": "2026-07-06T15:52:28.000Z",
+      "dispositivo_id": "019f37ba-8b00-7669-a71e-8c524fa11750",
+      "costo_centavos": 7558
+    },
+    {
+      "producto_id": "019f3824-87d0-7d3d-9e19-56557e40276d",
+      "negocio_id": "019f37ba-8b00-7f4d-b82c-ad686dabc7ed",
+      "clave": "CAT-0051",
+      "nombre": "Termo Grande 2",
+      "categoria": "Termos",
+      "variante": "rojo",
+      "unidad_medida": "pieza",
+      "precio_venta_centavos": 16000,
+      "precio_referencia_centavos": 17700,
+      "etiquetas": [
+        "B"
+      ],
+      "activo": true,
+      "creado_en": "2026-07-06T15:55:46.000Z",
+      "dispositivo_id": "019f37ba-8b00-7669-a71e-8c524fa11750",
+      "costo_centavos": 9950
+    },
+    {
+      "producto_id": "019f3824-e1a8-7c4b-94fc-27ed432ad403",
+      "negocio_id": "019f37ba-8b00-7f4d-b82c-ad686dabc7ed",
+      "clave": "CAT-0052",
+      "nombre": "Llavero Pro 2",
+      "categoria": "Llaveros",
+      "variante": "azul",
+      "unidad_medida": "pieza",
+      "precio_venta_centavos": 25000,
+      "precio_referencia_centavos": 26400,
+      "etiquetas": [
+        "B"
+      ],
+      "activo": true,
+      "creado_en": "2026-07-06T15:56:09.000Z",
+      "dispositivo_id": "019f37ba-8b00-7669-a71e-8c524fa11750",
+      "costo_centavos": 14500
+    },
+    {
+      "producto_id": "019f3827-faa0-7c48-a053-dbd68f1f4eee",
+      "negocio_id": "019f37ba-8b00-7f4d-b82c-ad686dabc7ed",
+      "clave": "CAT-0053",
+      "nombre": "Encendedor Eco 2",
+      "categoria": "Encendedores",
+      "variante": "arena",
+      "unidad_medida": "pieza",
+      "precio_venta_centavos": 16000,
+      "precio_referencia_centavos": 19000,
+      "etiquetas": [
+        "B"
+      ],
+      "activo": true,
+      "creado_en": "2026-07-06T15:59:32.000Z",
+      "dispositivo_id": "019f37ba-8b00-7669-a71e-8c524fa11750",
+      "costo_centavos": 10400
+    },
+    {
+      "producto_id": "019f382a-86f8-7ea5-ae49-2308a5410c31",
+      "negocio_id": "019f37ba-8b00-7f4d-b82c-ad686dabc7ed",
+      "clave": "CAT-0054",
+      "nombre": "Estuch Plus 2",
+      "categoria": "Estuches",
+      "variante": "blanco",
+      "unidad_medida": "pieza",
+      "precio_venta_centavos": 3500,
+      "precio_referencia_centavos": 4500,
+      "etiquetas": [
+        "B"
+      ],
+      "activo": true,
+      "creado_en": "2026-07-06T16:02:19.000Z",
+      "dispositivo_id": "019f37ba-8b00-7669-a71e-8c524fa11750",
+      "costo_centavos": 2300
+    },
+    {
+      "producto_id": "019f382b-deb8-7b06-8878-53986496e651",
+      "negocio_id": "019f37ba-8b00-7f4d-b82c-ad686dabc7ed",
+      "clave": "CAT-0055",
+      "nombre": "Bolsa Viaje 2",
+      "categoria": "Bolsas",
+      "variante": "negro",
+      "unidad_medida": "pieza",
+      "precio_venta_centavos": 24000,
+      "precio_referencia_centavos": 22300,
+      "etiquetas": [
+        "B"
+      ],
+      "activo": true,
+      "creado_en": "2026-07-06T16:03:47.000Z",
+      "dispositivo_id": "019f37ba-8b00-7669-a71e-8c524fa11750",
+      "costo_centavos": 12950
+    },
+    {
+      "producto_id": "019f382f-6128-707c-9170-0b9af4f2ca4a",
+      "negocio_id": "019f37ba-8b00-7f4d-b82c-ad686dabc7ed",
+      "clave": "CAT-0056",
+      "nombre": "Gorra Doble 2",
+      "categoria": "Gorras",
+      "variante": "verde",
+      "unidad_medida": "pieza",
+      "precio_venta_centavos": 22500,
+      "precio_referencia_centavos": 24400,
+      "etiquetas": [
+        "B"
+      ],
+      "activo": true,
+      "creado_en": "2026-07-06T16:07:37.000Z",
+      "dispositivo_id": "019f37ba-8b00-7669-a71e-8c524fa11750",
+      "costo_centavos": 13250
+    },
+    {
+      "producto_id": "019f382f-da40-7c09-ae70-ed3e07c6d156",
+      "negocio_id": "019f37ba-8b00-7f4d-b82c-ad686dabc7ed",
+      "clave": "CAT-0057",
+      "nombre": "Termo Clásico 2",
+      "categoria": "Termos",
+      "variante": "rojo",
+      "unidad_medida": "pieza",
+      "precio_venta_centavos": 17000,
+      "precio_referencia_centavos": 22200,
+      "etiquetas": [
+        "B"
+      ],
+      "activo": true,
+      "creado_en": "2026-07-06T16:08:08.000Z",
+      "dispositivo_id": "019f37ba-8b00-7669-a71e-8c524fa11750",
+      "costo_centavos": 10850
+    },
+    {
+      "producto_id": "019f3832-6698-765c-8a81-d187374b784d",
+      "negocio_id": "019f37ba-8b00-7f4d-b82c-ad686dabc7ed",
+      "clave": "CAT-0058",
+      "nombre": "Llavero Mini 2",
+      "categoria": "Llaveros",
+      "variante": "azul",
+      "unidad_medida": "pieza",
+      "precio_venta_centavos": 17500,
+      "precio_referencia_centavos": 18700,
+      "etiquetas": [
+        "B"
+      ],
+      "activo": true,
+      "creado_en": "2026-07-06T16:10:55.000Z",
+      "dispositivo_id": "019f37ba-8b00-7669-a71e-8c524fa11750",
+      "costo_centavos": 10000
+    },
+    {
+      "producto_id": "019f3832-f338-73da-b232-79586286e402",
+      "negocio_id": "019f37ba-8b00-7f4d-b82c-ad686dabc7ed",
+      "clave": "CAT-0059",
+      "nombre": "Encendedor Grande 2",
+      "categoria": "Encendedores",
+      "variante": "arena",
+      "unidad_medida": "pieza",
+      "precio_venta_centavos": 12000,
+      "precio_referencia_centavos": 13500,
+      "etiquetas": [
+        "B"
+      ],
+      "activo": true,
+      "creado_en": "2026-07-06T16:11:31.000Z",
+      "dispositivo_id": "019f37ba-8b00-7669-a71e-8c524fa11750",
+      "costo_centavos": 7000
+    },
+    {
+      "producto_id": "019f3833-ba70-79d3-9724-3c64a0474b54",
+      "negocio_id": "019f37ba-8b00-7f4d-b82c-ad686dabc7ed",
+      "clave": "CAT-0060",
+      "nombre": "Estuch Pro 2",
+      "categoria": "Estuches",
+      "variante": "blanco",
+      "unidad_medida": "pieza",
+      "precio_venta_centavos": 11500,
+      "precio_referencia_centavos": 12700,
+      "etiquetas": [
+        "B"
+      ],
+      "activo": true,
+      "creado_en": "2026-07-06T16:12:22.000Z",
+      "dispositivo_id": "019f37ba-8b00-7669-a71e-8c524fa11750",
+      "costo_centavos": 6900
+    },
+    {
+      "producto_id": "019f3836-46c8-70ec-953a-4ae0856c9a1f",
+      "negocio_id": "019f37ba-8b00-7f4d-b82c-ad686dabc7ed",
+      "clave": "CAT-0061",
+      "nombre": "Bolsa Eco 2",
+      "categoria": "Bolsas",
+      "variante": "negro",
+      "unidad_medida": "pieza",
+      "precio_venta_centavos": 13000,
+      "precio_referencia_centavos": 15800,
+      "etiquetas": [
+        "B"
+      ],
+      "activo": true,
+      "creado_en": "2026-07-06T16:15:09.000Z",
+      "dispositivo_id": "019f37ba-8b00-7669-a71e-8c524fa11750",
+      "costo_centavos": 7500
+    },
+    {
+      "producto_id": "019f3838-69a8-7b2e-89bd-d65817c158e3",
+      "negocio_id": "019f37ba-8b00-7f4d-b82c-ad686dabc7ed",
+      "clave": "CAT-0062",
+      "nombre": "Gorra Plus 2",
+      "categoria": "Gorras",
+      "variante": "verde",
+      "unidad_medida": "pieza",
+      "precio_venta_centavos": 11000,
+      "precio_referencia_centavos": 12400,
+      "etiquetas": [
+        "B"
+      ],
+      "activo": true,
+      "creado_en": "2026-07-06T16:17:29.000Z",
+      "dispositivo_id": "019f37ba-8b00-7669-a71e-8c524fa11750",
+      "costo_centavos": 6850
+    },
+    {
+      "producto_id": "019f383a-d6c0-7f63-8654-556637947804",
+      "negocio_id": "019f37ba-8b00-7f4d-b82c-ad686dabc7ed",
+      "clave": "CAT-0063",
+      "nombre": "Termo Viaje 2",
+      "categoria": "Termos",
+      "variante": "rojo",
+      "unidad_medida": "pieza",
+      "precio_venta_centavos": 10500,
+      "precio_referencia_centavos": 13300,
+      "etiquetas": [
+        "B"
+      ],
+      "activo": true,
+      "creado_en": "2026-07-06T16:20:08.000Z",
+      "dispositivo_id": "019f37ba-8b00-7669-a71e-8c524fa11750",
+      "costo_centavos": 6750
+    },
+    {
+      "producto_id": "019f383d-99c8-7444-8bf9-2adcef808358",
+      "negocio_id": "019f37ba-8b00-7f4d-b82c-ad686dabc7ed",
+      "clave": "CAT-0064",
+      "nombre": "Llavero Doble 2",
+      "categoria": "Llaveros",
+      "variante": "azul",
+      "unidad_medida": "pieza",
+      "precio_venta_centavos": 24500,
+      "precio_referencia_centavos": 26100,
+      "etiquetas": [
+        "B"
+      ],
+      "activo": true,
+      "creado_en": "2026-07-06T16:23:09.000Z",
+      "dispositivo_id": "019f37ba-8b00-7669-a71e-8c524fa11750",
+      "costo_centavos": 14850
+    },
+    {
+      "producto_id": "019f383e-6100-7e44-a269-6394117a7f04",
+      "negocio_id": "019f37ba-8b00-7f4d-b82c-ad686dabc7ed",
+      "clave": "CAT-0065",
+      "nombre": "Encendedor Clásico 2",
+      "categoria": "Encendedores",
+      "variante": "arena",
+      "unidad_medida": "pieza",
+      "precio_venta_centavos": 18000,
+      "precio_referencia_centavos": 20400,
+      "etiquetas": [
+        "B"
+      ],
+      "activo": true,
+      "creado_en": "2026-07-06T16:24:00.000Z",
+      "dispositivo_id": "019f37ba-8b00-7669-a71e-8c524fa11750",
+      "costo_centavos": 10500
+    },
+    {
+      "producto_id": "019f383f-c860-7b1e-b91b-10d3d1455711",
+      "negocio_id": "019f37ba-8b00-7f4d-b82c-ad686dabc7ed",
+      "clave": "CAT-0066",
+      "nombre": "Estuch Mini 2",
+      "categoria": "Estuches",
+      "variante": "blanco",
+      "unidad_medida": "pieza",
+      "precio_venta_centavos": 6000,
+      "precio_referencia_centavos": 6100,
+      "etiquetas": [
+        "B"
+      ],
+      "activo": true,
+      "creado_en": "2026-07-06T16:25:32.000Z",
+      "dispositivo_id": "019f37ba-8b00-7669-a71e-8c524fa11750",
+      "costo_centavos": 3450
+    },
+    {
+      "producto_id": "019f3842-58a0-7489-a901-1ff3c4f6bea8",
+      "negocio_id": "019f37ba-8b00-7f4d-b82c-ad686dabc7ed",
+      "clave": "CAT-0067",
+      "nombre": "Bolsa Grande 2",
+      "categoria": "Bolsas",
+      "variante": "negro",
+      "unidad_medida": "pieza",
+      "precio_venta_centavos": 20000,
+      "precio_referencia_centavos": 23200,
+      "etiquetas": [
+        "B"
+      ],
+      "activo": true,
+      "creado_en": "2026-07-06T16:28:20.000Z",
+      "dispositivo_id": "019f37ba-8b00-7669-a71e-8c524fa11750",
+      "costo_centavos": 11550
+    },
+    {
+      "producto_id": "019f3844-15f0-76f6-b0d5-8da8f24bf527",
+      "negocio_id": "019f37ba-8b00-7f4d-b82c-ad686dabc7ed",
+      "clave": "CAT-0068",
+      "nombre": "Gorra Pro 2",
+      "categoria": "Gorras",
+      "variante": "verde",
+      "unidad_medida": "pieza",
+      "precio_venta_centavos": 20500,
+      "precio_referencia_centavos": 20700,
+      "etiquetas": [
+        "B"
+      ],
+      "activo": true,
+      "creado_en": "2026-07-06T16:30:14.000Z",
+      "dispositivo_id": "019f37ba-8b00-7669-a71e-8c524fa11750",
+      "costo_centavos": 12200
+    },
+    {
+      "producto_id": "019f3845-0438-7967-981d-9e8f2655c061",
+      "negocio_id": "019f37ba-8b00-7f4d-b82c-ad686dabc7ed",
+      "clave": "CAT-0069",
+      "nombre": "Termo Eco 2",
+      "categoria": "Termos",
+      "variante": "rojo",
+      "unidad_medida": "pieza",
+      "precio_venta_centavos": 14000,
+      "precio_referencia_centavos": 14100,
+      "etiquetas": [
+        "B"
+      ],
+      "activo": true,
+      "creado_en": "2026-07-06T16:31:15.000Z",
+      "dispositivo_id": "019f37ba-8b00-7669-a71e-8c524fa11750",
+      "costo_centavos": 7900
+    },
+    {
+      "producto_id": "019f3846-3cb8-7cd4-a287-007922821760",
+      "negocio_id": "019f37ba-8b00-7f4d-b82c-ad686dabc7ed",
+      "clave": "CAT-0070",
+      "nombre": "Llavero Plus 2",
+      "categoria": "Llaveros",
+      "variante": "azul",
+      "unidad_medida": "pieza",
+      "precio_venta_centavos": 21000,
+      "precio_referencia_centavos": 25400,
+      "etiquetas": [
+        "B"
+      ],
+      "activo": true,
+      "creado_en": "2026-07-06T16:32:35.000Z",
+      "dispositivo_id": "019f37ba-8b00-7669-a71e-8c524fa11750",
+      "costo_centavos": 13100
+    },
+    {
+      "producto_id": "019f3848-1d30-7cf5-b6dd-c7e732b71507",
+      "negocio_id": "019f37ba-8b00-7f4d-b82c-ad686dabc7ed",
+      "clave": "CAT-0071",
+      "nombre": "Encendedor Viaje 2",
+      "categoria": "Encendedores",
+      "variante": "arena",
+      "unidad_medida": "pieza",
+      "precio_venta_centavos": 7500,
+      "precio_referencia_centavos": 8300,
+      "etiquetas": [
+        "B"
+      ],
+      "activo": true,
+      "creado_en": "2026-07-06T16:34:38.000Z",
+      "dispositivo_id": "019f37ba-8b00-7669-a71e-8c524fa11750",
+      "costo_centavos": 4650
+    },
+    {
+      "producto_id": "019f3849-ee08-774b-8ecd-7af3fed00249",
+      "negocio_id": "019f37ba-8b00-7f4d-b82c-ad686dabc7ed",
+      "clave": "CAT-0072",
+      "nombre": "Estuch Doble 2",
+      "categoria": "Estuches",
+      "variante": "blanco",
+      "unidad_medida": "pieza",
+      "precio_venta_centavos": 9500,
+      "precio_referencia_centavos": 11000,
+      "etiquetas": [
+        "B"
+      ],
+      "activo": true,
+      "creado_en": "2026-07-06T16:36:37.000Z",
+      "dispositivo_id": "019f37ba-8b00-7669-a71e-8c524fa11750",
+      "costo_centavos": 5600
+    },
+    {
+      "producto_id": "019f384a-dc50-7f60-8aee-0499ff0f7c8d",
+      "negocio_id": "019f37ba-8b00-7f4d-b82c-ad686dabc7ed",
+      "clave": "CAT-0073",
+      "nombre": "Bolsa Clásico 2",
+      "categoria": "Bolsas",
+      "variante": "negro",
+      "unidad_medida": "pieza",
+      "precio_venta_centavos": 11500,
+      "precio_referencia_centavos": 14900,
+      "etiquetas": [
+        "B"
+      ],
+      "activo": true,
+      "creado_en": "2026-07-06T16:37:38.000Z",
+      "dispositivo_id": "019f37ba-8b00-7669-a71e-8c524fa11750",
+      "costo_centavos": 6950
+    },
+    {
+      "producto_id": "019f384c-c880-76ef-bce1-f0ff9ccf665d",
+      "negocio_id": "019f37ba-8b00-7f4d-b82c-ad686dabc7ed",
+      "clave": "CAT-0074",
+      "nombre": "Gorra Mini 2",
+      "categoria": "Gorras",
+      "variante": "verde",
+      "unidad_medida": "pieza",
+      "precio_venta_centavos": 18000,
+      "precio_referencia_centavos": 18300,
+      "etiquetas": [
+        "B"
+      ],
+      "activo": true,
+      "creado_en": "2026-07-06T16:39:44.000Z",
+      "dispositivo_id": "019f37ba-8b00-7669-a71e-8c524fa11750",
+      "costo_centavos": 9660
+    },
+    {
+      "producto_id": "019f384d-16a0-7cf3-a2cc-b8ece1aeada5",
+      "negocio_id": "019f37ba-8b00-7f4d-b82c-ad686dabc7ed",
+      "clave": "CAT-0075",
+      "nombre": "Termo Grande 2",
+      "categoria": "Termos",
+      "variante": "rojo",
+      "unidad_medida": "pieza",
+      "precio_venta_centavos": 17000,
+      "precio_referencia_centavos": 19600,
+      "etiquetas": [
+        "B"
+      ],
+      "activo": true,
+      "creado_en": "2026-07-06T16:40:04.000Z",
+      "dispositivo_id": "019f37ba-8b00-7669-a71e-8c524fa11750",
+      "costo_centavos": 10250
+    },
+    {
+      "producto_id": "019f3850-3768-71ba-a7b0-98509c3d4b51",
+      "negocio_id": "019f37ba-8b00-7f4d-b82c-ad686dabc7ed",
+      "clave": "CAT-0076",
+      "nombre": "Llavero Pro 2",
+      "categoria": "Llaveros",
+      "variante": "azul",
+      "unidad_medida": "pieza",
+      "precio_venta_centavos": 23000,
+      "precio_referencia_centavos": 26300,
+      "etiquetas": [
+        "B"
+      ],
+      "activo": true,
+      "creado_en": "2026-07-06T16:43:29.000Z",
+      "dispositivo_id": "019f37ba-8b00-7669-a71e-8c524fa11750",
+      "costo_centavos": 13200
+    },
+    {
+      "producto_id": "019f3852-9cb0-78a4-b166-e6a5eb2b109c",
+      "negocio_id": "019f37ba-8b00-7f4d-b82c-ad686dabc7ed",
+      "clave": "CAT-0077",
+      "nombre": "Encendedor Eco 2",
+      "categoria": "Encendedores",
+      "variante": "arena",
+      "unidad_medida": "pieza",
+      "precio_venta_centavos": 13500,
+      "precio_referencia_centavos": 18200,
+      "etiquetas": [
+        "B"
+      ],
+      "activo": true,
+      "creado_en": "2026-07-06T16:46:06.000Z",
+      "dispositivo_id": "019f37ba-8b00-7669-a71e-8c524fa11750",
+      "costo_centavos": 8650
+    },
+    {
+      "producto_id": "019f3853-9e80-7ddd-90d9-668d93aa7523",
+      "negocio_id": "019f37ba-8b00-7f4d-b82c-ad686dabc7ed",
+      "clave": "CAT-0078",
+      "nombre": "Estuch Plus 2",
+      "categoria": "Estuches",
+      "variante": "blanco",
+      "unidad_medida": "pieza",
+      "precio_venta_centavos": 12500,
+      "precio_referencia_centavos": 11100,
+      "etiquetas": [
+        "B"
+      ],
+      "activo": true,
+      "creado_en": "2026-07-06T16:47:12.000Z",
+      "dispositivo_id": "019f37ba-8b00-7669-a71e-8c524fa11750",
+      "costo_centavos": 6700
+    },
+    {
+      "producto_id": "019f3856-bf48-7c8e-b623-1c6bca08af75",
+      "negocio_id": "019f37ba-8b00-7f4d-b82c-ad686dabc7ed",
+      "clave": "CAT-0079",
+      "nombre": "Bolsa Viaje 2",
+      "categoria": "Bolsas",
+      "variante": "negro",
+      "unidad_medida": "pieza",
+      "precio_venta_centavos": 3500,
+      "precio_referencia_centavos": 3800,
+      "etiquetas": [
+        "B"
+      ],
+      "activo": true,
+      "creado_en": "2026-07-06T16:50:37.000Z",
+      "dispositivo_id": "019f37ba-8b00-7669-a71e-8c524fa11750",
+      "costo_centavos": 2150
+    },
+    {
+      "producto_id": "019f3858-de40-7f8d-aed9-be3a2ecc5d2f",
+      "negocio_id": "019f37ba-8b00-7f4d-b82c-ad686dabc7ed",
+      "clave": "CAT-0080",
+      "nombre": "Gorra Doble 2",
+      "categoria": "Gorras",
+      "variante": "verde",
+      "unidad_medida": "pieza",
+      "precio_venta_centavos": 15500,
+      "precio_referencia_centavos": 16000,
+      "etiquetas": [
+        "B"
+      ],
+      "activo": true,
+      "creado_en": "2026-07-06T16:52:56.000Z",
+      "dispositivo_id": "019f37ba-8b00-7669-a71e-8c524fa11750",
+      "costo_centavos": 8950
+    },
+    {
+      "producto_id": "019f3859-e7e0-7258-b984-1e54a3912c32",
+      "negocio_id": "019f37ba-8b00-7f4d-b82c-ad686dabc7ed",
+      "clave": "CAT-0081",
+      "nombre": "Termo Clásico 2",
+      "categoria": "Termos",
+      "variante": "rojo",
+      "unidad_medida": "pieza",
+      "precio_venta_centavos": 9500,
+      "precio_referencia_centavos": 12300,
+      "etiquetas": [
+        "B"
+      ],
+      "activo": true,
+      "creado_en": "2026-07-06T16:54:04.000Z",
+      "dispositivo_id": "019f37ba-8b00-7669-a71e-8c524fa11750",
+      "costo_centavos": 5900
+    },
+    {
+      "producto_id": "019f385c-7050-7d55-a20e-c884226aff3c",
+      "negocio_id": "019f37ba-8b00-7f4d-b82c-ad686dabc7ed",
+      "clave": "CAT-0082",
+      "nombre": "Llavero Mini 2",
+      "categoria": "Llaveros",
+      "variante": "azul",
+      "unidad_medida": "pieza",
+      "precio_venta_centavos": 15500,
+      "precio_referencia_centavos": 18600,
+      "etiquetas": [
+        "B"
+      ],
+      "activo": true,
+      "creado_en": "2026-07-06T16:56:50.000Z",
+      "dispositivo_id": "019f37ba-8b00-7669-a71e-8c524fa11750",
+      "costo_centavos": 8700
+    },
+    {
+      "producto_id": "019f385f-e708-7f5f-86de-a5943c59378f",
+      "negocio_id": "019f37ba-8b00-7f4d-b82c-ad686dabc7ed",
+      "clave": "CAT-0083",
+      "nombre": "Encendedor Grande 2",
+      "categoria": "Encendedores",
+      "variante": "arena",
+      "unidad_medida": "pieza",
+      "precio_venta_centavos": 19500,
+      "precio_referencia_centavos": 18600,
+      "etiquetas": [
+        "B"
+      ],
+      "activo": true,
+      "creado_en": "2026-07-06T17:00:37.000Z",
+      "dispositivo_id": "019f37ba-8b00-7669-a71e-8c524fa11750",
+      "costo_centavos": 11400
+    },
+    {
+      "producto_id": "019f3861-0048-713a-99e8-a4497c5418b2",
+      "negocio_id": "019f37ba-8b00-7f4d-b82c-ad686dabc7ed",
+      "clave": "CAT-0084",
+      "nombre": "Estuch Pro 2",
+      "categoria": "Estuches",
+      "variante": "blanco",
+      "unidad_medida": "pieza",
+      "precio_venta_centavos": 11000,
+      "precio_referencia_centavos": 13200,
+      "etiquetas": [
+        "B"
+      ],
+      "activo": true,
+      "creado_en": "2026-07-06T17:01:49.000Z",
+      "dispositivo_id": "019f37ba-8b00-7669-a71e-8c524fa11750",
+      "costo_centavos": 6200
+    },
+    {
+      "producto_id": "019f3864-09a0-75cf-b855-1f10e4a653d4",
+      "negocio_id": "019f37ba-8b00-7f4d-b82c-ad686dabc7ed",
+      "clave": "CAT-0085",
+      "nombre": "Bolsa Eco 2",
+      "categoria": "Bolsas",
+      "variante": "negro",
+      "unidad_medida": "pieza",
+      "precio_venta_centavos": 9500,
+      "precio_referencia_centavos": 10600,
+      "etiquetas": [
+        "B"
+      ],
+      "activo": true,
+      "creado_en": "2026-07-06T17:05:08.000Z",
+      "dispositivo_id": "019f37ba-8b00-7669-a71e-8c524fa11750",
+      "costo_centavos": 5750
+    },
+    {
+      "producto_id": "019f3866-d478-7573-a36c-ddb5525e9def",
+      "negocio_id": "019f37ba-8b00-7f4d-b82c-ad686dabc7ed",
+      "clave": "CAT-0086",
+      "nombre": "Gorra Plus 2",
+      "categoria": "Gorras",
+      "variante": "verde",
+      "unidad_medida": "pieza",
+      "precio_venta_centavos": 19500,
+      "precio_referencia_centavos": 21700,
+      "etiquetas": [
+        "B"
+      ],
+      "activo": true,
+      "creado_en": "2026-07-06T17:08:11.000Z",
+      "dispositivo_id": "019f37ba-8b00-7669-a71e-8c524fa11750",
+      "costo_centavos": 11550
+    },
+    {
+      "producto_id": "019f3869-2638-7035-9571-6adfd25cb623",
+      "negocio_id": "019f37ba-8b00-7f4d-b82c-ad686dabc7ed",
+      "clave": "CAT-0087",
+      "nombre": "Termo Viaje 2",
+      "categoria": "Termos",
+      "variante": "rojo",
+      "unidad_medida": "pieza",
+      "precio_venta_centavos": 25000,
+      "precio_referencia_centavos": 28200,
+      "etiquetas": [
+        "B"
+      ],
+      "activo": true,
+      "creado_en": "2026-07-06T17:10:43.000Z",
+      "dispositivo_id": "019f37ba-8b00-7669-a71e-8c524fa11750",
+      "costo_centavos": 13800
+    },
+    {
+      "producto_id": "019f3869-a720-7906-bfe6-59c9aef2153e",
+      "negocio_id": "019f37ba-8b00-7f4d-b82c-ad686dabc7ed",
+      "clave": "CAT-0088",
+      "nombre": "Llavero Doble 2",
+      "categoria": "Llaveros",
+      "variante": "azul",
+      "unidad_medida": "pieza",
+      "precio_venta_centavos": 25000,
+      "precio_referencia_centavos": 29100,
+      "etiquetas": [
+        "B"
+      ],
+      "activo": true,
+      "creado_en": "2026-07-06T17:11:16.000Z",
+      "dispositivo_id": "019f37ba-8b00-7669-a71e-8c524fa11750",
+      "costo_centavos": 13450
+    },
+    {
+      "producto_id": "019f386c-9520-7a42-9d6e-6cd8cf27558d",
+      "negocio_id": "019f37ba-8b00-7f4d-b82c-ad686dabc7ed",
+      "clave": "CAT-0089",
+      "nombre": "Encendedor Clásico 2",
+      "categoria": "Encendedores",
+      "variante": "arena",
+      "unidad_medida": "pieza",
+      "precio_venta_centavos": 21500,
+      "precio_referencia_centavos": 26700,
+      "etiquetas": [
+        "B"
+      ],
+      "activo": true,
+      "creado_en": "2026-07-06T17:14:28.000Z",
+      "dispositivo_id": "019f37ba-8b00-7669-a71e-8c524fa11750",
+      "costo_centavos": 12350
+    },
+    {
+      "producto_id": "019f386e-5e28-7350-8a40-bdc8ec6fbcff",
+      "negocio_id": "019f37ba-8b00-7f4d-b82c-ad686dabc7ed",
+      "clave": "CAT-0090",
+      "nombre": "Estuch Mini 2",
+      "categoria": "Estuches",
+      "variante": "blanco",
+      "unidad_medida": "pieza",
+      "precio_venta_centavos": 25000,
+      "precio_referencia_centavos": 29500,
+      "etiquetas": [
+        "B"
+      ],
+      "activo": true,
+      "creado_en": "2026-07-06T17:16:25.000Z",
+      "dispositivo_id": "019f37ba-8b00-7669-a71e-8c524fa11750",
+      "costo_centavos": 14700
+    },
+    {
+      "producto_id": "019f386f-2948-7e47-8599-4f9284bcfde3",
+      "negocio_id": "019f37ba-8b00-7f4d-b82c-ad686dabc7ed",
+      "clave": "CAT-0091",
+      "nombre": "Bolsa Grande 2",
+      "categoria": "Bolsas",
+      "variante": "negro",
+      "unidad_medida": "pieza",
+      "precio_venta_centavos": 16500,
+      "precio_referencia_centavos": 18000,
+      "etiquetas": [
+        "B"
+      ],
+      "activo": true,
+      "creado_en": "2026-07-06T17:17:17.000Z",
+      "dispositivo_id": "019f37ba-8b00-7669-a71e-8c524fa11750",
+      "costo_centavos": 9650
+    },
+    {
+      "producto_id": "019f3871-7ef0-7ac8-b20c-7b297a22ced2",
+      "negocio_id": "019f37ba-8b00-7f4d-b82c-ad686dabc7ed",
+      "clave": "CAT-0092",
+      "nombre": "Gorra Pro 2",
+      "categoria": "Gorras",
+      "variante": "verde",
+      "unidad_medida": "pieza",
+      "precio_venta_centavos": 7500,
+      "precio_referencia_centavos": 7400,
+      "etiquetas": [
+        "B"
+      ],
+      "activo": true,
+      "creado_en": "2026-07-06T17:19:50.000Z",
+      "dispositivo_id": "019f37ba-8b00-7669-a71e-8c524fa11750",
+      "costo_centavos": 4100
+    },
+    {
+      "producto_id": "019f3875-20a0-797b-aa24-4337d8f999a0",
+      "negocio_id": "019f37ba-8b00-7f4d-b82c-ad686dabc7ed",
+      "clave": "CAT-0093",
+      "nombre": "Termo Eco 2",
+      "categoria": "Termos",
+      "variante": "rojo",
+      "unidad_medida": "pieza",
+      "precio_venta_centavos": 26500,
+      "precio_referencia_centavos": 25200,
+      "etiquetas": [
+        "B"
+      ],
+      "activo": true,
+      "creado_en": "2026-07-06T17:23:48.000Z",
+      "dispositivo_id": "019f37ba-8b00-7669-a71e-8c524fa11750",
+      "costo_centavos": 15680
+    },
+    {
+      "producto_id": "019f3878-1288-7441-bdc5-5d883a234cb2",
+      "negocio_id": "019f37ba-8b00-7f4d-b82c-ad686dabc7ed",
+      "clave": "CAT-0094",
+      "nombre": "Llavero Plus 2",
+      "categoria": "Llaveros",
+      "variante": "azul",
+      "unidad_medida": "pieza",
+      "precio_venta_centavos": 23000,
+      "precio_referencia_centavos": 22500,
+      "etiquetas": [
+        "B"
+      ],
+      "activo": true,
+      "creado_en": "2026-07-06T17:27:01.000Z",
+      "dispositivo_id": "019f37ba-8b00-7669-a71e-8c524fa11750",
+      "costo_centavos": 13100
+    },
+    {
+      "producto_id": "019f3878-f900-7417-b4ab-18c13db8fdc6",
+      "negocio_id": "019f37ba-8b00-7f4d-b82c-ad686dabc7ed",
+      "clave": "CAT-0095",
+      "nombre": "Encendedor Viaje 2",
+      "categoria": "Encendedores",
+      "variante": "arena",
+      "unidad_medida": "pieza",
+      "precio_venta_centavos": 16500,
+      "precio_referencia_centavos": 17400,
+      "etiquetas": [
+        "B"
+      ],
+      "activo": true,
+      "creado_en": "2026-07-06T17:28:00.000Z",
+      "dispositivo_id": "019f37ba-8b00-7669-a71e-8c524fa11750",
+      "costo_centavos": 8600
+    },
+    {
+      "producto_id": "019f387a-4cd8-7fb6-ba7b-9cf4edbb32e3",
+      "negocio_id": "019f37ba-8b00-7f4d-b82c-ad686dabc7ed",
+      "clave": "CAT-0096",
+      "nombre": "Estuch Doble 2",
+      "categoria": "Estuches",
+      "variante": "blanco",
+      "unidad_medida": "pieza",
+      "precio_venta_centavos": 24000,
+      "precio_referencia_centavos": 26000,
+      "etiquetas": [
+        "B"
+      ],
+      "activo": true,
+      "creado_en": "2026-07-06T17:29:27.000Z",
+      "dispositivo_id": "019f37ba-8b00-7669-a71e-8c524fa11750",
+      "costo_centavos": 13000
+    },
+    {
+      "producto_id": "019f387c-8ef8-7092-8c48-270245898730",
+      "negocio_id": "019f37ba-8b00-7f4d-b82c-ad686dabc7ed",
+      "clave": "CAT-0097",
+      "nombre": "Bolsa Clásico 3",
+      "categoria": "Bolsas",
+      "variante": "negro",
+      "unidad_medida": "pieza",
+      "precio_venta_centavos": 24500,
+      "precio_referencia_centavos": 27300,
+      "etiquetas": [
+        "B"
+      ],
+      "activo": true,
+      "creado_en": "2026-07-06T17:31:55.000Z",
+      "dispositivo_id": "019f37ba-8b00-7669-a71e-8c524fa11750",
+      "costo_centavos": 13700
+    },
+    {
+      "producto_id": "019f387f-4648-771e-bd02-c72b8fb114ce",
+      "negocio_id": "019f37ba-8b00-7f4d-b82c-ad686dabc7ed",
+      "clave": "CAT-0098",
+      "nombre": "Gorra Mini 3",
+      "categoria": "Gorras",
+      "variante": "verde",
+      "unidad_medida": "pieza",
+      "precio_venta_centavos": 7500,
+      "precio_referencia_centavos": 8600,
+      "etiquetas": [
+        "B"
+      ],
+      "activo": true,
+      "creado_en": "2026-07-06T17:34:53.000Z",
+      "dispositivo_id": "019f37ba-8b00-7669-a71e-8c524fa11750",
+      "costo_centavos": 4450
+    },
+    {
+      "producto_id": "019f3880-3c60-79c2-8aab-2000608da227",
+      "negocio_id": "019f37ba-8b00-7f4d-b82c-ad686dabc7ed",
+      "clave": "CAT-0099",
+      "nombre": "Termo Grande 3",
+      "categoria": "Termos",
+      "variante": "rojo",
+      "unidad_medida": "pieza",
+      "precio_venta_centavos": 18000,
+      "precio_referencia_centavos": 18300,
+      "etiquetas": [
+        "B"
+      ],
+      "activo": true,
+      "creado_en": "2026-07-06T17:35:56.000Z",
+      "dispositivo_id": "019f37ba-8b00-7669-a71e-8c524fa11750",
+      "costo_centavos": 9950
+    },
+    {
+      "producto_id": "019f3882-6af8-7013-ac28-1ca757082896",
+      "negocio_id": "019f37ba-8b00-7f4d-b82c-ad686dabc7ed",
+      "clave": "CAT-0100",
+      "nombre": "Llavero Pro 3",
+      "categoria": "Llaveros",
+      "variante": "azul",
+      "unidad_medida": "pieza",
+      "precio_venta_centavos": 19000,
+      "precio_referencia_centavos": 21700,
+      "etiquetas": [
+        "B"
+      ],
+      "activo": true,
+      "creado_en": "2026-07-06T17:38:19.000Z",
+      "dispositivo_id": "019f37ba-8b00-7669-a71e-8c524fa11750",
+      "costo_centavos": 10150
+    },
+    {
+      "producto_id": "019f3884-8608-7edd-b79e-87f6241dd112",
+      "negocio_id": "019f37ba-8b00-7f4d-b82c-ad686dabc7ed",
+      "clave": "CAT-0101",
+      "nombre": "Encendedor Eco 3",
+      "categoria": "Encendedores",
+      "variante": "arena",
+      "unidad_medida": "pieza",
+      "precio_venta_centavos": 24500,
+      "precio_referencia_centavos": 22100,
+      "etiquetas": [
+        "B"
+      ],
+      "activo": true,
+      "creado_en": "2026-07-06T17:40:37.000Z",
+      "dispositivo_id": "019f37ba-8b00-7669-a71e-8c524fa11750",
+      "costo_centavos": 13650
+    },
+    {
+      "producto_id": "019f3886-9d30-74eb-8eb1-5e3a76f5785b",
+      "negocio_id": "019f37ba-8b00-7f4d-b82c-ad686dabc7ed",
+      "clave": "CAT-0102",
+      "nombre": "Estuch Plus 3",
+      "categoria": "Estuches",
+      "variante": "blanco",
+      "unidad_medida": "pieza",
+      "precio_venta_centavos": 11500,
+      "precio_referencia_centavos": 12500,
+      "etiquetas": [
+        "B"
+      ],
+      "activo": true,
+      "creado_en": "2026-07-06T17:42:54.000Z",
+      "dispositivo_id": "019f37ba-8b00-7669-a71e-8c524fa11750",
+      "costo_centavos": 6300
+    },
+    {
+      "producto_id": "019f3887-7020-7012-b3c0-1933894c388d",
+      "negocio_id": "019f37ba-8b00-7f4d-b82c-ad686dabc7ed",
+      "clave": "CAT-0103",
+      "nombre": "Bolsa Viaje 3",
+      "categoria": "Bolsas",
+      "variante": "negro",
+      "unidad_medida": "pieza",
+      "precio_venta_centavos": 4000,
+      "precio_referencia_centavos": 5300,
+      "etiquetas": [
+        "B"
+      ],
+      "activo": true,
+      "creado_en": "2026-07-06T17:43:48.000Z",
+      "dispositivo_id": "019f37ba-8b00-7669-a71e-8c524fa11750",
+      "costo_centavos": 2750
+    },
+    {
+      "producto_id": "019f3888-3370-7c37-bb36-156fa857c15b",
+      "negocio_id": "019f37ba-8b00-7f4d-b82c-ad686dabc7ed",
+      "clave": "CAT-0104",
+      "nombre": "Gorra Doble 3",
+      "categoria": "Gorras",
+      "variante": "verde",
+      "unidad_medida": "pieza",
+      "precio_venta_centavos": 23000,
+      "precio_referencia_centavos": 30500,
+      "etiquetas": [
+        "B"
+      ],
+      "activo": true,
+      "creado_en": "2026-07-06T17:44:38.000Z",
+      "dispositivo_id": "019f37ba-8b00-7669-a71e-8c524fa11750",
+      "costo_centavos": 14750
+    },
+    {
+      "producto_id": "019f388a-fe48-7dec-8d9a-b415e5029a6b",
+      "negocio_id": "019f37ba-8b00-7f4d-b82c-ad686dabc7ed",
+      "clave": "CAT-0105",
+      "nombre": "Termo Clásico 3",
+      "categoria": "Termos",
+      "variante": "rojo",
+      "unidad_medida": "pieza",
+      "precio_venta_centavos": 7500,
+      "precio_referencia_centavos": 8500,
+      "etiquetas": [
+        "B"
+      ],
+      "activo": true,
+      "creado_en": "2026-07-06T17:47:41.000Z",
+      "dispositivo_id": "019f37ba-8b00-7669-a71e-8c524fa11750",
+      "costo_centavos": 4850
+    },
+    {
+      "producto_id": "019f388c-0400-7890-b304-42ac3579015f",
+      "negocio_id": "019f37ba-8b00-7f4d-b82c-ad686dabc7ed",
+      "clave": "CAT-0106",
+      "nombre": "Llavero Mini 3",
+      "categoria": "Llaveros",
+      "variante": "azul",
+      "unidad_medida": "pieza",
+      "precio_venta_centavos": 8000,
+      "precio_referencia_centavos": 8300,
+      "etiquetas": [
+        "B"
+      ],
+      "activo": true,
+      "creado_en": "2026-07-06T17:48:48.000Z",
+      "dispositivo_id": "019f37ba-8b00-7669-a71e-8c524fa11750",
+      "costo_centavos": 4250
+    },
+    {
+      "producto_id": "019f388c-a040-7f5e-9d91-82b5f553e325",
+      "negocio_id": "019f37ba-8b00-7f4d-b82c-ad686dabc7ed",
+      "clave": "CAT-0107",
+      "nombre": "Encendedor Grande 3",
+      "categoria": "Encendedores",
+      "variante": "arena",
+      "unidad_medida": "pieza",
+      "precio_venta_centavos": 15500,
+      "precio_referencia_centavos": 21900,
+      "etiquetas": [
+        "B"
+      ],
+      "activo": true,
+      "creado_en": "2026-07-06T17:49:28.000Z",
+      "dispositivo_id": "019f37ba-8b00-7669-a71e-8c524fa11750",
+      "costo_centavos": 10150
+    },
+    {
+      "producto_id": "019f3890-0370-71d3-9435-00dde7244ad5",
+      "negocio_id": "019f37ba-8b00-7f4d-b82c-ad686dabc7ed",
+      "clave": "CAT-0108",
+      "nombre": "Estuch Pro 3",
+      "categoria": "Estuches",
+      "variante": "blanco",
+      "unidad_medida": "pieza",
+      "precio_venta_centavos": 25500,
+      "precio_referencia_centavos": 25600,
+      "etiquetas": [
+        "B"
+      ],
+      "activo": true,
+      "creado_en": "2026-07-06T17:53:10.000Z",
+      "dispositivo_id": "019f37ba-8b00-7669-a71e-8c524fa11750",
+      "costo_centavos": 14600
+    },
+    {
+      "producto_id": "019f3891-0158-7f8a-907b-d68f70fb59f7",
+      "negocio_id": "019f37ba-8b00-7f4d-b82c-ad686dabc7ed",
+      "clave": "CAT-0109",
+      "nombre": "Bolsa Eco 3",
+      "categoria": "Bolsas",
+      "variante": "negro",
+      "unidad_medida": "pieza",
+      "precio_venta_centavos": 20000,
+      "precio_referencia_centavos": 22500,
+      "etiquetas": [
+        "B"
+      ],
+      "activo": true,
+      "creado_en": "2026-07-06T17:54:15.000Z",
+      "dispositivo_id": "019f37ba-8b00-7669-a71e-8c524fa11750",
+      "costo_centavos": 11550
+    },
+    {
+      "producto_id": "019f3891-bcd8-7005-bc9e-b0adb359724d",
+      "negocio_id": "019f37ba-8b00-7f4d-b82c-ad686dabc7ed",
+      "clave": "CAT-0110",
+      "nombre": "Gorra Plus 3",
+      "categoria": "Gorras",
+      "variante": "verde",
+      "unidad_medida": "pieza",
+      "precio_venta_centavos": 13500,
+      "precio_referencia_centavos": 16900,
+      "etiquetas": [
+        "B"
+      ],
+      "activo": true,
+      "creado_en": "2026-07-06T17:55:03.000Z",
+      "dispositivo_id": "019f37ba-8b00-7669-a71e-8c524fa11750",
+      "costo_centavos": 9150
+    },
+    {
+      "producto_id": "019f3893-85e0-7ca6-af55-96bc82189ed1",
+      "negocio_id": "019f37ba-8b00-7f4d-b82c-ad686dabc7ed",
+      "clave": "CAT-0111",
+      "nombre": "Termo Viaje 3",
+      "categoria": "Termos",
+      "variante": "rojo",
+      "unidad_medida": "pieza",
+      "precio_venta_centavos": 15500,
+      "precio_referencia_centavos": 19000,
+      "etiquetas": [
+        "B"
+      ],
+      "activo": true,
+      "creado_en": "2026-07-06T17:57:00.000Z",
+      "dispositivo_id": "019f37ba-8b00-7669-a71e-8c524fa11750",
+      "costo_centavos": 10350
+    },
+    {
+      "producto_id": "019f3895-db88-7b64-9dd5-2cf211afa8ff",
+      "negocio_id": "019f37ba-8b00-7f4d-b82c-ad686dabc7ed",
+      "clave": "CAT-0112",
+      "nombre": "Llavero Doble 3",
+      "categoria": "Llaveros",
+      "variante": "azul",
+      "unidad_medida": "pieza",
+      "precio_venta_centavos": 21000,
+      "precio_referencia_centavos": 25300,
+      "etiquetas": [
+        "B"
+      ],
+      "activo": true,
+      "creado_en": "2026-07-06T17:59:33.000Z",
+      "dispositivo_id": "019f37ba-8b00-7669-a71e-8c524fa11750",
+      "costo_centavos": 12350
+    },
+    {
+      "producto_id": "019f3897-a0a8-7a89-9439-df5552290d76",
+      "negocio_id": "019f37ba-8b00-7f4d-b82c-ad686dabc7ed",
+      "clave": "CAT-0113",
+      "nombre": "Encendedor Clásico 3",
+      "categoria": "Encendedores",
+      "variante": "arena",
+      "unidad_medida": "pieza",
+      "precio_venta_centavos": 5000,
+      "precio_referencia_centavos": 5500,
+      "etiquetas": [
+        "B"
+      ],
+      "activo": true,
+      "creado_en": "2026-07-06T18:01:29.000Z",
+      "dispositivo_id": "019f37ba-8b00-7669-a71e-8c524fa11750",
+      "costo_centavos": 3100
+    },
+    {
+      "producto_id": "019f3899-c388-78bf-b50c-f7bc9ad1e206",
+      "negocio_id": "019f37ba-8b00-7f4d-b82c-ad686dabc7ed",
+      "clave": "CAT-0114",
+      "nombre": "Estuch Mini 3",
+      "categoria": "Estuches",
+      "variante": "blanco",
+      "unidad_medida": "pieza",
+      "precio_venta_centavos": 9000,
+      "precio_referencia_centavos": 8600,
+      "etiquetas": [
+        "B"
+      ],
+      "activo": true,
+      "creado_en": "2026-07-06T18:03:49.000Z",
+      "dispositivo_id": "019f37ba-8b00-7669-a71e-8c524fa11750",
+      "costo_centavos": 5050
+    },
+    {
+      "producto_id": "019f389c-1930-7f45-a131-3761b5ce515a",
+      "negocio_id": "019f37ba-8b00-7f4d-b82c-ad686dabc7ed",
+      "clave": "CAT-0115",
+      "nombre": "Bolsa Grande 3",
+      "categoria": "Bolsas",
+      "variante": "negro",
+      "unidad_medida": "pieza",
+      "precio_venta_centavos": 10500,
+      "precio_referencia_centavos": 12900,
+      "etiquetas": [
+        "B"
+      ],
+      "activo": true,
+      "creado_en": "2026-07-06T18:06:22.000Z",
+      "dispositivo_id": "019f37ba-8b00-7669-a71e-8c524fa11750",
+      "costo_centavos": 6850
+    },
+    {
+      "producto_id": "019f389d-6538-796a-aeb1-ef3077161d12",
+      "negocio_id": "019f37ba-8b00-7f4d-b82c-ad686dabc7ed",
+      "clave": "CAT-0116",
+      "nombre": "Gorra Pro 3",
+      "categoria": "Gorras",
+      "variante": "verde",
+      "unidad_medida": "pieza",
+      "precio_venta_centavos": 11500,
+      "precio_referencia_centavos": 11700,
+      "etiquetas": [
+        "B"
+      ],
+      "activo": true,
+      "creado_en": "2026-07-06T18:07:47.000Z",
+      "dispositivo_id": "019f37ba-8b00-7669-a71e-8c524fa11750",
+      "costo_centavos": 6750
+    },
+    {
+      "producto_id": "019f389e-4f98-799c-bb64-a325492ec212",
+      "negocio_id": "019f37ba-8b00-7f4d-b82c-ad686dabc7ed",
+      "clave": "CAT-0117",
+      "nombre": "Termo Eco 3",
+      "categoria": "Termos",
+      "variante": "rojo",
+      "unidad_medida": "pieza",
+      "precio_venta_centavos": 7000,
+      "precio_referencia_centavos": 8100,
+      "etiquetas": [
+        "B"
+      ],
+      "activo": true,
+      "creado_en": "2026-07-06T18:08:47.000Z",
+      "dispositivo_id": "019f37ba-8b00-7669-a71e-8c524fa11750",
+      "costo_centavos": 4200
+    },
+    {
+      "producto_id": "019f389f-a370-7583-aa59-8c586ae621d5",
+      "negocio_id": "019f37ba-8b00-7f4d-b82c-ad686dabc7ed",
+      "clave": "CAT-0118",
+      "nombre": "Llavero Plus 3",
+      "categoria": "Llaveros",
+      "variante": "azul",
+      "unidad_medida": "pieza",
+      "precio_venta_centavos": 9000,
+      "precio_referencia_centavos": 10600,
+      "etiquetas": [
+        "B"
+      ],
+      "activo": true,
+      "creado_en": "2026-07-06T18:10:14.000Z",
+      "dispositivo_id": "019f37ba-8b00-7669-a71e-8c524fa11750",
+      "costo_centavos": 5650
+    },
+    {
+      "producto_id": "019f38a2-2410-74a4-9c6e-818c0cbce455",
+      "negocio_id": "019f37ba-8b00-7f4d-b82c-ad686dabc7ed",
+      "clave": "CAT-0119",
+      "nombre": "Encendedor Viaje 3",
+      "categoria": "Encendedores",
+      "variante": "arena",
+      "unidad_medida": "pieza",
+      "precio_venta_centavos": 16000,
+      "precio_referencia_centavos": 17900,
+      "etiquetas": [
+        "B"
+      ],
+      "activo": true,
+      "creado_en": "2026-07-06T18:12:58.000Z",
+      "dispositivo_id": "019f37ba-8b00-7669-a71e-8c524fa11750"
+    },
+    {
+      "producto_id": "019f38a4-3f20-7bf8-9a30-4ebbf73b6ba0",
+      "negocio_id": "019f37ba-8b00-7f4d-b82c-ad686dabc7ed",
+      "clave": "CAT-0120",
+      "nombre": "Estuch Doble 3",
+      "categoria": "Estuches",
+      "variante": "blanco",
+      "unidad_medida": "pieza",
+      "precio_venta_centavos": 4500,
+      "precio_referencia_centavos": 6200,
+      "etiquetas": [
+        "B"
+      ],
+      "activo": true,
+      "creado_en": "2026-07-06T18:15:16.000Z",
+      "dispositivo_id": "019f37ba-8b00-7669-a71e-8c524fa11750",
+      "costo_centavos": 2900
+    },
+    {
+      "producto_id": "019f38a4-fe88-7e67-8142-ef2b512559e5",
+      "negocio_id": "019f37ba-8b00-7f4d-b82c-ad686dabc7ed",
+      "clave": "CAT-0121",
+      "nombre": "Bolsa Clásico 3",
+      "categoria": "Bolsas",
+      "variante": "negro",
+      "unidad_medida": "pieza",
+      "precio_venta_centavos": 25000,
+      "precio_referencia_centavos": 23300,
+      "etiquetas": [
+        "B"
+      ],
+      "activo": true,
+      "creado_en": "2026-07-06T18:16:05.000Z",
+      "dispositivo_id": "019f37ba-8b00-7669-a71e-8c524fa11750",
+      "costo_centavos": 13600
+    },
+    {
+      "producto_id": "019f38a7-38d8-7da6-879c-64d965eeb0dd",
+      "negocio_id": "019f37ba-8b00-7f4d-b82c-ad686dabc7ed",
+      "clave": "CAT-0122",
+      "nombre": "Gorra Mini 3",
+      "categoria": "Gorras",
+      "variante": "verde",
+      "unidad_medida": "pieza",
+      "precio_venta_centavos": 19500,
+      "precio_referencia_centavos": 21200,
+      "etiquetas": [
+        "B"
+      ],
+      "activo": true,
+      "creado_en": "2026-07-06T18:18:31.000Z",
+      "dispositivo_id": "019f37ba-8b00-7669-a71e-8c524fa11750",
+      "costo_centavos": 10750
+    },
+    {
+      "producto_id": "019f38aa-4a00-7c07-a162-352276703340",
+      "negocio_id": "019f37ba-8b00-7f4d-b82c-ad686dabc7ed",
+      "clave": "CAT-0123",
+      "nombre": "Termo Grande 3",
+      "categoria": "Termos",
+      "variante": "rojo",
+      "unidad_medida": "pieza",
+      "precio_venta_centavos": 13000,
+      "precio_referencia_centavos": 13000,
+      "etiquetas": [
+        "B"
+      ],
+      "activo": true,
+      "creado_en": "2026-07-06T18:21:52.000Z",
+      "dispositivo_id": "019f37ba-8b00-7669-a71e-8c524fa11750",
+      "costo_centavos": 6950
+    },
+    {
+      "producto_id": "019f38ad-7680-75d4-8da6-e7d0a02c9c9b",
+      "negocio_id": "019f37ba-8b00-7f4d-b82c-ad686dabc7ed",
+      "clave": "CAT-0124",
+      "nombre": "Llavero Pro 3",
+      "categoria": "Llaveros",
+      "variante": "azul",
+      "unidad_medida": "pieza",
+      "precio_venta_centavos": 7500,
+      "precio_referencia_centavos": 10200,
+      "etiquetas": [
+        "B"
+      ],
+      "activo": true,
+      "creado_en": "2026-07-06T18:25:20.000Z",
+      "dispositivo_id": "019f37ba-8b00-7669-a71e-8c524fa11750",
+      "costo_centavos": 4800
+    },
+    {
+      "producto_id": "019f38af-81f0-7806-8e54-93d0ee1cdb36",
+      "negocio_id": "019f37ba-8b00-7f4d-b82c-ad686dabc7ed",
+      "clave": "CAT-0125",
+      "nombre": "Encendedor Eco 3",
+      "categoria": "Encendedores",
+      "variante": "arena",
+      "unidad_medida": "pieza",
+      "precio_venta_centavos": 6000,
+      "precio_referencia_centavos": 6900,
+      "etiquetas": [
+        "B"
+      ],
+      "activo": true,
+      "creado_en": "2026-07-06T18:27:34.000Z",
+      "dispositivo_id": "019f37ba-8b00-7669-a71e-8c524fa11750",
+      "costo_centavos": 3400
+    },
+    {
+      "producto_id": "019f38b2-3d28-73a8-91dd-f2eeaee4ae0d",
+      "negocio_id": "019f37ba-8b00-7f4d-b82c-ad686dabc7ed",
+      "clave": "CAT-0126",
+      "nombre": "Estuch Plus 3",
+      "categoria": "Estuches",
+      "variante": "blanco",
+      "unidad_medida": "pieza",
+      "precio_venta_centavos": 6500,
+      "precio_referencia_centavos": 6300,
+      "etiquetas": [
+        "B"
+      ],
+      "activo": true,
+      "creado_en": "2026-07-06T18:30:33.000Z",
+      "dispositivo_id": "019f37ba-8b00-7669-a71e-8c524fa11750",
+      "costo_centavos": 3400
+    },
+    {
+      "producto_id": "019f38b4-38f8-74bf-a079-3670a9421934",
+      "negocio_id": "019f37ba-8b00-7f4d-b82c-ad686dabc7ed",
+      "clave": "CAT-0127",
+      "nombre": "Bolsa Viaje 3",
+      "categoria": "Bolsas",
+      "variante": "negro",
+      "unidad_medida": "pieza",
+      "precio_venta_centavos": 7000,
+      "precio_referencia_centavos": 7300,
+      "etiquetas": [
+        "B"
+      ],
+      "activo": true,
+      "creado_en": "2026-07-06T18:32:43.000Z",
+      "dispositivo_id": "019f37ba-8b00-7669-a71e-8c524fa11750",
+      "costo_centavos": 4550
+    },
+    {
+      "producto_id": "019f38b4-c1b0-74e5-adf4-8e3d7115c661",
+      "negocio_id": "019f37ba-8b00-7f4d-b82c-ad686dabc7ed",
+      "clave": "CAT-0128",
+      "nombre": "Gorra Doble 3",
+      "categoria": "Gorras",
+      "variante": "verde",
+      "unidad_medida": "pieza",
+      "precio_venta_centavos": 17000,
+      "precio_referencia_centavos": 24500,
+      "etiquetas": [
+        "B"
+      ],
+      "activo": true,
+      "creado_en": "2026-07-06T18:33:18.000Z",
+      "dispositivo_id": "019f37ba-8b00-7669-a71e-8c524fa11750",
+      "costo_centavos": 11250
+    },
+    {
+      "producto_id": "019f38b7-de90-7c17-8f19-507495004b33",
+      "negocio_id": "019f37ba-8b00-7f4d-b82c-ad686dabc7ed",
+      "clave": "CAT-0129",
+      "nombre": "Termo Clásico 3",
+      "categoria": "Termos",
+      "variante": "rojo",
+      "unidad_medida": "pieza",
+      "precio_venta_centavos": 20000,
+      "precio_referencia_centavos": 22700,
+      "etiquetas": [
+        "B"
+      ],
+      "activo": true,
+      "creado_en": "2026-07-06T18:36:42.000Z",
+      "dispositivo_id": "019f37ba-8b00-7669-a71e-8c524fa11750",
+      "costo_centavos": 11150
+    },
+    {
+      "producto_id": "019f38ba-ad50-7904-bc9f-b367e2b7e558",
+      "negocio_id": "019f37ba-8b00-7f4d-b82c-ad686dabc7ed",
+      "clave": "CAT-0130",
+      "nombre": "Llavero Mini 3",
+      "categoria": "Llaveros",
+      "variante": "azul",
+      "unidad_medida": "pieza",
+      "precio_venta_centavos": 22500,
+      "precio_referencia_centavos": 20700,
+      "etiquetas": [
+        "B"
+      ],
+      "activo": true,
+      "creado_en": "2026-07-06T18:39:46.000Z",
+      "dispositivo_id": "019f37ba-8b00-7669-a71e-8c524fa11750"
+    },
+    {
+      "producto_id": "019f38bd-87c8-7a22-a793-98463fad847f",
+      "negocio_id": "019f37ba-8b00-7f4d-b82c-ad686dabc7ed",
+      "clave": "CAT-0131",
+      "nombre": "Encendedor Grande 3",
+      "categoria": "Encendedores",
+      "variante": "arena",
+      "unidad_medida": "pieza",
+      "precio_venta_centavos": 24000,
+      "precio_referencia_centavos": 28400,
+      "etiquetas": [
+        "B"
+      ],
+      "activo": true,
+      "creado_en": "2026-07-06T18:42:53.000Z",
+      "dispositivo_id": "019f37ba-8b00-7669-a71e-8c524fa11750",
+      "costo_centavos": 13050
+    },
+    {
+      "producto_id": "019f38bd-ed58-7a37-b222-35c2100b1314",
+      "negocio_id": "019f37ba-8b00-7f4d-b82c-ad686dabc7ed",
+      "clave": "CAT-0132",
+      "nombre": "Estuch Pro 3",
+      "categoria": "Estuches",
+      "variante": "blanco",
+      "unidad_medida": "pieza",
+      "precio_venta_centavos": 9500,
+      "precio_referencia_centavos": 9100,
+      "etiquetas": [
+        "B"
+      ],
+      "activo": true,
+      "creado_en": "2026-07-06T18:43:19.000Z",
+      "dispositivo_id": "019f37ba-8b00-7669-a71e-8c524fa11750",
+      "costo_centavos": 5250
+    },
+    {
+      "producto_id": "019f38c1-2590-7ee8-91e6-60e343ee8eb2",
+      "negocio_id": "019f37ba-8b00-7f4d-b82c-ad686dabc7ed",
+      "clave": "CAT-0133",
+      "nombre": "Bolsa Eco 3",
+      "categoria": "Bolsas",
+      "variante": "negro",
+      "unidad_medida": "pieza",
+      "precio_venta_centavos": 4000,
+      "precio_referencia_centavos": 5400,
+      "etiquetas": [
+        "B"
+      ],
+      "activo": true,
+      "creado_en": "2026-07-06T18:46:50.000Z",
+      "dispositivo_id": "019f37ba-8b00-7669-a71e-8c524fa11750",
+      "costo_centavos": 2650
+    },
+    {
+      "producto_id": "019f38c4-8ca8-76e9-8ab1-a42494d6a1d4",
+      "negocio_id": "019f37ba-8b00-7f4d-b82c-ad686dabc7ed",
+      "clave": "CAT-0134",
+      "nombre": "Gorra Plus 3",
+      "categoria": "Gorras",
+      "variante": "verde",
+      "unidad_medida": "pieza",
+      "precio_venta_centavos": 6500,
+      "precio_referencia_centavos": 6100,
+      "etiquetas": [
+        "B"
+      ],
+      "activo": true,
+      "creado_en": "2026-07-06T18:50:33.000Z",
+      "dispositivo_id": "019f37ba-8b00-7669-a71e-8c524fa11750",
+      "costo_centavos": 3600
+    },
+    {
+      "producto_id": "019f38c6-de68-7e72-8e00-72a8ccc61078",
+      "negocio_id": "019f37ba-8b00-7f4d-b82c-ad686dabc7ed",
+      "clave": "CAT-0135",
+      "nombre": "Termo Viaje 3",
+      "categoria": "Termos",
+      "variante": "rojo",
+      "unidad_medida": "pieza",
+      "precio_venta_centavos": 9000,
+      "precio_referencia_centavos": 9400,
+      "etiquetas": [
+        "B"
+      ],
+      "activo": true,
+      "creado_en": "2026-07-06T18:53:05.000Z",
+      "dispositivo_id": "019f37ba-8b00-7669-a71e-8c524fa11750",
+      "costo_centavos": 4900
+    },
+    {
+      "producto_id": "019f38c7-dc50-73af-8fac-867ed4dd5e9c",
+      "negocio_id": "019f37ba-8b00-7f4d-b82c-ad686dabc7ed",
+      "clave": "CAT-0136",
+      "nombre": "Llavero Doble 3",
+      "categoria": "Llaveros",
+      "variante": "azul",
+      "unidad_medida": "pieza",
+      "precio_venta_centavos": 9500,
+      "precio_referencia_centavos": 10000,
+      "etiquetas": [
+        "B"
+      ],
+      "activo": true,
+      "creado_en": "2026-07-06T18:54:10.000Z",
+      "dispositivo_id": "019f37ba-8b00-7669-a71e-8c524fa11750",
+      "costo_centavos": 5550
+    },
+    {
+      "producto_id": "019f38ca-39c8-746f-b3f7-ce42cacaaa6f",
+      "negocio_id": "019f37ba-8b00-7f4d-b82c-ad686dabc7ed",
+      "clave": "CAT-0137",
+      "nombre": "Encendedor Clásico 3",
+      "categoria": "Encendedores",
+      "variante": "arena",
+      "unidad_medida": "pieza",
+      "precio_venta_centavos": 24000,
+      "precio_referencia_centavos": 24800,
+      "etiquetas": [
+        "B"
+      ],
+      "activo": true,
+      "creado_en": "2026-07-06T18:56:45.000Z",
+      "dispositivo_id": "019f37ba-8b00-7669-a71e-8c524fa11750",
+      "costo_centavos": 13550
+    },
+    {
+      "producto_id": "019f38cb-37b0-73dd-bcaf-2783abdbfeba",
+      "negocio_id": "019f37ba-8b00-7f4d-b82c-ad686dabc7ed",
+      "clave": "CAT-0138",
+      "nombre": "Estuch Mini 3",
+      "categoria": "Estuches",
+      "variante": "blanco",
+      "unidad_medida": "pieza",
+      "precio_venta_centavos": 11000,
+      "precio_referencia_centavos": 14000,
+      "etiquetas": [
+        "B"
+      ],
+      "activo": true,
+      "creado_en": "2026-07-06T18:57:50.000Z",
+      "dispositivo_id": "019f37ba-8b00-7669-a71e-8c524fa11750"
+    },
+    {
+      "producto_id": "019f38cd-5e78-7129-bf21-c3512d967dc2",
+      "negocio_id": "019f37ba-8b00-7f4d-b82c-ad686dabc7ed",
+      "clave": "CAT-0139",
+      "nombre": "Bolsa Grande 3",
+      "categoria": "Bolsas",
+      "variante": "negro",
+      "unidad_medida": "pieza",
+      "precio_venta_centavos": 18500,
+      "precio_referencia_centavos": 20200,
+      "etiquetas": [
+        "B"
+      ],
+      "activo": true,
+      "creado_en": "2026-07-06T19:00:11.000Z",
+      "dispositivo_id": "019f37ba-8b00-7669-a71e-8c524fa11750",
+      "costo_centavos": 10750
+    },
+    {
+      "producto_id": "019f38d0-11e0-7058-a3cb-b67c3b601fa5",
+      "negocio_id": "019f37ba-8b00-7f4d-b82c-ad686dabc7ed",
+      "clave": "CAT-0140",
+      "nombre": "Gorra Pro 3",
+      "categoria": "Gorras",
+      "variante": "verde",
+      "unidad_medida": "pieza",
+      "precio_venta_centavos": 10000,
+      "precio_referencia_centavos": 10000,
+      "etiquetas": [
+        "B"
+      ],
+      "activo": true,
+      "creado_en": "2026-07-06T19:03:08.000Z",
+      "dispositivo_id": "019f37ba-8b00-7669-a71e-8c524fa11750",
+      "costo_centavos": 5400
+    }
+  ]
+}
