@@ -55,3 +55,22 @@ export function cantidadCon(milesimas: number, unidad: string): string {
 export function porcentaje(pb: number | null): string {
   return pb === null ? '—' : `${(pb / 100).toLocaleString('es-MX', { maximumFractionDigits: 1 })} %`
 }
+
+const DIAS = ['domingo', 'lunes', 'martes', 'miércoles', 'jueves', 'viernes', 'sábado']
+const MESES = ['enero', 'febrero', 'marzo', 'abril', 'mayo', 'junio', 'julio', 'agosto', 'septiembre', 'octubre', 'noviembre', 'diciembre']
+
+/** «lunes 26 de octubre» (con el año si no es el de `hoy`). */
+export function fechaLarga(f: string, hoy: string): string {
+  const d = new Date(`${f}T12:00:00Z`)
+  const texto = `${DIAS[d.getUTCDay()]} ${d.getUTCDate()} de ${MESES[d.getUTCMonth()]}`
+  return f.slice(0, 4) === hoy.slice(0, 4) ? texto : `${texto} de ${f.slice(0, 4)}`
+}
+
+/** Encabezado de día en las listas (UX-09): «Hoy», «Ayer» o «Lunes 26 de octubre». */
+export function nombreDelDia(f: string, hoy: string): string {
+  const dias = Math.round((Date.parse(`${hoy}T12:00:00Z`) - Date.parse(`${f}T12:00:00Z`)) / 86_400_000)
+  if (dias === 0) return 'Hoy'
+  if (dias === 1) return 'Ayer'
+  const texto = fechaLarga(f, hoy)
+  return texto[0].toUpperCase() + texto.slice(1)
+}

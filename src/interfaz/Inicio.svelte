@@ -4,12 +4,10 @@
   // Un solo aviso a la vez (UX-03); moverse, en la barra inferior (D-62).
   import { diasEntre } from '../dominio/index.ts'
   import { app } from './app.svelte.ts'
-  import { haceDias, pesos, porcentaje } from './textos.ts'
+  import { fechaLarga, haceDias, pesos, porcentaje } from './textos.ts'
   import Hoja from './Hoja.svelte'
 
   const CLAVE_VER_MAS = 'elchalan:ver-mas'
-  const DIAS = ['domingo', 'lunes', 'martes', 'miércoles', 'jueves', 'viernes', 'sábado']
-  const MESES = ['enero', 'febrero', 'marzo', 'abril', 'mayo', 'junio', 'julio', 'agosto', 'septiembre', 'octubre', 'noviembre', 'diciembre']
 
   let explica = $state(false)
   let confirmarBorrado = $state(false)
@@ -29,10 +27,7 @@
   const diasRespaldo = $derived(e.meta.ultimo_respaldo ? diasEntre(e.meta.ultimo_respaldo, app.hoy) : null)
   const almacenamientoEnRiesgo = $derived(app.almacenamiento && !app.almacenamiento.persistente)
   const avisos = $derived(app.alertas)
-  const fecha = $derived.by(() => {
-    const d = new Date(`${app.hoy}T12:00:00Z`)
-    return `${DIAS[d.getUTCDay()]} ${d.getUTCDate()} de ${MESES[d.getUTCMonth()]}`
-  })
+  const fecha = $derived(fechaLarga(app.hoy, app.hoy))
   const hora = new Date().getHours()
   const saludo = hora < 12 ? 'Buenos días' : hora < 19 ? 'Buenas tardes' : 'Buenas noches'
 </script>
@@ -53,7 +48,11 @@
 {#if app.esEjemplo}
   <div class="strip">
     <span>Datos de ejemplo (inventados)</span>
-    <button class="link" style="min-height:0;padding:0" onclick={() => (confirmarBorrado = true)}>Borrarlos</button>
+    {#if app.tieneNegocioPropio}
+      <button class="link" style="min-height:0;padding:0" onclick={() => app.borrarEjemplo()}>Volver a mi negocio</button>
+    {:else}
+      <button class="link" style="min-height:0;padding:0" onclick={() => (confirmarBorrado = true)}>Borrarlos</button>
+    {/if}
   </div>
 {:else if diasRespaldo === null || diasRespaldo > 7}
   <button class="banner" class:warn={diasRespaldo === null} class:bad={diasRespaldo !== null} onclick={() => app.ir('respaldo')}>

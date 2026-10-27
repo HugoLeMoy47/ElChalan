@@ -83,7 +83,7 @@ textarea { padding: 10px 12px; min-height: 72px; }
 .person { width: 100%; text-align: left; border: 0; background: var(--bg); border-radius: 14px; padding: 12px; margin-bottom: 8px; display: flex; justify-content: space-between; align-items: center; gap: 8px; min-height: 60px; }
 .person.on { outline: 2px solid var(--acc); }
 .person.tachado { opacity: .55; text-decoration: line-through; }
-.tag { display: inline-block; border-radius: 999px; padding: 2px 8px; font-size: 12px; background: var(--bad-soft); color: var(--bad); }
+.tag { white-space: nowrap; display: inline-block; border-radius: 999px; padding: 2px 8px; font-size: 12px; background: var(--bad-soft); color: var(--bad); }
 .tag.g { background: var(--acc-soft); color: var(--ok); } .tag.w { background: var(--warn-soft); color: var(--warn); }
 .toast { position: fixed; left: 50%; transform: translateX(-50%); width: min(448px, calc(100% - 32px)); bottom: calc(84px + env(safe-area-inset-bottom)); background: #1f2a24; color: #fff; border-radius: 14px; padding: 12px 14px; display: flex; justify-content: space-between; align-items: center; gap: 8px; font-size: 14px; z-index: 6; }
 .toast button { background: none; border: 0; color: #9be3bd; font-weight: 700; min-height: 36px; }
@@ -94,6 +94,22 @@ textarea { padding: 10px 12px; min-height: 72px; }
 .sheet h3 { margin: 0 0 6px; font-size: 18px; } .sheet p { margin: 0 0 14px; color: var(--muted); }
 .error { background: var(--bad-soft); color: var(--bad); border-radius: 12px; padding: 10px 12px; margin: 8px 0; font-size: 14px; }
 .dia { font-size: 13px; color: var(--muted); margin: 14px 0 6px; font-weight: 600; }
+/* Ronda D: listas (UX-05, 08, 09, 15). */
+.dia-total { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 2px 8px; font-size: 14px; }
+.dia-total span { white-space: nowrap; }
+.dia-total span:last-child { font-weight: 400; margin-left: auto; }
+.chips.desliza { flex-wrap: nowrap; overflow-x: auto; scrollbar-width: none; margin-left: -16px; margin-right: -16px; padding: 0 16px; }
+.chips.desliza::-webkit-scrollbar { display: none; }
+.chips.desliza .chip { flex: none; }
+.grupo { padding: 12px; }
+.grupo .btn.sec { background: var(--panel); }
+.grupo-titulo { display: flex; justify-content: space-between; align-items: flex-start; gap: 8px; }
+.alerta { display: flex; align-items: center; gap: 8px; border-top: 1px solid var(--line); }
+.alerta-ver { flex: 1; min-width: 0; display: flex; align-items: center; gap: 10px; border: 0; background: none; text-align: left; padding: 8px 0; min-height: 56px; }
+.alerta-texto { flex: 1; min-width: 0; display: flex; flex-direction: column; }
+.alerta .chip { flex: none; min-width: 44px; padding: 0; }
+.buscador { position: sticky; top: 0; z-index: 2; background: var(--panel); padding: 8px 0; margin: 0 0 4px; }
+.tag.agotado { background: var(--bad-soft); color: var(--bad); }
 .kv { display: flex; justify-content: space-between; gap: 12px; font-size: 15px; padding: 6px 0; border-bottom: 1px solid var(--line); }
 .kv span:first-child { color: var(--muted); }
 .vacio { text-align: center; color: var(--muted); padding: 24px 8px; }

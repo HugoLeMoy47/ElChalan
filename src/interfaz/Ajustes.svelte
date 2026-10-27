@@ -72,8 +72,14 @@
 
 <div class="dia">Mis datos</div>
 <button class="btn sec" onclick={() => app.ir('respaldo')}>Respaldo</button>
-{#if app.esEjemplo}
+{#if app.esEjemplo && app.tieneNegocioPropio}
+  <button class="btn sec" onclick={() => app.borrarEjemplo()}>Salir del ejemplo y volver a mi negocio</button>
+{:else if app.esEjemplo}
   <button class="btn mal" onclick={() => (confirmarBorrado = true)}>Borrar los datos de ejemplo</button>
+{:else}
+  <!-- UX-17: el ejemplo también se puede ver teniendo un negocio; el tuyo no se toca. -->
+  <button class="btn sec" onclick={() => app.probarEjemplo()}>Ver datos de ejemplo</button>
+  <p class="sub">Para practicar con un negocio inventado. Tu negocio no se toca y vuelves con un toque.</p>
 {/if}
 
 <div class="dia">Acerca de</div>

@@ -334,6 +334,11 @@ class App {
     this.ir('inicio')
   }
 
+  /** Hay un negocio propio al cual volver al salir del ejemplo (UX-17). */
+  get tieneNegocioPropio(): boolean {
+    return leerClave(CLAVE_NEGOCIO) !== null
+  }
+
   async borrarEjemplo() {
     const id = this.estado!.negocio.negocio_id
     this.almacen?.cerrar()
