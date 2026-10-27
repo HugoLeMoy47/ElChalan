@@ -166,7 +166,7 @@
       "activo": true,
       "creado_en": "2026-07-06T14:01:32.000Z",
       "dispositivo_id": "019f37ba-8b00-7669-a71e-8c524fa11750",
-      "costo_centavos": 8350
+      "costo_centavos": 9600
     },
     {
       "producto_id": "019f37bd-80d0-7dbc-9588-2ccfca91f5e8",
@@ -184,7 +184,7 @@
       "activo": true,
       "creado_en": "2026-07-06T14:03:14.000Z",
       "dispositivo_id": "019f37ba-8b00-7669-a71e-8c524fa11750",
-      "costo_centavos": 7020
+      "costo_centavos": 6100
     },
     {
       "producto_id": "019f37be-a5c8-72e5-940e-147bc23e1559",
@@ -220,7 +220,7 @@
       "activo": true,
       "creado_en": "2026-07-06T14:07:44.000Z",
       "dispositivo_id": "019f37ba-8b00-7669-a71e-8c524fa11750",
-      "costo_centavos": 9300
+      "costo_centavos": 10230
     },
     {
       "producto_id": "019f37c3-39a8-7fa1-aa8f-d01be49da889",
@@ -310,7 +310,7 @@
       "activo": true,
       "creado_en": "2026-07-06T14:18:34.000Z",
       "dispositivo_id": "019f37ba-8b00-7669-a71e-8c524fa11750",
-      "costo_centavos": 8500
+      "costo_centavos": 9138
     },
     {
       "producto_id": "019f37cd-6720-745a-b227-70a2bf621d51",
@@ -382,7 +382,7 @@
       "activo": true,
       "creado_en": "2026-07-06T14:27:10.000Z",
       "dispositivo_id": "019f37ba-8b00-7669-a71e-8c524fa11750",
-      "costo_centavos": 10700
+      "costo_centavos": 9840
     },
     {
       "producto_id": "019f37d4-25b0-7649-a2c8-496a163a9443",
@@ -436,7 +436,7 @@
       "activo": true,
       "creado_en": "2026-07-06T14:32:14.000Z",
       "dispositivo_id": "019f37ba-8b00-7669-a71e-8c524fa11750",
-      "costo_centavos": 9600
+      "costo_centavos": 8830
     },
     {
       "producto_id": "019f37d9-a7d8-7333-bc64-7482a50e4a22",
@@ -544,7 +544,7 @@
       "activo": true,
       "creado_en": "2026-07-06T14:43:20.000Z",
       "dispositivo_id": "019f37ba-8b00-7669-a71e-8c524fa11750",
-      "costo_centavos": 13550
+      "costo_centavos": 14485
     },
     {
       "producto_id": "019f37e5-4c50-70c0-842a-0644651b89e1",
@@ -634,7 +634,7 @@
       "activo": true,
       "creado_en": "2026-07-06T14:57:10.000Z",
       "dispositivo_id": "019f37ba-8b00-7669-a71e-8c524fa11750",
-      "costo_centavos": 3250
+      "costo_centavos": 3556
     },
     {
       "producto_id": "019f37f0-3160-7cb9-9e5b-ac6ee3d7fa99",
@@ -1048,7 +1048,7 @@
       "activo": true,
       "creado_en": "2026-07-06T15:52:28.000Z",
       "dispositivo_id": "019f37ba-8b00-7669-a71e-8c524fa11750",
-      "costo_centavos": 7558
+      "costo_centavos": 6750
     },
     {
       "producto_id": "019f3824-87d0-7d3d-9e19-56557e40276d",
@@ -1570,7 +1570,7 @@
       "activo": true,
       "creado_en": "2026-07-06T16:50:37.000Z",
       "dispositivo_id": "019f37ba-8b00-7669-a71e-8c524fa11750",
-      "costo_centavos": 2150
+      "costo_centavos": 1994
     },
     {
       "producto_id": "019f3858-de40-7f8d-aed9-be3a2ecc5d2f",
@@ -1696,7 +1696,7 @@
       "activo": true,
       "creado_en": "2026-07-06T17:08:11.000Z",
       "dispositivo_id": "019f37ba-8b00-7669-a71e-8c524fa11750",
-      "costo_centavos": 11550
+      "costo_centavos": 12198
     },
     {
       "producto_id": "019f3869-2638-7035-9571-6adfd25cb623",
@@ -1822,7 +1822,7 @@
       "activo": true,
       "creado_en": "2026-07-06T17:23:48.000Z",
       "dispositivo_id": "019f37ba-8b00-7669-a71e-8c524fa11750",
-      "costo_centavos": 15680
+      "costo_centavos": 14250
     },
     {
       "producto_id": "019f3878-1288-7441-bdc5-5d883a234cb2",

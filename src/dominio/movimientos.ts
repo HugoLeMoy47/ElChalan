@@ -42,6 +42,8 @@ export interface DatosMovimiento {
   condicion?: Condicion
   fecha_promesa?: Fecha
   origen_id?: Uuid
+  /** Solo en devoluciones: lo que se queda el negocio (D-59). */
+  penalizacion_centavos?: Centavos
   tercero_id?: Uuid
   categoria_gasto?: CategoriaGasto
   concepto?: string
@@ -118,6 +120,13 @@ function validar(datos: DatosMovimiento, monto: Centavos, fecha: Fecha, ctx: Con
     err('concepto', '¿Por qué ajustas la bodega?')
   }
   if (datos.tipo === 'ajuste_efectivo' && !datos.sentido) err('sentido', '¿Sobró o faltó dinero?')
+  const pena = datos.penalizacion_centavos
+  if (pena !== undefined) {
+    if (datos.tipo !== 'devolucion_venta') err('penalizacion', 'Solo una devolución lleva penalización.')
+    else if (!Number.isInteger(pena) || pena < 0 || pena > monto) {
+      err('penalizacion', 'La penalización no puede ser mayor que lo devuelto.')
+    }
+  }
 
   for (const r of datos.renglones ?? []) {
     if (!r.producto_id && !r.descripcion?.trim()) err('renglon', 'Cada renglón necesita producto o descripción.')
@@ -184,6 +193,7 @@ function construir(
   if (datos.sentido) m.sentido = datos.sentido
   if (datos.fecha_promesa) m.fecha_promesa = datos.fecha_promesa
   if (datos.origen_id) m.origen_id = datos.origen_id
+  if (datos.penalizacion_centavos) m.penalizacion_centavos = datos.penalizacion_centavos
   if (datos.tercero_id) m.tercero_id = datos.tercero_id
   if (datos.categoria_gasto) m.categoria_gasto = datos.categoria_gasto
   if (datos.concepto) m.concepto = datos.concepto

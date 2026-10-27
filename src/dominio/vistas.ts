@@ -27,7 +27,10 @@ export interface Vistas {
   ventas_brutas: Centavos
   ventas_contado: Centavos
   ventas_credito: Centavos
+  /** Lo que se le reconoció al cliente: lo devuelto menos la penalización (D-59). */
   devoluciones: Centavos
+  /** Lo que el negocio se quedó de las devoluciones (D-59); sigue contando como venta. */
+  penalizaciones: Centavos
   ventas_netas: Centavos
   cobros: Centavos
   otros_ingresos: Centavos
@@ -113,7 +116,7 @@ export function calcularVistas(
   const v: Vistas = {
     periodo,
     saldo_por_medio: vacio(), saldo_total: 0,
-    ventas_brutas: 0, ventas_contado: 0, ventas_credito: 0, devoluciones: 0, ventas_netas: 0,
+    ventas_brutas: 0, ventas_contado: 0, ventas_credito: 0, devoluciones: 0, penalizaciones: 0, ventas_netas: 0,
     cobros: 0, otros_ingresos: 0, compras: 0, gastos: 0, gastos_por_categoria: {},
     ventas_netas_con_costo: 0, ventas_netas_sin_costo: 0, ventas_sin_costo_pb: null,
     costo_de_lo_vendido: 0, utilidad_bruta: 0, margen_sobre_costo_pb: null,
@@ -184,22 +187,26 @@ export function calcularVistas(
       }
       case 'devolucion_venta': {
         existencia(1)
-        // Contra una venta a crédito, la devolución primero baja lo que debe;
-        // lo que exceda se regresa en dinero (pregunta Q-48 en CH-01).
+        // D-59: el negocio se queda la penalización y al cliente se le reconoce el resto.
+        // Contra una venta a crédito, lo reconocido primero baja lo que debe; lo que
+        // sobre se le regresa en dinero.
+        const penalizacion = m.penalizacion_centavos ?? 0
+        const reconocido = monto - penalizacion
         const venta = vigenteDe(versiones, m.origen_id)
         const r = venta && versiones.raiz.get(venta.movimiento_id)!
         let aDeuda = 0
         if (r && saldoVenta.has(r)) {
-          aDeuda = Math.min(monto, Math.max(saldoVenta.get(r)!, 0))
+          aDeuda = Math.min(reconocido, Math.max(saldoVenta.get(r)!, 0))
           saldoVenta.set(r, saldoVenta.get(r)! - aDeuda)
         }
-        caja(-1, monto - aDeuda)
+        caja(-1, reconocido - aDeuda)
         if (!enPeriodo) break
-        v.devoluciones += monto
+        v.devoluciones += reconocido
+        v.penalizaciones += penalizacion
         const cv = venta ? costoDeVenta(venta, catalogo) : { conCosto: false, costo: 0 }
         const costoDevuelto = costoDeVenta(m, catalogo)
         v.costo_de_lo_vendido -= costoDevuelto.costo
-        if (cv.conCosto && costoDevuelto.conCosto) v.ventas_netas_con_costo -= monto
+        if (cv.conCosto && costoDevuelto.conCosto) v.ventas_netas_con_costo -= reconocido
         break
       }
       case 'aportacion':

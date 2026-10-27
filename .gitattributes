@@ -1,0 +1,7 @@
+# Saltos de línea LF en todo el repositorio, también en Windows.
+# Los datos sintéticos se comparan byte a byte con lo que genera el código.
+* text=auto eol=lf
+
+*.png binary
+*.jpg binary
+*.ico binary

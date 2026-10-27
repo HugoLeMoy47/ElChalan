@@ -175,6 +175,12 @@ export interface Movimiento {
   condicion?: Condicion
   fecha_promesa?: Fecha
   origen_id?: Uuid
+  /**
+   * Solo en devolucion_venta: lo que el negocio se queda de lo devuelto (D-59).
+   * `monto_centavos` es el valor de la mercancía devuelta; al cliente se le reconoce
+   * `monto_centavos − penalizacion_centavos`.
+   */
+  penalizacion_centavos?: Centavos
   tercero_id?: Uuid
   categoria_gasto?: CategoriaGasto
   concepto?: string

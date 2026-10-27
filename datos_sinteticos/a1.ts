@@ -72,6 +72,7 @@ export function generarA1() {
     12: 'devolucion', 25: 'devolucion', 40: 'devolucion', 60: 'devolucion_mayor',
   }
   let contadoLimpias = 0
+  let creditos = 0
   /** Lo que hay en el banco, para pagar compras por transferencia solo si alcanza. */
   let banco = 0
 
@@ -204,6 +205,16 @@ export function generarA1() {
 
     const raiz = venta.movimiento_id
     if (credito) {
+      // D-59: un cliente devuelve una pieza de una venta a crédito con penalización;
+      // lo reconocido baja su deuda y después paga el resto.
+      if (++creditos === 6 && !noCuadra) {
+        const l = lineas[0]
+        const pieza = importeLinea(1000, l.precio_unitario_centavos!)
+        const reconocido = pieza - Math.round(pieza / 10 / 100) * 100
+        programar(masDias(dia, 2), () => { devolver(raiz, l, 1000, medio, cliente.tercero_id, true) })
+        programarCobro(raiz, { ...datos, monto: monto - reconocido }, cliente.tercero_id)
+        return
+      }
       programarCobro(raiz, datos, cliente.tercero_id)
       return
     }
@@ -225,20 +236,29 @@ export function generarA1() {
       const mayor = caso === 'devolucion_mayor'
       const l = lineas[0]
       const cantidad = mayor ? l.cantidad_milesimas + 1000 : 1000
+      // La primera devolución va sin penalización; las demás, con 10 % (D-59).
+      const penaliza = !mayor && contadoLimpias > 12
       programar(masDias(dia, az.entero(1, 5)), () => {
-        const importe = importeLinea(cantidad, l.precio_unitario_centavos!)
-        const dl: Linea = { ...l, cantidad_milesimas: cantidad, importe_centavos: importe }
-        const costoDev = l.costo_unitario_centavos !== undefined ? costoLinea(cantidad, l.costo_unitario_centavos) : null
-        const dev = g.alta({
-          tipo: 'devolucion_venta', fecha: diaHoy, monto: importe, medio, origen: raiz,
-          tercero: cliente.tercero_id, renglones: [dl],
-          efecto: { aplicaA: raiz, costo: costoDev, existencia: { [l.producto_id!]: cantidad } },
-        })
-        existencia.set(l.producto_id!, existencia.get(l.producto_id!)! + cantidad)
-        if (medio !== 'efectivo') banco -= importe
+        const dev = devolver(raiz, l, cantidad, medio, cliente.tercero_id, penaliza)
         if (mayor) g.alerta('AN-10', dev.movimiento_id)
       })
     }
+  }
+
+  /** Devolución de una pieza o más de un renglón; con penalización, el negocio se queda el 10 %. */
+  function devolver(raiz: Uuid, l: Linea, cantidad: number, medio: MedioPago, tercero: Uuid, penaliza: boolean) {
+    const importe = importeLinea(cantidad, l.precio_unitario_centavos!)
+    const penalizacion = penaliza ? Math.round(importe / 10 / 100) * 100 : 0
+    const dl: Linea = { ...l, cantidad_milesimas: cantidad, importe_centavos: importe }
+    const costoDev = l.costo_unitario_centavos !== undefined ? costoLinea(cantidad, l.costo_unitario_centavos) : null
+    const dev = g.alta({
+      tipo: 'devolucion_venta', fecha: diaHoy, monto: importe, medio, origen: raiz,
+      penalizacion: penalizacion || undefined, tercero, renglones: [dl],
+      efecto: { aplicaA: raiz, costo: costoDev, penalizacion, existencia: { [l.producto_id!]: cantidad } },
+    })
+    existencia.set(l.producto_id!, existencia.get(l.producto_id!)! + cantidad)
+    if (medio !== 'efectivo') banco -= importe - penalizacion
+    return { movimiento_id: dev.movimiento_id, reconocido: importe - penalizacion }
   }
 
   /** AN-11: se vende más de lo que consta (se olvidó anotar una compra). */

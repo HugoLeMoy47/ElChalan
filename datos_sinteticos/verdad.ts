@@ -11,6 +11,7 @@ export interface Esperado {
   ventas_contado: number
   ventas_credito: number
   devoluciones: number
+  penalizaciones: number
   ventas_netas: number
   cobros: number
   otros_ingresos: number
@@ -51,34 +52,35 @@ export function verdad(
 ): Esperado {
   const e: Esperado = {
     saldo_por_medio: { efectivo: capitalInicial, transferencia: 0, tarjeta: 0, otro: 0 },
-    saldo_total: 0, ventas_brutas: 0, ventas_contado: 0, ventas_credito: 0, devoluciones: 0,
+    saldo_total: 0, ventas_brutas: 0, ventas_contado: 0, ventas_credito: 0, devoluciones: 0, penalizaciones: 0,
     ventas_netas: 0, cobros: 0, otros_ingresos: 0, compras: 0, gastos: 0, gastos_por_categoria: {},
     ventas_netas_con_costo: 0, costo_de_lo_vendido: 0, utilidad_bruta: 0, margen_sobre_costo_pb: null,
     utilidad_del_periodo: 0, flujo_de_caja: 0, por_cobrar: 0, por_cobrar_vencido: 0,
     por_cobrar_por_tercero: {}, existencia: {}, valor_inventario: 0, dias_de_inventario: null,
     aportaciones: 0, retiros: 0, movimientos_por_completar: 0, pendientes: {},
   }
-  const efectos = [...libro.values()].sort((a, b) => a.orden - b.orden)
-  const hastaCorte = efectos.filter((x) => x.fecha <= hasta)
+  const hastaCorte = [...libro].filter(([, x]) => x.fecha <= hasta).sort(([, a], [, b]) => a.orden - b.orden)
   const enPeriodo = (x: Efecto) => x.fecha >= desde
 
-  // Ventas a crédito y lo que se ha cobrado de cada una (el generador solo
-  // devuelve ventas de contado, así que aquí las devoluciones no tocan la deuda).
-  const creditos = new Map<Uuid, Efecto>()
-  const cobrado = new Map<Uuid, number>()
+  // Lo que debe cada venta a crédito, en el orden en que pasaron las cosas.
+  const debe = new Map<Uuid, number>()
   const costoDeVenta = new Map<Uuid, number | null>()
+  for (const [raiz, x] of libro) if (x.tipo === 'venta') costoDeVenta.set(raiz, x.costo)
 
-  for (const [raiz, x] of libro) {
-    if (x.tipo === 'venta') costoDeVenta.set(raiz, x.costo)
-    if (x.fecha > hasta) continue
-    if (x.tipo === 'venta' && x.condicion === 'credito') creditos.set(raiz, x)
-    if (x.tipo === 'cobro') cobrado.set(x.aplicaA!, (cobrado.get(x.aplicaA!) ?? 0) + x.monto)
-  }
-
-  for (const x of hastaCorte) {
+  for (const [raiz, x] of hastaCorte) {
+    if (x.tipo === 'venta' && x.condicion === 'credito') debe.set(raiz, x.monto)
+    if (x.tipo === 'cobro' && debe.has(x.aplicaA!)) debe.set(x.aplicaA!, debe.get(x.aplicaA!)! - x.monto)
+    // D-59: al cliente se le reconoce lo devuelto menos la penalización; primero baja lo que debe.
+    const reconocido = x.monto - (x.penalizacion ?? 0)
+    let aDeuda = 0
+    if (x.tipo === 'devolucion_venta' && debe.has(x.aplicaA!)) {
+      aDeuda = Math.min(reconocido, Math.max(debe.get(x.aplicaA!)!, 0))
+      debe.set(x.aplicaA!, debe.get(x.aplicaA!)! - aDeuda)
+    }
     const signo = ['venta', 'cobro', 'aportacion', 'otro_ingreso'].includes(x.tipo) ? 1 : -1
     const mueveCaja = !(x.tipo === 'venta' && x.condicion === 'credito') && x.tipo !== 'ajuste_existencia'
-    if (mueveCaja) {
+    if (x.tipo === 'devolucion_venta') e.saldo_por_medio[x.medio] -= reconocido - aDeuda
+    else if (mueveCaja) {
       const s = x.tipo === 'ajuste_efectivo' ? (x.sentido === 'entra' ? 1 : -1) : signo
       e.saldo_por_medio[x.medio] += s * x.monto
     }
@@ -99,9 +101,10 @@ export function verdad(
         if (x.costo !== null) e.ventas_netas_con_costo += x.monto
         break
       case 'devolucion_venta':
-        e.devoluciones += x.monto
+        e.devoluciones += reconocido
+        e.penalizaciones += x.penalizacion ?? 0
         e.costo_de_lo_vendido -= x.costo ?? x.costoConocido ?? 0
-        if (costoDeVenta.get(x.aplicaA!) != null && x.costo !== null) e.ventas_netas_con_costo -= x.monto
+        if (costoDeVenta.get(x.aplicaA!) != null && x.costo !== null) e.ventas_netas_con_costo -= reconocido
         break
       case 'cobro': e.cobros += x.monto; break
       case 'otro_ingreso': e.otros_ingresos += x.monto; break
@@ -124,12 +127,12 @@ export function verdad(
   e.utilidad_del_periodo = e.utilidad_bruta - e.gastos
   e.flujo_de_caja = e.ventas_contado + e.cobros + e.otros_ingresos - e.compras - e.gastos
 
-  for (const [raiz, venta] of creditos) {
-    const debe = venta.monto - (cobrado.get(raiz) ?? 0)
-    if (debe <= 0) continue
-    e.por_cobrar += debe
-    e.por_cobrar_por_tercero[venta.tercero!] = (e.por_cobrar_por_tercero[venta.tercero!] ?? 0) + debe
-    if ((venta.promesa ?? masDias(venta.fecha, 30)) < hasta) e.por_cobrar_vencido += debe
+  for (const [raiz, saldo] of debe) {
+    if (saldo <= 0) continue
+    const venta = libro.get(raiz)!
+    e.por_cobrar += saldo
+    e.por_cobrar_por_tercero[venta.tercero!] = (e.por_cobrar_por_tercero[venta.tercero!] ?? 0) + saldo
+    if ((venta.promesa ?? masDias(venta.fecha, 30)) < hasta) e.por_cobrar_vencido += saldo
   }
 
   for (const [p, c] of Object.entries(e.existencia)) {

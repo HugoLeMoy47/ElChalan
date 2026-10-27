@@ -145,7 +145,31 @@ describe('T-07 · devolución de venta', () => {
     expect(v.valor_inventario).toBe(32_000) // 8 × 40
   })
 
-  it('contra una venta a crédito, primero baja lo que me deben (Q-48)', () => {
+  it('con penalización: el negocio se la queda y lo reconocido baja primero la deuda (D-59)', () => {
+    const l = new Libro()
+    const venta = l.anotar({ tipo: 'venta', monto_centavos: 30_000, fecha: '2026-07-05', condicion: 'credito', tercero_id: 'memo', fecha_promesa: '2026-08-01' })
+    l.anotar({ tipo: 'cobro', monto_centavos: 25_000, fecha: '2026-07-06', origen_id: venta.movimiento_id })
+    // Debía 50; devuelve mercancía por 80 con 10 de penalización: se le reconocen 70,
+    // 50 bajan la deuda y 20 se le regresan en efectivo
+    const dev = l.anotar({ tipo: 'devolucion_venta', monto_centavos: 8_000, penalizacion_centavos: 1_000, fecha: '2026-07-07', origen_id: venta.movimiento_id })
+    expect(dev.penalizacion_centavos).toBe(1_000)
+    const v = l.vistas()
+    expect(v.por_cobrar).toBe(0)
+    expect(v.saldo_por_medio.efectivo).toBe(100_000 + 25_000 - 2_000)
+    expect(v.devoluciones).toBe(7_000)
+    expect(v.penalizaciones).toBe(1_000)
+    expect(v.ventas_netas).toBe(23_000) // 300 − 70
+  })
+
+  it('la penalización no puede pasar de lo devuelto ni ir en otro tipo', () => {
+    const l = new Libro()
+    const venta = l.anotar({ tipo: 'venta', monto_centavos: 10_000, fecha: '2026-07-05' })
+    const r1 = firmar({ tipo: 'devolucion_venta', monto_centavos: 5_000, penalizacion_centavos: 6_000, origen_id: venta.movimiento_id }, l.ctx())
+    const r2 = firmar({ tipo: 'venta', monto_centavos: 5_000, penalizacion_centavos: 100 }, l.ctx())
+    expect(r1.ok || r2.ok).toBe(false)
+  })
+
+  it('sin penalización, contra una venta a crédito primero baja lo que me deben', () => {
     const l = new Libro()
     const venta = l.anotar({ tipo: 'venta', monto_centavos: 30_000, fecha: '2026-07-05', condicion: 'credito', tercero_id: 'memo', fecha_promesa: '2026-08-01' })
     l.anotar({ tipo: 'cobro', monto_centavos: 25_000, fecha: '2026-07-06', origen_id: venta.movimiento_id })

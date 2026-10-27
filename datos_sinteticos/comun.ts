@@ -95,6 +95,8 @@ export interface Efecto {
   costo: number | null
   /** Si `costo` es null: lo que sí tiene costo (lo demás vale 0, D-58). */
   costoConocido?: number
+  /** Devolución: lo que el negocio se queda como penalización (D-59). */
+  penalizacion?: number
   existencia: Record<Uuid, number>
   pendientes: Pendiente[]
 }
@@ -122,6 +124,7 @@ export interface DatosAlta {
   tercero?: Uuid
   promesa?: Fecha
   origen?: Uuid
+  penalizacion?: number
   categoria?: CategoriaGasto
   concepto?: string
   sentido?: Sentido
@@ -217,6 +220,7 @@ export class Generador {
     if (d.tipo === 'venta') m.condicion = d.condicion ?? 'contado'
     if (d.promesa) m.fecha_promesa = d.promesa
     if (d.origen) m.origen_id = d.origen
+    if (d.penalizacion) m.penalizacion_centavos = d.penalizacion
     if (d.tercero) m.tercero_id = d.tercero
     if (d.categoria) m.categoria_gasto = d.categoria
     if (d.concepto) m.concepto = d.concepto
