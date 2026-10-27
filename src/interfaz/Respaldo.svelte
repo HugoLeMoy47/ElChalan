@@ -14,7 +14,16 @@
 
   async function respaldar() {
     ocupado = true
-    try { await app.respaldar() } catch { app.error = 'No se pudo crear el respaldo. Intenta otra vez.' } finally { ocupado = false }
+    app.error = null
+    try {
+      await app.respaldar()
+    } catch (err) {
+      // El detalle ayuda a diagnosticar desde el teléfono (RNF-18); no trae datos del negocio.
+      const e = err as Error
+      app.error = `No se pudo crear el respaldo. Intenta otra vez. (Detalle: ${e?.name ?? 'Error'}: ${e?.message ?? String(err)})`
+    } finally {
+      ocupado = false
+    }
   }
 
   async function elegido(ev: Event) {
@@ -36,7 +45,7 @@
 
 <div style="height:12px"></div>
 <button class="btn sec" onclick={() => entrada?.click()}>Restaurar desde archivo</button>
-<input bind:this={entrada} type="file" accept="application/json,.json" style="display:none" onchange={elegido} />
+<input bind:this={entrada} type="file" accept="application/json,.json,text/plain,.txt" style="display:none" onchange={elegido} />
 
 {#if app.error}<div class="error">{app.error}</div>{/if}
 

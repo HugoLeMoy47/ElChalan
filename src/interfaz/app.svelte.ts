@@ -12,6 +12,7 @@ import {
   resolverVersiones, type Alerta, type Centavos, type Contexto, type DatosMovimiento, type DecisionAlerta,
   type ErrorValidacion, type Milesimas, type Movimiento, type Negocio, type Producto, type Tercero, type Uuid,
 } from '../dominio/index.ts'
+import { descargarEnNavegador, entregarArchivo } from '../exportacion/entregar.ts'
 import { crearRespaldo, estadoDesdeRespaldo, leerRespaldo, nombreArchivo } from '../exportacion/respaldo.ts'
 import { cargarEjemplo } from '../captura/ejemplo.ts'
 
@@ -267,25 +268,18 @@ class App {
   async respaldar() {
     const e = this.estado!
     const texto = await crearRespaldo(e, new Date().toISOString())
-    const nombre = nombreArchivo(e.negocio, this.hoy)
-    const archivo = new File([texto], nombre, { type: 'application/json' })
-    // En Android se ofrece compartir (Drive, WhatsApp, correo…); si no, se descarga.
-    if (navigator.canShare?.({ files: [archivo] })) {
-      try {
-        await navigator.share({ files: [archivo], title: nombre })
-      } catch (err) {
-        if ((err as DOMException).name === 'AbortError') return
-        throw err
-      }
-    } else {
-      const url = URL.createObjectURL(archivo)
-      const a = Object.assign(document.createElement('a'), { href: url, download: nombre })
-      a.click()
-      setTimeout(() => URL.revokeObjectURL(url), 1000)
-    }
+    const { entrega, fallo } = await entregarArchivo(texto, nombreArchivo(e.negocio, this.hoy), {
+      canShare: navigator.canShare?.bind(navigator),
+      share: navigator.share?.bind(navigator),
+      descargar: descargarEnNavegador,
+    })
+    if (fallo) console.warn('No se pudo compartir el respaldo; se descargó.', fallo)
+    if (entrega === 'cancelado') return
     await this.almacen!.marcarRespaldo(this.hoy)
     this.estado = { ...e, meta: { ...e.meta, ultimo_respaldo: this.hoy } }
-    this.avisar('Respaldo listo')
+    this.avisar(entrega === 'compartido'
+      ? 'Respaldo listo'
+      : 'Respaldo guardado en Descargas de este teléfono. Mándatelo por correo o súbelo a tu Drive.')
   }
 
   /** Lee el archivo; si es válido, devuelve una función para confirmar el reemplazo. */
