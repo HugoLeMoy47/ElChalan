@@ -109,7 +109,7 @@ describe('T-16 · respaldar, borrar y restaurar desde archivo', () => {
       const entorno = { hoy: '2026-10-04', ultimo_respaldo: '2026-10-04' }
       expect(detectarAlertas(despues.movimientos, despues.negocio, despues.productos, entorno))
         .toEqual(detectarAlertas(antes.movimientos, antes.negocio, antes.productos, entorno))
-    })
+    }, 30_000) // A2 tiene 2,228 movimientos y el IndexedDB simulado es lento
   }
 })
 

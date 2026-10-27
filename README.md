@@ -15,6 +15,8 @@ npm install
 npm test            # dominio contra la verdad de terreno
 npm run generar     # regenera los datos sintéticos A1 y A2
 npm run check       # tipos
+npm run build       # versión instalable en dist/ (con sw.js y política de contenido)
+node scripts/generar-iconos.mjs   # regenera los íconos de public/iconos/
 npm run dev         # la app en http://localhost:5173 (usa la vista de teléfono)
 ```
 
@@ -28,12 +30,14 @@ npm run dev         # la app en http://localhost:5173 (usa la vista de teléfono
 | `src/respaldo/` | Interfaz del proveedor y adaptador de Drive | PoC-2 |
 | `src/captura/` | Datos de ejemplo (M0): A1 con las fechas recorridas a hoy, en su propia base | Hecho (paso 5) |
 | `src/interfaz/` | Pantallas y textos de calle (CH-16): F-0 a F-8, F-10 mínima y F-11 | Hecho (paso 5); F-9, F-12 y F-13 en el paso 7 |
+| `pwa/` | Service worker escrito a mano y el plugin de Vite que le pasa la lista de archivos (ADR-11) | Hecho (paso 6) |
+| `public/` | Manifiesto e íconos de la app instalable | Hecho (paso 6) |
 | `datos_sinteticos/` | Generador determinista de A1 y A2 y su verdad de terreno (CH-08) | Hecho (paso 1) |
 | `pruebas/` | Escenarios T-01 a T-11, T-14, T-17, T-16, T-21 y T-22, atomicidad, y comparación al centavo con A1 y A2 | Hecho |
 
 ## Plan (CH-18 §5)
 
-1. ~~Generador de datos sintéticos~~ · 2. ~~Dominio~~ · 3. ~~Detector de alertas~~ · 4. ~~Almacén local y respaldo manual~~ · 5. ~~Interfaz mínima~~ · 6. Instalable y sin conexión · 7. Productos, por revisar, semana y mes, ajustes · 8. Mediciones en un Android real.
+1. ~~Generador de datos sintéticos~~ · 2. ~~Dominio~~ · 3. ~~Detector de alertas~~ · 4. ~~Almacén local y respaldo manual~~ · 5. ~~Interfaz mínima~~ · 6. ~~Instalable y sin conexión~~ (falta probarlo en un Android real) · 7. Productos, por revisar, semana y mes, ajustes · 8. Mediciones en un Android real.
 
 ## Reglas que no se negocian aquí
 

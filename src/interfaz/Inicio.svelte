@@ -20,6 +20,11 @@
   <span class="sub">funciona sin internet</span>
 </div>
 
+{#if app.actualizar}
+  {@const activar = app.actualizar}
+  <button class="banner ok" onclick={activar}><span>Hay una versión nueva de la app.</span><b>Actualizar</b></button>
+{/if}
+
 {#if app.esEjemplo}
   <div class="strip">
     <span>Datos de ejemplo (inventados)</span>

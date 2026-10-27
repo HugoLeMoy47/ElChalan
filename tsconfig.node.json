@@ -20,5 +20,5 @@
     "erasableSyntaxOnly": true,
     "noFallthroughCasesInSwitch": true
   },
-  "include": ["vite.config.ts", "vitest.config.ts", "datos_sinteticos/**/*.ts", "pruebas/**/*.ts"]
+  "include": ["vite.config.ts", "pwa/**/*.ts", "vitest.config.ts", "datos_sinteticos/**/*.ts", "pruebas/**/*.ts"]
 }

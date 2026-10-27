@@ -53,6 +53,8 @@ class App {
   seleccion = $state<Uuid | null>(null)
   terceroCobro = $state<Uuid | null>(null)
   error = $state<string | null>(null)
+  /** Hay una versión nueva de la app lista; se activa al tocar «Actualizar» (RNF-19). */
+  actualizar = $state<(() => void) | null>(null)
 
   private almacen: AlmacenNegocio | null = null
   private temporizador: ReturnType<typeof setTimeout> | undefined
