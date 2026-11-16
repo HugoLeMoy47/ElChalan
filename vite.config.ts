@@ -11,7 +11,8 @@ const { version } = JSON.parse(readFileSync(new URL('./package.json', import.met
 const commit = (() => {
   // Cloudflare (Workers Builds) y GitHub Actions exponen el commit que compilan.
   const declarado = process.env.BUILD_COMMIT || process.env.WORKERS_CI_COMMIT_SHA || process.env.GITHUB_SHA
-  if (declarado) return declarado.slice(0, 7)
+  // Solo se acepta un SHA: si el entorno trae otra cosa (p. ej. el nombre de la rama), se usa git.
+  if (declarado && /^[0-9a-f]{7,40}$/i.test(declarado)) return declarado.slice(0, 7)
   try {
     return execSync('git rev-parse --short=7 HEAD', { stdio: ['ignore', 'pipe', 'ignore'] }).toString().trim()
   } catch {
