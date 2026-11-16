@@ -1,0 +1,38 @@
+# Verificación antes de fusionar. Cada push a `main` publica en producción,
+# así que tipos, pruebas y compilación deben verse en el PR, no después.
+name: CI
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  verificar:
+    name: Tipos, pruebas y compilación
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npm run check
+      - run: npm test
+      - run: npm run build
+      - name: Comprobar lo que salió
+        run: |
+          test -f dist/index.html
+          test -f dist/sw.js
+          test -f dist/version.json
+          node -e "const v=require('./dist/version.json'); if(!/^[0-9a-f]{7}$/.test(v.commit)) { console.error('version.json sin commit válido:', v); process.exit(1) } console.log('version.json', v)"
+          if grep -q 'version.json' dist/sw.js; then echo 'El marcador no debe entrar a la lista sin conexión'; exit 1; fi
