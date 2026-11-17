@@ -4,6 +4,7 @@
   // fijo arriba (UX-15).
   import { existencias, seEstaAcabando, sumarDias, vendidoPorProducto } from '../dominio/index.ts'
   import { app } from './app.svelte.ts'
+  import Pista from './Pista.svelte'
   import { cantidadCon, pesos } from './textos.ts'
   import AltaProducto from './AltaProducto.svelte'
 
@@ -39,6 +40,7 @@
 
 <button class="back" onclick={() => app.atras()}>‹ Volver</button>
 <h1>Mis productos</h1>
+<Pista pantalla="productos" />
 
 <button class="btn" onclick={() => (alta = true)}>＋ Agregar producto</button>
 <div class="buscador">

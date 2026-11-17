@@ -6,6 +6,8 @@
   import { app } from './app.svelte.ts'
   import { fechaLarga, haceDias, pesos, porcentaje } from './textos.ts'
   import Hoja from './Hoja.svelte'
+  import PrimerosPasos from './PrimerosPasos.svelte'
+  import QueEs from './QueEs.svelte'
 
   const CLAVE_VER_MAS = 'elchalan:ver-mas'
 
@@ -31,6 +33,8 @@
   /** El asistente se retoma donde se quedó (CH-19 §6); no obliga. */
   let pasoAsistente = $state(app.pasoAsistente())
   const hora = new Date().getHours()
+  /** Primeros pasos (guia.ts): después del asistente, en el negocio propio, hasta que los oculte. */
+  const conPasos = $derived(!app.esEjemplo && pasoAsistente === null && !app.visto.has('oculta:pasos'))
   const saludo = hora < 12 ? 'Buenos días' : hora < 19 ? 'Buenas tardes' : 'Buenas noches'
 </script>
 
@@ -75,8 +79,10 @@
   </div>
 {/if}
 
+<div class="inicio-cols">
+<div class="col">
 <div class="tengo">
-  <h2>Tengo</h2>
+  <h2>Tengo <QueEs id="tengo" /></h2>
   <div class="big">{pesos(v.saldo_total)}</div>
   <div class="medios">
     <span>💵 Efectivo {pesos(v.saldo_por_medio.efectivo)}</span>
@@ -91,8 +97,8 @@
 </div>
 
 <div class="grid2">
-  <div class="stat t-venta"><div class="l">Vendí</div><div class="n">{pesos(v.ventas_netas)}</div></div>
-  <div class="stat t-gasto"><div class="l">Gasté</div><div class="n">{pesos(v.gastos)}</div></div>
+  <div class="stat t-venta"><div class="l">Vendí <QueEs id="vendi" /></div><div class="n">{pesos(v.ventas_netas)}</div></div>
+  <div class="stat t-gasto"><div class="l">Gasté <QueEs id="gaste" /></div><div class="n">{pesos(v.gastos)}</div></div>
 </div>
 {#if v.movimientos_por_completar}
   <p class="sub" style="margin:-4px 0 12px">Incluye {v.movimientos_por_completar} movimiento{v.movimientos_por_completar === 1 ? '' : 's'} al que le falta algo.</p>
@@ -108,9 +114,9 @@
       <div class="l">Gané <button class="link" style="min-height:0;padding:0" onclick={() => (explica = !explica)}>¿cómo?</button></div>
       <div class="n" class:neg={v.utilidad_del_periodo < 0} class:pos={v.utilidad_del_periodo > 0}>{pesos(v.utilidad_del_periodo)}</div>
     </div>
-    <div class="stat"><div class="l">Me deja</div><div class="n">{pesos(v.utilidad_bruta)}</div></div>
+    <div class="stat"><div class="l">Me deja <QueEs id="medeja" /></div><div class="n">{pesos(v.utilidad_bruta)}</div></div>
     <div class="stat">
-      <div class="l">Margen sobre costo</div>
+      <div class="l">Margen sobre costo <QueEs id="margen" /></div>
       {#if v.margen_sobre_costo_pb === null}<div class="n sub">Sin costos aún</div>{:else}<div class="n">{porcentaje(v.margen_sobre_costo_pb)}</div>{/if}
     </div>
     <div class="stat t-compra"><div class="l">Compré mercancía</div><div class="n">{pesos(v.compras)}</div></div>
@@ -133,6 +139,9 @@
   <button class="link" style="margin:-6px 0 8px" onclick={() => app.ir('periodo')}>Compararlo con el periodo anterior ›</button>
 {/if}
 
+</div>
+<div class="col">
+{#if conPasos}<PrimerosPasos />{/if}
 {#if v.por_cobrar > 0}
   <button class="person" onclick={() => { app.terceroCobro = null; app.tipoCaptura = 'venta'; app.pestana('deben') }}>
     <span class="con-ico"><span class="ico t-cobro" aria-hidden="true">🤝</span>
@@ -149,6 +158,9 @@
     </span><span aria-hidden="true">›</span>
   </button>
 {/if}
+
+</div>
+</div>
 
 {#if confirmarBorrado}
   <Hoja titulo={`¿Borrar los datos de ejemplo?`} alCerrar={() => (confirmarBorrado = false)}>

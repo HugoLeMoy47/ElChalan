@@ -4,6 +4,7 @@
   // se acepta o se pospone, una por una o todo el grupo (CH-04 §12.1).
   import { sumarDias, type Alerta, type Movimiento } from '../dominio/index.ts'
   import { app } from './app.svelte.ts'
+  import Pista from './Pista.svelte'
   import { TIPO, fechaCorta, pesos } from './textos.ts'
 
   /** Título del grupo, según cuántas son. */
@@ -60,6 +61,7 @@
 
 <button class="back" onclick={() => app.atras()}>‹ Volver</button>
 <h1>Cosas por revisar</h1>
+<Pista pantalla="revisar" />
 {#if grupos.length}<p class="sub" style="margin:-6px 0 12px">Toca una para verla. Nada se borra: si está bien así, la quitas de la lista.</p>{/if}
 
 {#each grupos as g (g.codigo)}

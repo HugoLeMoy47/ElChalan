@@ -3,6 +3,7 @@
   // periodo llega en la PoC-2 (M9).
   import { calcularVistas, finDeMes, inicioDeSemana, sumarDias, type Fecha, type Vistas } from '../dominio/index.ts'
   import { app } from './app.svelte.ts'
+  import Pista from './Pista.svelte'
   import { CATEGORIA, pesos, porcentaje } from './textos.ts'
 
   let tipo = $state<'semana' | 'mes'>(app.periodo)
@@ -58,6 +59,7 @@
 
 <button class="back" onclick={() => app.atras()}>‹ Volver</button>
 <h1>Semana y mes</h1>
+<Pista pantalla="periodo" />
 
 <div class="seg">
   <button class:on={tipo === 'semana'} onclick={() => { tipo = 'semana'; atras = 0 }}>Semana</button>

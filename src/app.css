@@ -34,7 +34,7 @@ button { font: inherit; color: inherit; cursor: pointer; }
 .banner b { white-space: nowrap; }
 .card { background: var(--bg); border-radius: 16px; padding: 14px; margin-bottom: 12px; }
 .card h2 { font-size: 13px; color: var(--muted); margin: 0 0 4px; font-weight: 600; text-transform: uppercase; letter-spacing: .04em; }
-.big { font-size: 34px; font-weight: 700; letter-spacing: -.02em; }
+.big { font-size: clamp(28px, 9vw, 34px); font-weight: 700; letter-spacing: -.02em; }
 .row { display: flex; gap: 10px; } .row > * { flex: 1; }
 .seg { display: flex; background: var(--bg); border-radius: 12px; padding: 3px; margin-bottom: 12px; }
 .seg button { flex: 1; border: 0; background: transparent; padding: 10px; border-radius: 10px; color: var(--muted); min-height: 44px; }
@@ -53,12 +53,12 @@ button { font: inherit; color: inherit; cursor: pointer; }
 .act.main { background: var(--tc-soft); color: var(--tc); min-height: 100px; font-size: 17px; }
 .act.main .ico { background: var(--panel); }
 .back { background: none; border: 0; color: var(--muted); padding: 8px 0; min-height: 44px; }
-.amount { font-size: 44px; font-weight: 700; text-align: center; margin: 6px 0 4px; letter-spacing: -.02em; }
+.amount { font-size: clamp(34px, 12vw, 44px); font-weight: 700; text-align: center; margin: 6px 0 4px; letter-spacing: -.02em; }
 /* Ronda C: monto con el teclado del teléfono (UX-28) y renglones de producto. */
 .monto { display: flex; align-items: center; gap: 6px; background: var(--bg); border: 2px solid transparent; border-radius: 16px; padding: 4px 16px; margin: 6px 0 10px; cursor: text; }
 .monto:focus-within { border-color: var(--acc); background: var(--panel); }
 .monto span { font-size: 30px; font-weight: 700; color: var(--muted); }
-.monto input { border: 0; background: transparent; min-height: 64px; padding: 0; font-size: 40px; font-weight: 700; letter-spacing: -.02em; }
+.monto input { border: 0; background: transparent; min-height: 64px; padding: 0; font-size: clamp(32px, 11vw, 40px); font-weight: 700; letter-spacing: -.02em; }
 .monto input:focus-visible { outline: none; }
 .total-prod { display: flex; flex-direction: column; align-items: center; background: var(--bg); border-radius: 16px; padding: 10px; margin: 8px 0 10px; }
 .total-prod b { font-size: 36px; letter-spacing: -.02em; }
@@ -121,7 +121,7 @@ textarea { padding: 10px 12px; min-height: 72px; }
 .tengo { position: relative; overflow: hidden; background: linear-gradient(135deg, var(--acc) 0%, var(--acc-2) 100%); color: var(--acc-ink); border-radius: 22px; padding: 16px 18px 14px; margin-bottom: 12px; box-shadow: var(--shadow); }
 .tengo::after { content: ''; position: absolute; right: -46px; top: -56px; width: 170px; height: 170px; border-radius: 50%; background: rgba(255, 255, 255, .09); pointer-events: none; }
 .tengo h2 { font-size: 13px; margin: 0 0 2px; font-weight: 600; text-transform: uppercase; letter-spacing: .06em; opacity: .85; }
-.tengo .big { font-size: 40px; }
+.tengo .big { font-size: clamp(32px, 11vw, 40px); }
 .tengo .medios { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 10px; }
 .tengo .medios span { background: rgba(255, 255, 255, .17); border-radius: 999px; padding: 4px 10px; font-size: 13px; }
 .stat[class*='t-'] { border-left: 4px solid var(--tc); }
@@ -175,6 +175,103 @@ h1.con-ico { gap: 10px; } h1.con-ico .ico { width: 36px; height: 36px; font-size
 .alta-rapida .btn { margin: 0; padding: 0; min-height: 48px; }
 .person.retomar { padding: 4px 8px 4px 12px; background: var(--acc-soft); }
 .hecho { color: var(--ok); font-weight: 600; }
+
+/* ── Acompañamiento didáctico (guia.ts): pistas, primeros pasos, «?» y glosario ── */
+.pista { background: var(--acc-soft); border-radius: 16px; padding: 12px 14px 8px; margin: 0 0 12px; border-left: 4px solid var(--acc); }
+.pista-cuerpo { display: flex; gap: 10px; align-items: flex-start; }
+.pista-cuerpo .ico { width: 34px; height: 34px; font-size: 18px; background: var(--panel); }
+.pista p { margin: 4px 0 0; font-size: 15px; }
+.pista-ejemplo { color: var(--muted); }
+.pista-ejemplo span { font-weight: 600; color: var(--ink); }
+.pista-acciones { display: flex; justify-content: space-between; align-items: center; gap: 8px; margin-top: 6px; }
+.pista-acciones .link { font-size: 13px; color: var(--muted); }
+.pista-acciones .chip { min-height: 40px; }
+.que { display: inline-grid; place-items: center; width: 22px; height: 22px; padding: 0; margin-left: 2px; border-radius: 50%; border: 1.5px solid currentColor; background: transparent; font-size: 13px; font-weight: 700; line-height: 1; vertical-align: 1px; opacity: .75; position: relative; text-transform: none; letter-spacing: 0; }
+.que::before { content: ''; position: absolute; inset: -11px; } /* área de toque de 44 px */
+span.que { cursor: default; }
+.pasos { background: var(--bg); border-radius: 16px; padding: 14px; margin-bottom: 12px; }
+.pasos-cabeza { display: flex; justify-content: space-between; align-items: flex-start; gap: 8px; }
+.pasos h2 { font-size: 17px; margin: 0; }
+.pasos-cabeza .chip { flex: none; min-width: 44px; padding: 0; }
+.pasos .avance { margin: 10px 0 6px; }
+.pasos ul { list-style: none; margin: 0; padding: 0; }
+.mision { display: flex; align-items: center; gap: 12px; width: 100%; min-height: 48px; border: 0; background: none; text-align: left; padding: 6px 0; }
+.mision.hecha { color: var(--muted); text-decoration: line-through; }
+.mision.proxima { background: var(--panel); border-radius: 12px; padding: 10px; margin: 4px 0; box-shadow: 0 1px 3px rgba(0, 0, 0, .1); }
+.mision-texto { flex: 1; min-width: 0; display: flex; flex-direction: column; }
+.palomita { display: inline-grid; place-items: center; flex: none; width: 26px; height: 26px; border-radius: 50%; border: 2px solid var(--line); font-size: 14px; font-weight: 700; }
+.mision.hecha .palomita { background: var(--acc); border-color: var(--acc); color: var(--acc-ink); }
+.mision.proxima .palomita { border-color: var(--acc); }
+.glosario { margin: 0 0 8px; }
+.glosario > div { padding: 10px 0; border-bottom: 1px solid var(--line); }
+.glosario dt { font-weight: 700; }
+.glosario dd { margin: 2px 0 0; color: var(--muted); }
+.leccion { margin-top: 8px; }
+.comparar { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin: 8px 0; }
+.comparar > div { display: flex; flex-direction: column; gap: 4px; background: var(--tc-soft); border-radius: 12px; padding: 10px; }
+.comparar b { color: var(--tc); }
+.comparar .ico { width: 34px; height: 34px; font-size: 18px; background: var(--panel); }
+.barra .marca { display: none; }
+
+/* ── Responsivo: teléfono chico, tableta y escritorio ──
+   El diseño nace para el teléfono (U-8). En pantallas más anchas no se estira: la columna
+   crece lo justo, el inicio se reparte en dos columnas, las hojas se vuelven ventanas al
+   centro y, en escritorio, la barra inferior pasa a ser un menú a la izquierda. */
+@media (max-width: 359px) {
+  main { padding-left: 12px; padding-right: 12px; }
+  .chips.desliza { margin-left: -12px; margin-right: -12px; padding: 0 12px; }
+  .barra button { font-size: 11px; }
+  .acts { gap: 8px; }
+  .act { min-height: 80px; font-size: 15px; }
+  .alta-rapida { grid-template-columns: 1fr 80px 48px; }
+  .comparar { grid-template-columns: 1fr; }
+}
+@media (hover: hover) {
+  .person:hover, .act:hover, .chip:hover, .mision:hover, .vermas:hover { filter: brightness(.96); }
+  .barra button:hover { color: var(--ink); }
+  .btn:hover:not([disabled]) { filter: brightness(1.06); }
+}
+@media (max-height: 520px) and (orientation: landscape) {
+  .sheet { max-height: 96vh; }
+  .barra button { min-height: 52px; }
+  .barra .circulo { width: 46px; height: 46px; margin-top: -18px; }
+}
+@media (min-width: 720px) {
+  main { max-width: 720px; padding-left: 24px; padding-right: 24px; }
+  .barra > div { max-width: 720px; }
+  .chips.desliza { margin-left: 0; margin-right: 0; padding: 0; flex-wrap: wrap; }
+  .modal { align-items: center; padding: 24px; }
+  .sheet { max-width: 520px; border-radius: 24px; max-height: 85vh; padding-bottom: 22px; }
+  .inicio-cols { display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr); gap: 16px; align-items: start; }
+  .grid2 { gap: 12px; }
+  /* Los formularios no se estiran: se leen y se llenan mejor angostos. */
+  main:not(.con-barra) > * { max-width: 560px; margin-left: auto; margin-right: auto; }
+  main:not(.con-barra) > .modal, main:not(.con-barra) > .toast { max-width: none; }
+  .acts { grid-template-columns: repeat(3, 1fr); }
+  .act.main { grid-column: span 1; }
+}
+@media (min-width: 1024px) {
+  body { background: var(--bg); }
+  main { background: var(--panel); min-height: 100vh; }
+  main.con-barra { max-width: 800px; margin-left: calc(240px + max(0px, (100vw - 240px - 800px) / 2)); padding: 28px 32px 48px; }
+  main.con-barra.p-inicio { max-width: 1000px; margin-left: calc(240px + max(0px, (100vw - 240px - 1000px) / 2)); }
+  main:not(.con-barra) { max-width: 640px; padding-top: 28px; padding-bottom: 48px; box-shadow: 0 0 0 1px var(--line); }
+  .barra { top: 0; right: auto; width: 240px; border-top: 0; border-right: 1px solid var(--line); padding: 20px 12px; overflow-y: auto; }
+  .barra > div { display: flex; flex-direction: column; gap: 4px; max-width: none; }
+  .barra .marca { display: flex; align-items: center; gap: 10px; padding: 0 8px 16px; order: -2; }
+  .barra .marca .ico { background: var(--acc-soft); }
+  .barra .marca > span:last-child { display: flex; flex-direction: column; min-width: 0; }
+  .barra .marca .sub { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .barra button { flex-direction: row; justify-content: flex-start; gap: 12px; min-height: 48px; padding: 0 14px; border-radius: 12px; font-size: 15px; }
+  .barra button.on { background: var(--acc-soft); }
+  .barra .anotar { order: -1; background: var(--acc); color: var(--acc-ink); margin-bottom: 12px; min-height: 52px; box-shadow: var(--shadow); }
+  .barra .anotar:hover { color: var(--acc-ink); }
+  .barra .circulo { width: auto; height: auto; margin: 0; background: none; box-shadow: none; border: 0; color: inherit; }
+  .barra .punto { top: 10px; left: 30px; }
+  main.con-barra .toast { left: calc(50% + 120px); bottom: 24px; }
+  .toast { bottom: 24px; }
+  .inicio-cols { gap: 20px; }
+}
 
 @media (prefers-reduced-motion: reduce) {
   * { transition: none !important; animation: none !important; }

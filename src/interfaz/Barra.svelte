@@ -10,7 +10,7 @@
   /** Las pantallas de «Más» marcan su pestaña. */
   const PESTANA: Partial<Record<Pantalla, Pantalla>> = {
     inicio: 'inicio', revisar: 'inicio', movimientos: 'movimientos', deben: 'deben',
-    mas: 'mas', productos: 'mas', periodo: 'mas', ajustes: 'mas', respaldo: 'mas',
+    mas: 'mas', productos: 'mas', periodo: 'mas', ajustes: 'mas', respaldo: 'mas', ayuda: 'mas',
   }
   const actual = $derived(PESTANA[app.pantalla])
   const vencido = $derived((app.vistas?.por_cobrar_vencido ?? 0) > 0)
@@ -34,6 +34,7 @@
 
 <nav class="barra" aria-label="Secciones">
   <div>
+    <div class="marca" aria-hidden="true"><span class="ico">📒</span><span><b>El Chalán</b><span class="sub">{app.estado?.negocio.nombre}</span></span></div>
     {@render pestana('inicio', 'Inicio', '<path d="M3 11l9-7 9 7v9a1 1 0 0 1-1 1h-5v-6h-6v6H4a1 1 0 0 1-1-1z"/>')}
     {@render pestana('movimientos', 'Movimientos', '<path d="M8 6h13M8 12h13M8 18h13M3.5 6h.01M3.5 12h.01M3.5 18h.01"/>')}
     <button class="anotar" onclick={() => (anotando = true)}>

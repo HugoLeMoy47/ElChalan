@@ -120,7 +120,7 @@
 {:else if paso === 2}
   <h1>Lo que puedes hacer</h1>
   <div class="beneficio"><span class="ico t-venta" aria-hidden="true">＋</span>
-    <span><b>Anotar</b>, abajo al centro<br /><span class="sub">Ventas, compras, gastos y lo que sacas o pones. Con «Listo y otra» anotas varias seguidas.</span></span></div>
+    <span><b>Anotar</b>, el botón ＋<br /><span class="sub">Ventas, compras, gastos y lo que sacas o pones. Con «Listo y otra» anotas varias seguidas.</span></span></div>
   <div class="beneficio"><span class="ico t-cobro" aria-hidden="true">🤝</span>
     <span><b>Me deben</b><br /><span class="sub">Si fías, al vender marca «Me deben»: aquí ves quién te debe, cuánto y desde cuándo.</span></span></div>
   <div class="beneficio"><span class="ico t-compra" aria-hidden="true">📦</span>
@@ -129,17 +129,28 @@
     <span><b>Cosas por revisar</b><br /><span class="sub">La app te avisa si algo no cuadra, como una venta repetida o por debajo del costo.</span></span></div>
   <div class="beneficio"><span class="ico t-aportacion" aria-hidden="true">📅</span>
     <span><b>Semana y mes</b>, en Más<br /><span class="sub">Cómo te fue, comparado con antes.</span></span></div>
+
+  <div class="card leccion">
+    <b>La diferencia que más confunde</b>
+    <div class="comparar">
+      <div class="t-compra"><span class="ico" aria-hidden="true">📦</span><b>Compré mercancía</b><span class="sub">Lo que vas a revender: las gorras, la fruta, los dulces.</span></div>
+      <div class="t-gasto"><span class="ico" aria-hidden="true">💸</span><b>Gasté</b><span class="sub">Lo que pagas para trabajar: renta, luz, pasajes, bolsas.</span></div>
+    </div>
+    <span class="sub">Y si tomas dinero del negocio para tu casa, es <b>Saqué dinero</b>: no es un gasto.</span>
+  </div>
+  <p class="sub">💡 La primera vez que abras cada pantalla verás una pista. Si una palabra no te queda clara, toca el <span class="que" aria-hidden="true">?</span> junto a ella o busca en Más → ¿Qué significa?</p>
   <div style="height:8px"></div>
   <button class="btn" onclick={() => ir(3)}>Siguiente</button>
 
 {:else}
   <h1>¿Anotamos tu primera venta?</h1>
-  <p class="sub" style="margin-top:-6px">Toca «Vendí», escribe cuánto y «Listo». Así de fácil.</p>
+  <p class="sub" style="margin-top:-6px">Escribe cuánto te pagaron y toca «Listo». Así de fácil.</p>
   <div class="tengo" style="margin:14px 0">
     <h2>{app.estado!.negocio.nombre}</h2>
     <div class="big">¡Listo!</div>
     <div class="medios"><span>{productos.length ? `${productos.length} producto${productos.length === 1 ? '' : 's'}` : 'Sin productos aún'}</span><span>{respaldado ? 'Con respaldo' : 'Sin respaldo aún'}</span>{#if conPin}<span>Con candado</span>{/if}</div>
   </div>
+  <p class="sub">En el inicio te dejamos <b>tus primeros pasos</b>: una lista corta que se palomea sola conforme usas la app.</p>
   <button class="btn" onclick={() => terminar(true)}>🛒 Anotar mi primera venta</button>
   <button class="btn sec" onclick={() => terminar(false)}>Ir al inicio</button>
 {/if}

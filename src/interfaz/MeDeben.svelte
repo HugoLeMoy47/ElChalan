@@ -3,6 +3,7 @@
   // registrar su pago (F-5).
   import { diasEntre, fechaPromesaEfectiva, type Movimiento } from '../dominio/index.ts'
   import { app } from './app.svelte.ts'
+  import Pista from './Pista.svelte'
   import { pesos } from './textos.ts'
 
   interface Persona { id: string; nombre: string; saldo: number; vencido: number; atraso: number; ventas: number }
@@ -31,6 +32,7 @@
 
 {#if deAnotar}<button class="back" onclick={() => app.atras()}>‹ Volver</button>{/if}
 <h1>{deAnotar ? '¿Quién te pagó?' : 'Lo que me deben'}</h1>
+{#if !deAnotar}<Pista pantalla="deben" />{/if}
 {#if personas.length && !deAnotar}
   <!-- UX-24: el total y lo vencido, arriba. -->
   <div class="grid2">

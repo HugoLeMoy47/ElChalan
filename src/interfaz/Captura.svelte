@@ -15,6 +15,7 @@
   import Monto from './Monto.svelte'
   import { CATEGORIA, MEDIO, TIPO, pesos } from './textos.ts'
   import Hoja from './Hoja.svelte'
+  import Pista from './Pista.svelte'
 
   /** En una compra, `compra` es lo que se tecleó como costo de compra («a cuánto»). */
   interface LineaProducto { producto_id: string; cantidad: string; precio?: number; costo?: number; compra?: string }
@@ -170,6 +171,7 @@
 
 <button class="back" onclick={() => app.atras()}>‹ Volver</button>
 <h1 class="con-ico t-{tipo}"><span class="ico" aria-hidden="true">{TIPO[tipo].icono}</span> {original ? 'Corregir: ' : ''}{TIPO[tipo].texto}</h1>
+{#if !original && !app.seguidas}<Pista pantalla="captura" {tipo} />{/if}
 {#if app.seguidas && !original}<p class="sub" style="margin:-6px 0 10px">Van {app.seguidas} seguida{app.seguidas === 1 ? '' : 's'}. La anterior ya quedó guardada.</p>{/if}
 
 {#snippet bloqueMonto()}

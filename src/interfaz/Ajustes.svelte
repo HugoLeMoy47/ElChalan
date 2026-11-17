@@ -84,6 +84,7 @@
 
 <div class="dia">Ayuda</div>
 <button class="btn sec" onclick={() => app.abrirAsistente()}>Ver otra vez el asistente de bienvenida</button>
+<button class="btn sec" onclick={() => app.ir('ayuda')}>¿Qué significa cada palabra?</button>
 
 <div class="dia">Acerca de</div>
 <p class="sub">El Chalán · versión {__VERSION_APP__}. Es una <b>prueba</b>: funciona sin internet y tus datos se quedan en este teléfono hasta que hagas un respaldo. No usa cuenta ni manda tus datos a ningún lado.</p>

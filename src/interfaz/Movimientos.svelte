@@ -4,6 +4,7 @@
   // desaparecen: se ven tachados con un filtro aparte.
   import type { Movimiento, TipoMovimiento } from '../dominio/index.ts'
   import { app } from './app.svelte.ts'
+  import Pista from './Pista.svelte'
   import { CATEGORIA, MOTIVO_AJUSTE, TIPO, cantidadCon, nombreDelDia, pesos } from './textos.ts'
 
   let filtro = $state<TipoMovimiento | 'todos'>('todos')
@@ -52,6 +53,7 @@
 </script>
 
 <h1>Movimientos</h1>
+<Pista pantalla="movimientos" />
 
 <div class="chips desliza">
   {#each FILTROS as f (f)}

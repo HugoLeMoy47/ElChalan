@@ -2,6 +2,7 @@
   // F-11 · Respaldo manual por archivo (M5a). Restaurar pregunta antes de reemplazar (P18).
   import { diasEntre } from '../dominio/index.ts'
   import { app } from './app.svelte.ts'
+  import Pista from './Pista.svelte'
   import { fechaCorta, haceDias } from './textos.ts'
   import Hoja from './Hoja.svelte'
 
@@ -37,6 +38,7 @@
 
 <button class="back" onclick={() => app.atras()}>‹ Volver</button>
 <h1>Respaldo</h1>
+<Pista pantalla="respaldo" />
 
 {#if app.estado && !app.bloqueado}
   <p>{ultimo ? `Último respaldo: ${haceDias(diasEntre(ultimo, app.hoy))} (${fechaCorta(ultimo)}).` : 'Todavía no has hecho un respaldo: tus datos solo están en este teléfono.'}</p>
