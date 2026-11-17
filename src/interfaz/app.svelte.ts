@@ -16,11 +16,12 @@ import { descargarEnNavegador, entregarArchivo } from '../exportacion/entregar.t
 import { crearRespaldo, estadoDesdeRespaldo, leerRespaldo, nombreArchivo } from '../exportacion/respaldo.ts'
 import { cargarEjemplo } from '../captura/ejemplo.ts'
 import { Navegacion } from './navegacion.ts'
+import { escribirVisto, leerVisto } from './guia.ts'
 
 export type Pantalla =
   | 'cargando' | 'bienvenida' | 'inicio' | 'captura' | 'deben' | 'cobro' | 'mas' | 'asistente'
   | 'devolucion' | 'movimientos' | 'detalle' | 'respaldo' | 'revisar'
-  | 'productos' | 'producto' | 'periodo' | 'ajustes' | 'bloqueo'
+  | 'productos' | 'producto' | 'periodo' | 'ajustes' | 'bloqueo' | 'ayuda'
 
 /** Pantallas desde las que «atrás» sale de la app (UX-01). */
 const RAICES: Pantalla[] = ['cargando', 'bienvenida', 'inicio', 'bloqueo']
@@ -34,6 +35,8 @@ const CLAVE_EJEMPLO = 'elchalan:ejemplo'
 const CLAVE_ASISTENTE = (negocio: Uuid) => `elchalan:asistente:${negocio}`
 /** El candado vive solo en este teléfono: nunca entra al respaldo (CH-04 §4.1). */
 const CLAVE_PIN = (negocio: Uuid) => `elchalan:pin:${negocio}`
+/** Pistas cerradas y pantallas vistas (guia.ts): una comodidad, no un dato del negocio. */
+const CLAVE_GUIA = (negocio: Uuid) => `elchalan:guia:${negocio}`
 
 async function huellaPin(pin: string, sal: string): Promise<string> {
   const bytes = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(`${sal}:${pin}`))
@@ -166,6 +169,32 @@ class App {
   abrirAsistente() {
     this.guardarPasoAsistente(0)
     this.ir('asistente')
+  }
+
+  // ── Acompañamiento didáctico (guia.ts, CH-19 §14) ───────────────────────
+  /** Sube cada vez que cambia lo visto, para releerlo. */
+  private versionGuia = $state(0)
+  /** Claves `pista:<x>` (pista cerrada), `vio:<pantalla>` y `oculta:<x>`. */
+  visto = $derived.by<ReadonlySet<string>>(() => {
+    void this.versionGuia
+    const id = this.estado?.negocio.negocio_id
+    return id ? leerVisto(leerClave(CLAVE_GUIA(id))) : new Set()
+  })
+
+  marcarVisto(clave: string) {
+    const id = this.estado?.negocio.negocio_id
+    if (!id || this.visto.has(clave)) return
+    escribirClave(CLAVE_GUIA(id), escribirVisto(new Set([...this.visto, clave])))
+    this.versionGuia++
+  }
+
+  /** «Volver a mostrar las pistas y los primeros pasos». */
+  olvidarGuia() {
+    const id = this.estado?.negocio.negocio_id
+    if (!id) return
+    // Lo que ya vio (para «Mira cómo te fue en la semana») se conserva.
+    escribirClave(CLAVE_GUIA(id), escribirVisto(new Set([...this.visto].filter((k) => k.startsWith('vio:')))))
+    this.versionGuia++
   }
 
   // ── Anotar ──────────────────────────────────────────────────────────────
@@ -370,6 +399,7 @@ class App {
     this.almacen = null
     await AlmacenNegocio.borrar(id)
     escribirClave(CLAVE_EJEMPLO, null)
+    escribirClave(CLAVE_GUIA(id), null)
     this.esEjemplo = false
     this.estado = null
     const propio = leerClave(CLAVE_NEGOCIO)
@@ -406,6 +436,7 @@ class App {
   private mostrar(p: Pantalla) {
     this.pantalla = p
     this.error = null
+    if (this.estado && p !== 'cargando') this.marcarVisto(`vio:${p}`)
     globalThis.scrollTo?.(0, 0)
   }
 

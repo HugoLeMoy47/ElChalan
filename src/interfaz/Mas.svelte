@@ -32,6 +32,11 @@
     <span><b>Cosas por revisar</b><br /><span class="sub">{app.alertas.length ? `${app.alertas.length} pendiente${app.alertas.length === 1 ? '' : 's'}` : 'Todo en orden'}</span></span>
   </span><span aria-hidden="true">›</span>
 </button>
+<button class="person" onclick={() => app.ir('ayuda')}>
+  <span class="con-ico"><span class="ico t-cobro" aria-hidden="true">💡</span>
+    <span><b>¿Qué significa?</b><br /><span class="sub">Las palabras de la app, pistas y primeros pasos</span></span>
+  </span><span aria-hidden="true">›</span>
+</button>
 <button class="person" onclick={() => app.ir('ajustes')}>
   <span class="con-ico"><span class="ico t-ajuste_efectivo" aria-hidden="true">⚙️</span>
     <span><b>Ajustes</b><br /><span class="sub">Nombre del negocio, candado con PIN</span></span>

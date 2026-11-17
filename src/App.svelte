@@ -19,11 +19,12 @@
   import Periodo from './interfaz/Periodo.svelte'
   import Producto from './interfaz/Producto.svelte'
   import Productos from './interfaz/Productos.svelte'
+  import Ayuda from './interfaz/Ayuda.svelte'
 
   let fallo = $state<string | null>(null)
 
   /** Pantallas con barra inferior; los formularios y el detalle van sin ella. */
-  const CON_BARRA = ['inicio', 'movimientos', 'deben', 'mas', 'productos', 'periodo', 'revisar', 'ajustes', 'respaldo']
+  const CON_BARRA = ['inicio', 'movimientos', 'deben', 'mas', 'productos', 'periodo', 'revisar', 'ajustes', 'respaldo', 'ayuda']
   const conBarra = $derived(!!app.estado && !app.bloqueado && CON_BARRA.includes(app.pantalla))
 
   onMount(() => {
@@ -31,7 +32,7 @@
   })
 </script>
 
-<main>
+<main class="p-{app.pantalla}" class:con-barra={conBarra}>
   {#if fallo}
     <div class="error" role="alert">{fallo} Lo que ya anotaste no se pierde; intenta cerrar y volver a abrir la app.</div>
   {:else if app.pantalla === 'cargando'}
@@ -59,6 +60,7 @@
     {:else if app.pantalla === 'producto'}<Producto />
     {:else if app.pantalla === 'periodo'}<Periodo />
     {:else if app.pantalla === 'ajustes'}<Ajustes />
+    {:else if app.pantalla === 'ayuda'}<Ayuda />
     {/if}
   {/if}
 
