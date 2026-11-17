@@ -22,7 +22,7 @@ npm run dev         # la app en http://localhost:5173 (usa la vista de teléfono
 
 ## Publicación (D-61)
 
-Cloudflare (Workers con archivos estáticos) en `elchalan.hugolemoy.ninja`, conectado a este repositorio: cada push a `main` corre `npm run build` y `npx wrangler deploy` (`wrangler.jsonc`). Las cabeceras de caché y seguridad (`dist/_headers`) las genera `pwa/plugin.ts` al construir. En Cloudflare: variable `NODE_VERSION = 22` y **sin** analítica, Rocket Loader ni ofuscación de correos (romperían la política de contenido).
+Cloudflare (Workers con archivos estáticos) en `elchalan.hugolemoy.ninja`, conectado a este repositorio: cada push a `main` corre `npm run build` y `npx wrangler deploy` (`wrangler.jsonc`). Las cabeceras de caché y seguridad (`dist/_headers`) las genera `pwa/plugin.ts` al construir. En Cloudflare: variable `NODE_VERSION = 22`; **Web Analytics activa** (la política de contenido permite solo `static.cloudflareinsights.com` y `cloudflareinsights.com`); **sin** Rocket Loader, ofuscación de correos ni detección de bots con JavaScript (inyectan scripts en línea que la política bloquea).
 
 ## Estructura (CH-15 §7)
 

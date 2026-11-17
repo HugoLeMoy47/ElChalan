@@ -13,7 +13,7 @@ Sin conector: anota en `BITACORA.md` (raíz; créalo si no existe) con encabezad
 - **Repo público.** Cero nombres de clientes, de pilotos o de negocios reales en código, datos, commits y PR. Los datos de prueba salen de `datos_sinteticos/`; nunca datos reales.
 - **Alcance de prueba de concepto (D-30).** No reintroduzcas voz, intérprete, WhatsApp, foto ni importación de Excel sin que Hugo lo pida: están diferidos como deuda técnica.
 - **Sin login ni servidor de datos (D-28).** Los datos viven en el teléfono (IndexedDB); Google solo al activar el respaldo en Drive (`drive.file`).
-- La política de contenido la generan `pwa/plugin.ts` y `dist/_headers`: no agregues scripts de terceros.
+- La política de contenido la generan `pwa/plugin.ts` y `dist/_headers`: no agregues scripts de terceros. **Única excepción:** Web Analytics de Cloudflare (`static.cloudflareinsights.com` y `cloudflareinsights.com`), que Hugo quiere activa.
 
 ## Cómo trabajar aquí
 - **Git:** commits y push de ramas sin preguntar; cambios por rama y PR hacia `main`. **Cada push a `main` publica en producción** (Cloudflare corre `npm run build` y `wrangler deploy`), así que fusionar a `main` es desplegar: solo con autorización explícita de Hugo, cada vez. Nunca `--force` ni reescribir historial.
@@ -23,5 +23,5 @@ Sin conector: anota en `BITACORA.md` (raíz; créalo si no existe) con encabezad
 ## Trampas técnicas
 - El navegador integrado no admite service workers: la PWA (instalable, sin conexión) se prueba en Chrome de Android.
 - Chrome en Android no comparte archivos `.json`: el respaldo se comparte como `.txt` o se descarga.
-- En Cloudflare: `NODE_VERSION = 22` y **sin** analítica, Rocket Loader ni ofuscación de correos (rompen la política de contenido).
+- En Cloudflare: `NODE_VERSION = 22`; **Web Analytics sí** (permitida en la política); **sin** Rocket Loader, ofuscación de correos ni detección de bots con JavaScript (inyectan scripts en línea que la política bloquea).
 - El «margen» del modelo es sobre el costo (D-42, D-48), no sobre el precio.
