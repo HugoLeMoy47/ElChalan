@@ -7,13 +7,21 @@ import { readdirSync, readFileSync, statSync } from 'node:fs'
 import { join, relative } from 'node:path'
 import type { Plugin } from 'vite'
 
-/** Solo archivos propios; nada de red ni código de terceros (RNF-13, RNF-14). */
-const POLITICA = [
+/**
+ * Web Analytics de Cloudflare (decisión de Hugo, 16-nov-2026): Cloudflare inyecta su
+ * beacon en la página; carga de `static.cloudflareinsights.com` y manda las visitas a
+ * `cloudflareinsights.com`. No usa cookies ni lee datos del negocio (viven en IndexedDB).
+ * Es la única excepción a «solo archivos propios».
+ */
+export const ANALITICA = { script: 'https://static.cloudflareinsights.com', envio: 'https://cloudflareinsights.com' }
+
+/** Solo archivos propios, salvo la analítica de Cloudflare (RNF-13, RNF-14). */
+export const POLITICA = [
   "default-src 'self'",
-  "script-src 'self'",
+  `script-src 'self' ${ANALITICA.script}`,
   "style-src 'self' 'unsafe-inline'",
   "img-src 'self' data: blob:",
-  "connect-src 'self'",
+  `connect-src 'self' ${ANALITICA.envio}`,
   "manifest-src 'self'",
   "worker-src 'self'",
   "object-src 'none'",

@@ -140,6 +140,13 @@ describe('construcción instalable', () => {
       expect(cabeceras).toMatch(/\/sw\.js\n {2}Cache-Control: no-cache/)
       expect(cabeceras).toMatch(/\/index\.html\n {2}Cache-Control: no-cache/)
       expect(cabeceras).toContain("frame-ancestors 'none'")
+
+      // La única red de terceros permitida es Web Analytics de Cloudflare.
+      const externos = [...new Set([...html.matchAll(/https:\/\/[^\s;'"]+/g)].map((m) => m[0]))].sort()
+      expect(externos).toEqual(['https://cloudflareinsights.com', 'https://static.cloudflareinsights.com'])
+      expect(cabeceras).toContain("script-src 'self' https://static.cloudflareinsights.com;")
+      expect(cabeceras).toContain("connect-src 'self' https://cloudflareinsights.com;")
+      expect(cabeceras).not.toContain('unsafe-eval')
       expect(archivos).not.toContain('./_headers')
     } finally {
       rmSync(salida, { recursive: true, force: true })
